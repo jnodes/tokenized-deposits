@@ -1,0 +1,137 @@
+# Default values for cari-platform Helm chart
+# Override per environment with values-{env}.yaml
+
+replicaCount: 2
+
+image:
+  repository: mtbcari.azurecr.io/cari-platform
+  tag: latest
+  pullPolicy: IfNotPresent
+
+environment: dev
+
+service:
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  enabled: true
+  className: azure/application-gateway  # Azure AGIC
+  annotations:
+    # Azure Application Gateway Ingress Controller (AGIC)
+    kubernetes.io/ingress.class: azure/application-gateway
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    appgw.ingress.kubernetes.io/request-timeout: "60"
+    # Nginx annotations (for non-Azure fallback)
+    # cert-manager.io/cluster-issuer: letsencrypt-prod
+    # nginx.ingress.kubernetes.io/rate-limit: "100"
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  hosts:
+    - host: cari-api.internal.mtbank.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: cari-api-tls
+      hosts:
+        - cari-api.internal.mtbank.com
+
+resources:
+  limits:
+    cpu: "1"
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+# Application configuration
+config:
+  logLevel: INFO
+  apiPrefix: /api/v1
+  corsOrigins: ""
+
+# External services
+blockchain:
+  rpcUrl: ""
+  chainId: 324
+
+custody:
+  provider: stub
+  fireblocksApiKey: ""
+  fireblocksVaultId: ""
+
+compliance:
+  amlProvider: stub
+  chainalysisApiKey: ""
+  travelRuleThreshold: 3000
+
+hsm:
+  provider: stub  # "azure_managed_hsm" for production
+
+# Azure Cloud Configuration
+azure:
+  keyVault:
+    name: ""  # e.g., mt-cari-kv
+    tenantId: ""
+    resourceGroup: ""
+  acr:
+    loginServer: mtbcari.azurecr.io
+
+# Database
+postgresql:
+  enabled: true
+  auth:
+    database: cari
+    username: cari
+    existingSecret: cari-db-credentials
+
+# Redis
+redis:
+  enabled: true
+  architecture: standalone
+  auth:
+    enabled: false
+
+# Kafka
+kafka:
+  enabled: true
+  bootstrapServers: ""
+
+# Monitoring
+monitoring:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    interval: 15s
+
+# Pod disruption budget
+podDisruptionBudget:
+  minAvailable: 1
+
+# Security context
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  readOnlyRootFilesystem: true
+
+# Health probes
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8000
+  initialDelaySeconds: 10
+  periodSeconds: 15
+
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: 8000
+  initialDelaySeconds: 5
+  periodSeconds: 10

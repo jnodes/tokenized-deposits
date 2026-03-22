@@ -1,0 +1,43 @@
+# Prividium Testnet overrides
+replicaCount: 1
+
+environment: prividium-testnet
+
+# Azure Container Registry (testnet uses same ACR as production)
+image:
+  repository: mtbcari.azurecr.io/cari-platform
+
+autoscaling:
+  enabled: false
+
+blockchain:
+  rpcUrl: https://testnet.prividium.zksync.io
+  chainId: 300
+
+custody:
+  provider: stub
+
+compliance:
+  amlProvider: stub
+
+hsm:
+  provider: stub
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+ingress:
+  hosts:
+    - host: cari-testnet.internal.mtbank.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: cari-testnet-tls
+      hosts:
+        - cari-testnet.internal.mtbank.com

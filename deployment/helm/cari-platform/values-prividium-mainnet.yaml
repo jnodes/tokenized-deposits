@@ -1,0 +1,58 @@
+# Prividium Mainnet overrides
+replicaCount: 3
+
+environment: prividium-mainnet
+
+# Azure Container Registry
+image:
+  repository: mtbcari.azurecr.io/cari-platform
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 8
+
+blockchain:
+  rpcUrl: https://mainnet.prividium.zksync.io
+  chainId: 324
+
+custody:
+  provider: fireblocks
+
+compliance:
+  amlProvider: chainalysis
+
+hsm:
+  provider: azure_managed_hsm
+
+resources:
+  limits:
+    cpu: "2"
+    memory: 1Gi
+  requests:
+    cpu: 500m
+    memory: 512Mi
+
+ingress:
+  annotations:
+    nginx.ingress.kubernetes.io/rate-limit: "500"
+    nginx.ingress.kubernetes.io/limit-connections: "50"
+  hosts:
+    - host: cari-api.mtbank.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: cari-prod-tls
+      hosts:
+        - cari-api.mtbank.com
+
+# Azure Cloud Configuration (production)
+azure:
+  keyVault:
+    name: mt-cari-kv-prod
+    tenantId: ""  # Set via secret
+    resourceGroup: mt-digital-assets-prod
+
+podDisruptionBudget:
+  minAvailable: 2

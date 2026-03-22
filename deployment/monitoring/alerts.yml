@@ -1,0 +1,151 @@
+groups:
+  # ── Platform Health ─────────────────────────────────────────
+  - name: cari-platform-health
+    rules:
+      - alert: CariAPIDown
+        expr: up{job="cari-api"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          team: digital-assets
+        annotations:
+          summary: "Cari Platform API is down"
+          description: "The Cari API server has been unreachable for more than 1 minute."
+          runbook: "deployment/runbooks/api-outage.md"
+
+      - alert: CariAPIHighLatency
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="cari-api"}[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+          team: digital-assets
+        annotations:
+          summary: "Cari API p95 latency > 2s"
+          description: "The 95th percentile request latency has exceeded 2 seconds for 5 minutes."
+
+      - alert: CariAPIHighErrorRate
+        expr: rate(http_requests_total{job="cari-api",status=~"5.."}[5m]) / rate(http_requests_total{job="cari-api"}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+          team: digital-assets
+        annotations:
+          summary: "Cari API error rate > 5%"
+          description: "More than 5% of API requests are returning 5xx errors."
+
+  # ── Reserve Monitoring ──────────────────────────────────────
+  - name: cari-reserve-alerts
+    rules:
+      - alert: ReserveBackingBelowThreshold
+        expr: cari_reserve_backing_ratio < 1.0
+        for: 0m
+        labels:
+          severity: critical
+          team: treasury
+          regulatory: genius-act-s4
+        annotations:
+          summary: "CRITICAL: Reserve backing ratio below 1.0"
+          description: "Reserve backing ratio is {{ $value }}. GENIUS Act Section 4 requires >= 1.0. Immediate action required."
+          runbook: "deployment/runbooks/reserve-breach.md"
+
+      - alert: ReserveBackingLow
+        expr: cari_reserve_backing_ratio < 1.02
+        for: 5m
+        labels:
+          severity: warning
+          team: treasury
+        annotations:
+          summary: "Reserve backing approaching minimum ({{ $value }})"
+          description: "Reserve backing ratio is {{ $value }}, approaching the 1.0 minimum."
+
+      - alert: ReserveAttestationStale
+        expr: (time() - cari_last_attestation_timestamp) > 259200
+        for: 0m
+        labels:
+          severity: critical
+          team: compliance
+          regulatory: genius-act-s6
+        annotations:
+          summary: "CRITICAL: Reserve attestation is stale (>72h)"
+          description: "The last reserve attestation is older than 72 hours. GENIUS Act Section 6 freshness requirement violated."
+
+  # ── Oracle Staleness Alerts (FINDING-002) ─────────────────────
+  - name: cari-oracle-staleness
+    rules:
+      - alert: OracleAttestationApproachingStaleness
+        expr: (time() - cari_last_attestation_timestamp) > (cari_max_staleness_seconds * 0.75)
+        for: 0m
+        labels:
+          severity: warning
+          team: treasury
+          regulatory: genius-act-s6
+        annotations:
+          summary: "WARNING: Oracle attestation approaching staleness (>75% of maxStaleness)"
+          description: "The oracle attestation has exceeded 75% of the staleness threshold. Time since last attestation: {{ $value | humanizeDuration }}. Refresh the attestation to avoid service disruption."
+          runbook: "deployment/runbooks/operational-runbooks.md#oracle-staleness"
+
+      - alert: OracleAttestationStale
+        expr: (time() - cari_last_attestation_timestamp) > cari_max_staleness_seconds
+        for: 0m
+        labels:
+          severity: critical
+          team: treasury
+          regulatory: genius-act-s6
+        annotations:
+          summary: "CRITICAL: Oracle attestation is stale"
+          description: "The oracle attestation has exceeded the maxStaleness threshold ({{ $value | humanizeDuration }}). Minting operations are blocked. Immediate attestation refresh required."
+          runbook: "deployment/runbooks/operational-runbooks.md#oracle-staleness"
+
+  # ── Compliance Alerts ───────────────────────────────────────
+  - name: cari-compliance-alerts
+    rules:
+      - alert: OFACBlockDetected
+        expr: increase(cari_ofac_blocks_total[1h]) > 0
+        for: 0m
+        labels:
+          severity: critical
+          team: compliance
+        annotations:
+          summary: "OFAC sanctioned address blocked"
+          description: "{{ $value }} OFAC-blocked transactions detected in the last hour. Review required."
+
+      - alert: HighAMLAlertVolume
+        expr: increase(cari_aml_alerts_total[1h]) > 10
+        for: 0m
+        labels:
+          severity: warning
+          team: compliance
+        annotations:
+          summary: "Elevated AML alert volume"
+          description: "{{ $value }} AML alerts in the last hour. May indicate suspicious activity pattern."
+
+  # ── Infrastructure ──────────────────────────────────────────
+  - name: cari-infrastructure
+    rules:
+      - alert: DatabaseConnectionPoolExhausted
+        expr: cari_db_active_connections / cari_db_max_connections > 0.85
+        for: 5m
+        labels:
+          severity: warning
+          team: sre
+        annotations:
+          summary: "Database connection pool > 85% utilized"
+
+      - alert: KafkaConsumerLag
+        expr: kafka_consumer_group_lag{group="cari-orchestrator"} > 1000
+        for: 5m
+        labels:
+          severity: warning
+          team: sre
+        annotations:
+          summary: "Kafka consumer lag > 1000 messages"
+          description: "Event processing is falling behind. Consumer group cari-orchestrator has {{ $value }} messages lag."
+
+      - alert: RedisMemoryHigh
+        expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.9
+        for: 5m
+        labels:
+          severity: warning
+          team: sre
+        annotations:
+          summary: "Redis memory usage > 90%"

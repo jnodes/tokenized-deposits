@@ -1,0 +1,150 @@
+# ─────────────────────────────────────────────────────────────
+# Cari Network Platform -- Local Development Docker Compose
+# ─────────────────────────────────────────────────────────────
+# NOTE: This configuration is for LOCAL DEVELOPMENT ONLY.
+# Production deployments use Azure AKS with Helm charts.
+# See deployment/helm/cari-platform/ for production config.
+# ─────────────────────────────────────────────────────────────
+#
+# Usage:
+#   docker-compose -f deployment/docker-compose.yml up -d
+#   docker-compose -f deployment/docker-compose.yml logs -f api
+
+version: "3.9"
+
+x-common-env: &common-env
+  PYTHONPATH: /app
+  CARI_ENVIRONMENT: ${CARI_ENVIRONMENT:-dev}
+  CARI_LOG_LEVEL: ${CARI_LOG_LEVEL:-INFO}
+  DATABASE_URL: postgresql+asyncpg://cari:${DB_PASSWORD:-cari_dev}@postgres:5432/cari
+  REDIS_URL: redis://redis:6379/0
+  KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
+services:
+  # ── API Server ────────────────────────────────────────────
+  api:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    ports:
+      - "${API_PORT:-8000}:8000"
+    environment:
+      <<: *common-env
+      FIREBLOCKS_API_KEY: ${FIREBLOCKS_API_KEY:-stub}
+      CHAINALYSIS_API_KEY: ${CHAINALYSIS_API_KEY:-stub}
+      HSM_PROVIDER: ${HSM_PROVIDER:-stub}
+      PRIVIDIUM_RPC_URL: ${PRIVIDIUM_RPC_URL:-http://localhost:8545}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1.0"
+
+  # ── Reserve Monitor (CronJob equivalent) ──────────────────
+  reserve-monitor:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    command: ["python", "-m", "offchain.jobs.reserve_monitor"]
+    environment:
+      <<: *common-env
+      MONITOR_INTERVAL_SECONDS: ${MONITOR_INTERVAL:-300}
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  # ── PostgreSQL ────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: cari
+      POSTGRES_USER: cari
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-cari_dev}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cari"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  # ── Redis ─────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  # ── Kafka ─────────────────────────────────────────────────
+  kafka:
+    image: confluentinc/cp-kafka:7.6.0
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_LISTENERS: PLAINTEXT://kafka:9092,CONTROLLER://kafka:9093
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+      CLUSTER_ID: cari-local-cluster-001
+    ports:
+      - "${KAFKA_PORT:-9092}:9092"
+    restart: unless-stopped
+
+  # ── Prometheus ────────────────────────────────────────────
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "${PROMETHEUS_PORT:-9090}:9090"
+    restart: unless-stopped
+
+  # ── Grafana ───────────────────────────────────────────────
+  grafana:
+    image: grafana/grafana:10.4.0
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-cari_admin}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - ./monitoring/grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml:ro
+      - grafana_data:/var/lib/grafana
+    ports:
+      - "${GRAFANA_PORT:-3000}:3000"
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+  prometheus_data:
+  grafana_data:

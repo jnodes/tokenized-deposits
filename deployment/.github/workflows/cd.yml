@@ -1,0 +1,162 @@
+name: CD -- Deploy Cari Platform
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        type: choice
+        options:
+          - prividium-testnet
+          - prividium-mainnet
+      skip_tests:
+        description: "Skip test suite (emergency only)"
+        required: false
+        type: boolean
+        default: false
+
+env:
+  REGISTRY: ${{ secrets.AZURE_ACR_LOGIN_SERVER }}
+  IMAGE_NAME: cari-platform
+  HELM_CHART: deployment/helm/cari-platform
+
+jobs:
+  # ── Determine Environment ───────────────────────────────────
+  setup:
+    name: Setup Deployment
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.env.outputs.environment }}
+      image_tag: ${{ steps.env.outputs.image_tag }}
+    steps:
+      - name: Determine environment
+        id: env
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "environment=${{ inputs.environment }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == refs/tags/v*-rc* ]]; then
+            echo "environment=prividium-testnet" >> $GITHUB_OUTPUT
+          else
+            echo "environment=prividium-mainnet" >> $GITHUB_OUTPUT
+          fi
+          echo "image_tag=${GITHUB_SHA::8}" >> $GITHUB_OUTPUT
+
+  # ── Run Tests (unless skipped) ──────────────────────────────
+  test:
+    name: Pre-Deploy Tests
+    runs-on: ubuntu-latest
+    if: ${{ !inputs.skip_tests }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install and test
+        run: |
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio
+          PYTHONPATH=. pytest offchain/tests/ tests/compliance/ -v --tb=short
+
+  # ── Deploy to Azure AKS ────────────────────────────────────
+  deploy:
+    name: Deploy to ${{ needs.setup.outputs.environment }}
+    runs-on: ubuntu-latest
+    needs: [setup, test]
+    if: always() && (needs.test.result == 'success' || needs.test.result == 'skipped')
+    environment: ${{ needs.setup.outputs.environment }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.13.0
+
+      - name: Configure kubectl for Azure AKS
+        uses: azure/k8s-set-context@v3
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+
+      - name: Deploy with Helm
+        run: |
+          ENV=${{ needs.setup.outputs.environment }}
+          TAG=${{ needs.setup.outputs.image_tag }}
+
+          helm upgrade --install cari-platform ${{ env.HELM_CHART }} \
+            --namespace cari-${ENV} \
+            --create-namespace \
+            --set image.repository=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} \
+            --set image.tag=${TAG} \
+            --set environment=${ENV} \
+            --values ${{ env.HELM_CHART }}/values-${ENV}.yaml \
+            --wait \
+            --timeout 300s
+
+      - name: Verify deployment
+        run: |
+          kubectl -n cari-${{ needs.setup.outputs.environment }} \
+            rollout status deployment/cari-api --timeout=120s
+
+      - name: Smoke test
+        run: |
+          API_URL=$(kubectl -n cari-${{ needs.setup.outputs.environment }} \
+            get svc cari-api -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+          curl -sf http://${API_URL}:8000/healthz | jq .
+
+  # ── Deploy Smart Contracts (mainnet only) ───────────────────
+  contracts:
+    name: Deploy Contracts
+    runs-on: ubuntu-latest
+    needs: [setup, deploy]
+    if: needs.setup.outputs.environment == 'prividium-mainnet'
+    environment: prividium-mainnet
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+
+      - name: Deploy contracts
+        run: |
+          forge script deploy/DeployAll.s.sol \
+            --rpc-url ${{ secrets.PRIVIDIUM_RPC_URL }} \
+            --private-key ${{ secrets.DEPLOYER_PRIVATE_KEY }} \
+            --broadcast \
+            --verify
+        env:
+          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+
+  # ── Post-Deploy Notification ────────────────────────────────
+  notify:
+    name: Notify
+    runs-on: ubuntu-latest
+    needs: [setup, deploy]
+    if: always()
+    steps:
+      - name: Notify on success
+        if: needs.deploy.result == 'success'
+        run: |
+          echo "Deployment to ${{ needs.setup.outputs.environment }} succeeded"
+          # Integrate with Slack/Teams webhook here
+
+      - name: Notify on failure
+        if: needs.deploy.result == 'failure'
+        run: |
+          echo "Deployment to ${{ needs.setup.outputs.environment }} FAILED"
+          # Integrate with PagerDuty here

@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  orchestrator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - CARI_ENVIRONMENT=dev
+      - CARI_DEBUG=true
+      - CARI_PRIVIDIUM_RPC_URL=https://sepolia.era.zksync.dev
+      - CARI_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - CARI_REDIS_URL=redis://redis:6379/0
+      - CARI_DATABASE_URL=sqlite+aiosqlite:///./cari_orchestrator.db
+    depends_on:
+      - kafka
+      - redis
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.0
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    restart: unless-stopped
+
+  kafka:
+    image: confluentinc/cp-kafka:7.6.0
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    depends_on:
+      - zookeeper
+    restart: unless-stopped
+
+volumes:
+  redis-data:
