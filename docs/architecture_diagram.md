@@ -6,7 +6,7 @@
 graph TB
     subgraph "StableArch Council (CrewAI Hierarchical Process)"
         ORC["Orchestrator<br/>Chief Enterprise Architect<br/>(Manager Agent)"]
-        SPA["Stablecoin Platform<br/>Architect"]
+        SPA["Cari Deposit Platform<br/>Architect"]
         TSE["Blockchain Technology<br/>Stack Expert"]
         SRG["Security, Risk &<br/>Compliance Guardian"]
         SAA["Strategic Advisory<br/>Agent"]

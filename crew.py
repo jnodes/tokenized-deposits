@@ -14,7 +14,7 @@ import os
 from crewai import Crew, Process
 
 from agents.orchestrator import create_orchestrator_agent
-from agents.stablecoin_platform import create_stablecoin_platform_agent
+from agents.cari_deposit_platform import create_cari_deposit_platform_agent
 from agents.tech_stack import create_tech_stack_agent
 from agents.security_guardian import create_security_guardian_agent
 from agents.strategic_advisory import create_strategic_advisory_agent
@@ -42,13 +42,13 @@ def build_crew(llm=None, verbose: bool = True) -> Crew:
     """
     # -- Create Agents --
     orchestrator = create_orchestrator_agent(llm=llm)
-    stablecoin_architect = create_stablecoin_platform_agent(llm=llm)
+    cari_architect = create_cari_deposit_platform_agent(llm=llm)
     tech_stack_expert = create_tech_stack_agent(llm=llm)
     security_guardian = create_security_guardian_agent(llm=llm)
     strategic_advisor = create_strategic_advisory_agent(llm=llm)
 
     # -- Create Tasks --
-    platform_task = create_platform_architecture_task(stablecoin_architect)
+    platform_task = create_platform_architecture_task(cari_architect)
     tech_task = create_tech_stack_evaluation_task(tech_stack_expert)
     security_task = create_security_compliance_task(security_guardian)
     strategy_task = create_strategic_advisory_task(strategic_advisor)
@@ -62,7 +62,7 @@ def build_crew(llm=None, verbose: bool = True) -> Crew:
     # -- Assemble Crew --
     crew = Crew(
         agents=[
-            stablecoin_architect,
+            cari_architect,
             tech_stack_expert,
             security_guardian,
             strategic_advisor,

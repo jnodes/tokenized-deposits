@@ -11,7 +11,7 @@
 | Agent | Role | Sign-Off |
 |-------|------|----------|
 | **Orchestrator** (Chief Enterprise Architect) | Final synthesis and ARB decision | APPROVED WITH CONDITIONS |
-| **Stablecoin Platform Architect** | Token mechanics, core banking integration | APPROVED |
+| **Cari Deposit Platform Architect** | Token mechanics, core banking integration | APPROVED |
 | **Blockchain Technology Stack Expert** | ZKsync Prividium infrastructure, DevOps | APPROVED |
 | **Security, Risk & Compliance Guardian** | GENIUS Act, AML/OFAC, NYDFS 500 | APPROVED WITH CONDITIONS |
 | **Strategic Advisory** | Vendor evaluation, roadmap, business case | APPROVED |
@@ -168,7 +168,7 @@ The following items require human decision-making and cannot be resolved by auto
 | Agent | Decision | Date |
 |-------|----------|------|
 | Orchestrator (Chief Enterprise Architect) | APPROVE WITH CONDITIONS | March 2026 |
-| Stablecoin Platform Architect | APPROVE | March 2026 |
+| Cari Deposit Platform Architect | APPROVE | March 2026 |
 | Blockchain Technology Stack Expert | APPROVE | March 2026 |
 | Security, Risk & Compliance Guardian | APPROVE WITH CONDITIONS | March 2026 |
 | Strategic Advisory | APPROVE | March 2026 |

@@ -1,5 +1,5 @@
 """
-Stablecoin Platform Architect Agent
+Cari Deposit Platform Architect Agent
 =====================================
 Designs the end-to-end Cari deposit platform for M&T Bank on the Cari Network / ZKsync Prividium.
 
@@ -10,8 +10,8 @@ DDA <-> CDA flow: fiat in DDA triggers CDA mint; CDA burn triggers fiat back to 
 from crewai import Agent
 
 
-STABLECOIN_PLATFORM_BACKSTORY = """\
-You are the Stablecoin Platform Architect for M&T Bank's Cari deposit initiative on the \
+CARI_DEPOSIT_PLATFORM_BACKSTORY = """\
+You are the Cari Deposit Platform Architect for M&T Bank's Cari deposit initiative on the \
 Cari Network, powered by ZKsync Prividium (private permissioned zkRollup L2).
 
 Cari Deposit Accounts (CDAs) are the on-chain representation of Demand Deposit Accounts (DDAs).
@@ -63,16 +63,16 @@ All designs must be GENIUS Act compliant and support Cari interoperability stand
 """
 
 
-def create_stablecoin_platform_agent(llm=None) -> Agent:
-    """Create the Stablecoin Platform Architect agent."""
+def create_cari_deposit_platform_agent(llm=None) -> Agent:
+    """Create the Cari Deposit Platform Architect agent."""
     return Agent(
-        role="Stablecoin Platform Architect",
+        role="Cari Deposit Platform Architect",
         goal=(
             "Design the complete Cari deposit platform architecture (CDA/DDA) for M&T Bank "
             "on the Cari Network / ZKsync Prividium, ensuring GENIUS Act compliance, "
             "1:1 reserve backing, and full Cari interoperability."
         ),
-        backstory=STABLECOIN_PLATFORM_BACKSTORY,
+        backstory=CARI_DEPOSIT_PLATFORM_BACKSTORY,
         verbose=True,
         allow_delegation=False,
         llm=llm,

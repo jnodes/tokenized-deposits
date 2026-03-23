@@ -88,7 +88,7 @@ cari/
   # ── Quest 0: StableArch Council (CrewAI) ──────────────
   agents/
     orchestrator/              # Chief Enterprise Architect (manager)
-    stablecoin_platform/       # Token mechanics & core banking
+    cari_deposit_platform/       # Token mechanics & core banking
     tech_stack/                # Blockchain infrastructure
     security_guardian/         # Security, risk & compliance
     strategic_advisory/        # Market intelligence & vendor eval
@@ -223,7 +223,7 @@ cari/
 | Agent | Role |
 |-------|------|
 | **Orchestrator** | Chief Enterprise Architect -- coordinates all agents, synthesizes ARB package |
-| **Stablecoin Platform Architect** | Token mechanics, core banking integration, Cari interoperability |
+| **Cari Deposit Platform Architect** | Token mechanics, core banking integration, Cari interoperability |
 | **Blockchain Technology Stack Expert** | ZKsync Prividium infrastructure, tooling, DevOps |
 | **Security, Risk & Compliance Guardian** | GENIUS Act, BSA/AML/OFAC, NYDFS 500, risk register |
 | **Strategic Advisory** | Competitive landscape, vendor evaluation, roadmap, business case |
