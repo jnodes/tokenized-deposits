@@ -15,7 +15,7 @@ graph TB
         API_EXT[Partner API Gateway]
     end
 
-    subgraph "M&T Bank — Application Layer (Azure AKS)"
+    subgraph "M&T Bank - Application Layer - Azure AKS"
         direction TB
         LB[Azure Application Gateway<br/>WAF + TLS Termination]
         
@@ -42,11 +42,11 @@ graph TB
             RESIL[Resilience Manager<br/>Circuit Breakers + DR]
         end
 
-        subgraph "Integration Layer (Hogan/Z DIH)"
-            ZDIH[IBM Z DIH<br/>(MQ/REST Gateway)]
-            HOGAN[Hogan Mainframe<br/>(IBM Z — CIF/DDA/GL)]
+        subgraph "Integration Layer - Hogan/Z DIH"
+            ZDIH["IBM Z DIH<br/>MQ/REST Gateway"]
+            HOGAN["Hogan Mainframe<br/>IBM Z - CIF/DDA/GL"]
             CUSTODY[Custody Adapter<br/>Fireblocks MPC]
-            PAYMENT[Payment Rails<br/>ACH/Fedwire/RTP/FedNow<br/>(via Hogan)]
+            PAYMENT["Payment Rails<br/>ACH/Fedwire/RTP/FedNow<br/>via Hogan"]
         end
     end
 
@@ -151,7 +151,7 @@ graph LR
     subgraph "Data Sources"
         TX[CDA Transaction Events]
         BLOCK[Block Confirmations]
-        BANK[Hogan DDA/GL Events<br/>(via Z DIH)]
+        BANK["Hogan DDA/GL Events<br/>via Z DIH"]
         COMP[Compliance Alerts]
     end
 
@@ -167,7 +167,7 @@ graph LR
         P1[CDA Transaction Processor]
         P2[Compliance Screener]
         P3[Settlement Engine]
-        P4[Dual-Rail Reconciliation<br/>(Post-2025 GL)]
+        P4["Dual-Rail Reconciliation<br/>Post-2025 GL"]
         P5[Reserve Monitor]
     end
 
@@ -176,7 +176,7 @@ graph LR
         RD[(Azure Cache for Redis<br/>State Cache)]
         S3[(Azure Blob<br/>Audit Archive)]
         BC[(ZKsync Prividium<br/>CDA On-Chain State)]
-        HOGAN[(Hogan GL<br/>Post-2025 Format)]
+        HOGAN[("Hogan GL<br/>Post-2025 Format")]
     end
 
     subgraph "Outputs"
@@ -228,7 +228,7 @@ graph TB
         CLIENT[Client Applications]
     end
 
-    subgraph "DMZ (Azure VNet -- Public Subnet)"
+    subgraph "DMZ - Azure VNet Public Subnet"
         WAF[Azure WAF]
         APIGW[API Gateway<br/>Rate Limiting + Auth]
     end
@@ -258,16 +258,16 @@ graph TB
         AKV[Azure Key Vault<br/>Secrets Management]
     end
 
-    subgraph "Core Banking (M&T Internal Network)"
-        ZDIH[IBM Z DIH<br/>(MQ/REST Gateway)]
-        HOGAN[Hogan Mainframe<br/>(IBM Z — CIF/DDA/GL)]
+    subgraph "Core Banking - M&T Internal Network"
+        ZDIH["IBM Z DIH<br/>MQ/REST Gateway"]
+        HOGAN["Hogan Mainframe<br/>IBM Z - CIF/DDA/GL"]
     end
 
     subgraph "Container Registry (Azure)"
         ACR[Azure ACR<br/>mtbcari.azurecr.io]
     end
 
-    subgraph "External Services (VPN / Private Link)"
+    subgraph "External Services - VPN / Private Link"
         FB_VPN[Fireblocks<br/>Private API]
         CH_VPN[Chainalysis<br/>Private API]
         NB_VPN[Notabene<br/>API]

@@ -201,15 +201,15 @@ event_bus:
 
 ```mermaid
 graph TB
-    subgraph "M&T Bank (Phase 2 -- existing)"
+    subgraph "M&T Bank - Phase 2 Existing"
         API[FastAPI Orchestrator]
         SETTLE[Settlement Service]
         COMPLY[Compliance Service]
     end
 
-    subgraph "M&T Core Banking (Hogan/Z DIH)"
-        ZDIH[IBM Z DIH<br/>(MQ/REST Gateway)]
-        HOGAN[Hogan Mainframe<br/>(CIF/DDA/GL)]
+    subgraph "M&T Core Banking - Hogan/Z DIH"
+        ZDIH["IBM Z DIH<br/>MQ/REST Gateway"]
+        HOGAN["Hogan Mainframe<br/>CIF/DDA/GL"]
     end
 
     subgraph "New: Cari Network Gateway"

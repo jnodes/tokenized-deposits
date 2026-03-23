@@ -5,11 +5,11 @@
 ```mermaid
 sequenceDiagram
     participant Depositor
-    participant ZDIH as IBM Z DIH<br/>(MQ/REST Gateway)
-    participant Hogan as Hogan Mainframe<br/>(IBM Z — CIF/DDA)
-    participant Operator as Operator<br/>(M&T Supply Controller)
+    participant ZDIH as IBM Z DIH - MQ/REST Gateway
+    participant Hogan as Hogan Mainframe - IBM Z - CIF/DDA
+    participant Operator as Operator - M&T Supply Controller
     participant Oracle as ReserveOracle
-    participant Token as MTokenizedDeposit<br/>(CDA on Prividium)
+    participant Token as MTokenizedDeposit - CDA on Prividium
 
     Depositor->>Hogan: Deposit USD to DDA (ACH/Fedwire/RTP/FedNow)
     Hogan->>Hogan: Credit DDA (CIF account), allocate to reserves
@@ -42,10 +42,10 @@ sequenceDiagram
 sequenceDiagram
     participant Holder
     participant API as M&T API Gateway
-    participant Operator as Operator<br/>(M&T Supply Controller)
-    participant Token as MTokenizedDeposit<br/>(CDA)
-    participant ZDIH as IBM Z DIH<br/>(MQ/REST Gateway)
-    participant Hogan as Hogan Mainframe<br/>(IBM Z — CIF/DDA)
+    participant Operator as Operator - M&T Supply Controller
+    participant Token as MTokenizedDeposit - CDA
+    participant ZDIH as IBM Z DIH - MQ/REST Gateway
+    participant Hogan as Hogan Mainframe - IBM Z - CIF/DDA
 
     Holder->>API: Redemption request (amount)
     API->>Operator: Operator initiates CDA burn (CDA->DDA)
@@ -69,8 +69,8 @@ sequenceDiagram
 sequenceDiagram
     participant Sender
     participant App as M&T Digital App
-    participant Notabene as Travel Rule Service<br/>(Notabene)
-    participant Token as MTokenizedDeposit<br/>(CDA)
+    participant Notabene as Travel Rule Service - Notabene
+    participant Token as MTokenizedDeposit - CDA
 
     Sender->>App: CDA Transfer request (to, $5,000)
     App->>App: Amount >= $3,000 threshold
@@ -90,12 +90,12 @@ sequenceDiagram
 
 ```mermaid
 sequenceDiagram
-    participant Originator as Originator<br/>(M&T Bank)
+    participant Originator as Originator - M&T Bank
     participant Settlement as CariSettlement
-    participant Token as MTokenizedDeposit<br/>(M&T CDA instance)
-    participant Bridge as Messaging Bridge<br/>(Cross-Bank Comms)
+    participant Token as MTokenizedDeposit - M&T CDA instance
+    participant Bridge as Messaging Bridge - Cross-Bank Comms
     participant SBank as Settlement Bank
-    participant DestBank as Destination Bank<br/>(Cari Member)
+    participant DestBank as Destination Bank - Cari Member
 
     Note over Originator,DestBank: PHASE 1: Initiate CDA Transfer (Burn at Source)
 
@@ -142,9 +142,9 @@ sequenceDiagram
     participant Banks as Cari Member Banks
     participant Bridge as Messaging Bridge
     participant SBank as Settlement Bank
-    participant Contract as CariSettlement<br/>(Prividium)
-    participant ZDIH as IBM Z DIH<br/>(MQ/REST Gateway)
-    participant Hogan as Hogan Mainframe<br/>(IBM Z — CIF/DDA)
+    participant Contract as CariSettlement - Prividium
+    participant ZDIH as IBM Z DIH - MQ/REST Gateway
+    participant Hogan as Hogan Mainframe - IBM Z - CIF/DDA
 
     Note over Banks,Hogan: DAILY SETTLEMENT WINDOW
 
@@ -188,7 +188,7 @@ sequenceDiagram
 sequenceDiagram
     participant OFAC as OFAC/Court Order
     participant Compliance as Compliance Officer
-    participant Token as MTokenizedDeposit<br/>(CDA)
+    participant Token as MTokenizedDeposit - CDA
     participant Escrow as M&T Escrow Account
 
     OFAC->>Compliance: Seizure order for address X

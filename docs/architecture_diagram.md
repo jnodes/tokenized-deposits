@@ -26,24 +26,24 @@ graph TB
         end
 
         subgraph "Off-Chain Services (DDA Layer)"
-            ZDIH["IBM Z DIH<br/>(MQ/REST Gateway)"]
-            HOGAN["Hogan Mainframe<br/>(IBM Z — CIF/DDA)"]
+            ZDIH["IBM Z DIH<br/>MQ/REST Gateway"]
+            HOGAN["Hogan Mainframe<br/>IBM Z - CIF/DDA"]
             RAS["Reserve Attestation<br/>Service"]
-            RE["Reconciliation<br/>Engine (Post-2025 GL)"]
+            RE["Reconciliation<br/>Engine - Post-2025 GL"]
             EI["Event Indexer"]
-            API["API Gateway<br/>(REST/GraphQL)"]
+            API["API Gateway<br/>REST/GraphQL"]
             AML["AML Transaction<br/>Monitoring"]
-            TR["Travel Rule<br/>Service (Notabene)"]
+            TR["Travel Rule<br/>Service - Notabene"]
         end
 
-        subgraph "Infrastructure (Azure)"
-            AKS["Azure AKS<br/>(Kubernetes)"]
-            ACR["Azure ACR<br/>(mtbcari.azurecr.io)"]
-            AKV["Azure Key Vault<br/>(Managed HSM)"]
-            CUST["Custody Integration<br/>(Fireblocks/BitGo)"]
-            MON["Observability Stack<br/>(Prometheus/Grafana)"]
-            CICD["CI/CD Pipeline<br/>(Hardhat/Foundry)"]
-            KAFKA["Kafka Event Bus<br/>(Confluent KRaft)"]
+        subgraph "Infrastructure - Azure"
+            AKS["Azure AKS<br/>Kubernetes"]
+            ACR["Azure ACR<br/>mtbcari.azurecr.io"]
+            AKV["Azure Key Vault<br/>Managed HSM"]
+            CUST["Custody Integration<br/>Fireblocks/BitGo"]
+            MON["Observability Stack<br/>Prometheus/Grafana"]
+            CICD["CI/CD Pipeline<br/>Hardhat/Foundry"]
+            KAFKA["Kafka Event Bus<br/>Confluent KRaft"]
         end
     end
 
@@ -58,10 +58,10 @@ graph TB
     end
 
     subgraph "External Systems"
-        ETH["Ethereum L1<br/>(zk-proof anchoring)"]
-        FED["FedNow / ACH /<br/>Fedwire (DDA Rails)"]
-        OFAC["OFAC SDN List<br/>(Chainalysis)"]
-        REG["Regulators<br/>(OCC/Fed/NYDFS)"]
+        ETH["Ethereum L1<br/>zk-proof anchoring"]
+        FED["FedNow / ACH /<br/>Fedwire - DDA Rails"]
+        OFAC["OFAC SDN List<br/>Chainalysis"]
+        REG["Regulators<br/>OCC/Fed/NYDFS"]
     end
 
     subgraph "Regulatory Guardrails"
@@ -149,13 +149,13 @@ graph TB
 ```mermaid
 sequenceDiagram
     participant Customer
-    participant ZDIH as IBM Z DIH<br/>(MQ/REST Gateway)
-    participant Hogan as Hogan Mainframe<br/>(IBM Z — CIF/DDA)
-    participant Operator as Operator<br/>(M&T Supply Controller)
+    participant ZDIH as IBM Z DIH - MQ/REST Gateway
+    participant Hogan as Hogan Mainframe - IBM Z - CIF/DDA
+    participant Operator as Operator - M&T Supply Controller
     participant API as API Gateway
     participant AML as AML/KYC Service
     participant OFAC as OFAC Screening
-    participant Contract as CDA Contract<br/>(ZKsync Prividium)
+    participant Contract as CDA Contract - ZKsync Prividium
     participant Oracle as Compliance Oracle
     participant Bridge as Messaging Bridge
     participant SBank as Settlement Bank

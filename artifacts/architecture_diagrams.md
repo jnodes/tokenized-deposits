@@ -33,16 +33,16 @@ graph TB
         IR[Incident Response<br/>Playbook Execution]
     end
 
-    subgraph "Quest 2 — Off-Chain Platform (DDA Layer via Hogan)"
+    subgraph "Quest 2 - Off-Chain Platform - DDA Layer via Hogan"
         API[FastAPI Routers]
         BC[Blockchain Service]
-        ZDIH[IBM Z DIH<br/>(MQ/REST Gateway)]
-        HOGAN[Hogan Mainframe<br/>(CIF/DDA/GL)]
+        ZDIH["IBM Z DIH<br/>MQ/REST Gateway"]
+        HOGAN["Hogan Mainframe<br/>CIF/DDA/GL"]
         CU[Custody Adapters]
     end
 
-    subgraph "Quest 1 — Smart Contracts (CDA Layer)"
-        MTD[MTokenizedDeposit<br/>(CDA)]
+    subgraph "Quest 1 - Smart Contracts - CDA Layer"
+        MTD["MTokenizedDeposit<br/>CDA"]
         RO[ReserveOracle]
         CS[CariSettlement]
         OP[Operator<br/>CDA Supply Control]
@@ -157,7 +157,7 @@ sequenceDiagram
     participant IR as Incident Response
     participant PB as DR Playbook
     participant Team as Response Team
-    participant Reg as Regulator (NYDFS)
+    participant Reg as Regulator - NYDFS
 
     Monitor->>IR: Detect anomaly (P1_CRITICAL)
     IR->>IR: Create CDA incident
@@ -188,10 +188,10 @@ graph LR
         Oracle[ReserveOracle<br/>Attestation Hash]
     end
 
-    subgraph "Off-Chain DDA Reserves (Hogan GL)"
-        TB[US Treasury Bills<br/>60% — GL 1015]
-        FDIC[FDIC Deposits<br/>30% — GL 1010]
-        RRP[Fed Reverse Repo<br/>10% — GL 1020]
+    subgraph "Off-Chain DDA Reserves - Hogan GL"
+        TB["US Treasury Bills<br/>60% - GL 1015"]
+        FDIC["FDIC Deposits<br/>30% - GL 1010"]
+        RRP["Fed Reverse Repo<br/>10% - GL 1020"]
     end
 
     subgraph "Proof Engine"
@@ -200,8 +200,8 @@ graph LR
     end
 
     subgraph "Hogan Integration"
-        ZDIH[IBM Z DIH<br/>(MQ/REST Gateway)]
-        HOGAN[Hogan GL Subsystem<br/>(Post-2025 Format)]
+        ZDIH["IBM Z DIH<br/>MQ/REST Gateway"]
+        HOGAN["Hogan GL Subsystem<br/>Post-2025 Format"]
     end
 
     Supply --> PE
@@ -213,6 +213,6 @@ graph LR
     HOGAN --> PE
     PE --> Hash
 
-    Hash --> |"CDA/DDA ratio >= 1.0"| Verified[VERIFIED ✓]
-    Hash --> |"CDA/DDA ratio < 1.0"| Failed[FAILED ✗]
+    Hash --> |"CDA/DDA ratio >= 1.0"| Verified["VERIFIED"]
+    Hash --> |"CDA/DDA ratio < 1.0"| Failed["FAILED"]
 ```

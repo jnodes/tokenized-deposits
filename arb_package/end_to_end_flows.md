@@ -13,13 +13,13 @@ sequenceDiagram
     participant API as FastAPI Orchestrator
     participant COMPLY as Compliance Service
     participant AML as Chainalysis KYT
-    participant ZDIH as IBM Z DIH<br/>(MQ/REST Gateway)
-    participant HOGAN as Hogan Mainframe<br/>(CIF/DDA/GL)
+    participant ZDIH as IBM Z DIH - MQ/REST Gateway
+    participant HOGAN as Hogan Mainframe - CIF/DDA/GL
     participant SIGN as Signing Policy Engine
     participant HSM as Azure Managed HSM
-    participant OPERATOR as Operator<br/>(M&T Supply Controller)
+    participant OPERATOR as Operator - M&T Supply Controller
     participant BC as ZKsync Prividium
-    participant TOKEN as MTBankTokenizedDeposit<br/>(CDA)
+    participant TOKEN as MTBankTokenizedDeposit - CDA
     participant AUDIT as Audit Service
 
     Client->>API: POST /api/v1/transactions/mint<br/>{depositor, amount, wallet_address}
@@ -76,11 +76,11 @@ sequenceDiagram
     participant TRAVEL as Travel Rule Engine
     participant SIGN as Signing Policy Engine
     participant HSM as Azure Managed HSM
-    participant OPERATOR as Operator<br/>(M&T Supply Controller)
+    participant OPERATOR as Operator - M&T Supply Controller
     participant BC as ZKsync Prividium
-    participant TOKEN as MTBankTokenizedDeposit<br/>(CDA)
-    participant ZDIH as IBM Z DIH<br/>(MQ/REST Gateway)
-    participant HOGAN as Hogan Mainframe<br/>(CIF/DDA/GL)
+    participant TOKEN as MTBankTokenizedDeposit - CDA
+    participant ZDIH as IBM Z DIH - MQ/REST Gateway
+    participant HOGAN as Hogan Mainframe - CIF/DDA/GL
     participant AUDIT as Audit Service
 
     Client->>API: POST /api/v1/transactions/burn<br/>{holder, amount, payout_method, beneficiary}
@@ -149,7 +149,7 @@ sequenceDiagram
     participant BRIDGE as Messaging Bridge
     participant SBANK as Settlement Bank
     participant ORACLE as Compliance Oracle
-    participant SETTLE as Settlement Contract<br/>(Prividium)
+    participant SETTLE as Settlement Contract - Prividium
     participant BP_GW as Bank B Cari Gateway
     participant BP as Bank B
 
@@ -198,8 +198,8 @@ sequenceDiagram
     participant Banks as Cari Member Banks
     participant BRIDGE as Messaging Bridge
     participant SBANK as Settlement Bank
-    participant CONTRACT as CariSettlement<br/>(Prividium)
-    participant DDA as DDA Rails<br/>(FedNow/Fedwire)
+    participant CONTRACT as CariSettlement - Prividium
+    participant DDA as DDA Rails - FedNow/Fedwire
 
     Note over Banks,DDA: DAILY SETTLEMENT WINDOW OPENS
 
@@ -240,10 +240,10 @@ sequenceDiagram
 
 ```mermaid
 sequenceDiagram
-    participant CRON as Scheduled Job (Daily)
+    participant CRON as Scheduled Job - Daily
     participant RESERVE as Reserve Monitor
-    participant ZDIH as IBM Z DIH<br/>(MQ/REST Gateway)
-    participant HOGAN as Hogan Mainframe<br/>(DDA Reserves/GL)
+    participant ZDIH as IBM Z DIH - MQ/REST Gateway
+    participant HOGAN as Hogan Mainframe - DDA Reserves/GL
     participant BC as ZKsync Prividium
     participant TOKEN as CDA Token Contract
     participant PROOF as Reserve Proof Engine
@@ -344,7 +344,7 @@ sequenceDiagram
     participant TX as CDA Transaction Request
     participant COMPLY as Compliance Service
     participant AML as AML Screening Engine
-    participant OFAC as OFAC Check (Chainalysis)
+    participant OFAC as OFAC Check - Chainalysis
     participant CTR as CTR Detection
     participant TRAVEL as Travel Rule
     participant AUDIT as Audit Log

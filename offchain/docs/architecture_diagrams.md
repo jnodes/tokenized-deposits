@@ -11,18 +11,18 @@
 - **Azure ACR** (mtbcari.azurecr.io) — Container registry
 - **Azure Managed HSM** — Key management
 
-### Mint Flow (Fiat Deposit → Tokenized Deposit via Hogan/Z DIH)
+### Mint Flow - Fiat Deposit to Tokenized Deposit via Hogan/Z DIH
 
 ```mermaid
 sequenceDiagram
     participant Client as API Client
     participant API as FastAPI Router
     participant Comp as Compliance Service
-    participant ZDIH as IBM Z DIH<br/>(MQ/REST Gateway)
-    participant Hogan as Hogan Mainframe<br/>(CIF/DDA/GL)
+    participant ZDIH as IBM Z DIH - MQ/REST Gateway
+    participant Hogan as Hogan Mainframe - CIF/DDA/GL
     participant Res as Reserve Monitor
     participant BC as Blockchain Service
-    participant Kafka as Kafka Event Bus<br/>(Confluent KRaft)
+    participant Kafka as Kafka Event Bus - Confluent KRaft
 
     Client->>API: POST /api/v1/transactions/mint
     API->>Comp: screen_address(to_address)
@@ -52,7 +52,7 @@ sequenceDiagram
     API-->>Client: 200 CONFIRMED (tx_hash)
 ```
 
-### Burn Flow (Par Redemption — GENIUS Act S5 via Hogan/Z DIH)
+### Burn Flow - Par Redemption - GENIUS Act S5 via Hogan/Z DIH
 
 ```mermaid
 sequenceDiagram
@@ -60,9 +60,9 @@ sequenceDiagram
     participant API as FastAPI Router
     participant Comp as Compliance Service
     participant BC as Blockchain Service
-    participant ZDIH as IBM Z DIH<br/>(MQ/REST Gateway)
-    participant Hogan as Hogan Mainframe<br/>(CIF/DDA/GL)
-    participant Kafka as Kafka Event Bus<br/>(Confluent KRaft)
+    participant ZDIH as IBM Z DIH - MQ/REST Gateway
+    participant Hogan as Hogan Mainframe - CIF/DDA/GL
+    participant Kafka as Kafka Event Bus - Confluent KRaft
 
     Client->>API: POST /api/v1/transactions/burn
     API->>Comp: screen_address(from_address)
@@ -84,7 +84,7 @@ sequenceDiagram
     API-->>Client: 200 CONFIRMED (tx_hash, trace_number)
 ```
 
-### Cari Settlement Flow (Cross-Bank)
+### Cari Settlement Flow - Cross-Bank
 
 ```mermaid
 sequenceDiagram
