@@ -10,14 +10,14 @@
 ```mermaid
 graph LR
     subgraph "Phase 1: Internal Pilot"
-        P1A[Single-node deployment<br/>(Docker Compose)]
+        P1A["Single-node deployment<br/>Docker Compose"]
         P1B[Stub HSM + Stub Custody<br/>+ Stub Z DIH]
         P1C[Prividium Testnet]
         P1D[M&T internal CDA only]
     end
 
     subgraph "Phase 2: Prividium Mainnet"
-        P2A[Azure AKS cluster<br/>(3 nodes, 3 AZs)]
+        P2A["Azure AKS cluster<br/>3 nodes, 3 AZs"]
         P2B[Fireblocks MPC +<br/>Azure Managed HSM]
         P2C[Prividium Mainnet]
         P2D[Intra-bank CDA settlement<br/>+ Hogan/Z DIH integration]
@@ -25,7 +25,7 @@ graph LR
 
     subgraph "Phase 3: Cari Network"
         P3A[Multi-region AKS<br/>+ Azure ACR]
-        P3B[Full vendor stack<br/>+ Hogan GL (Post-2025)]
+        P3B["Full vendor stack<br/>+ Hogan GL Post-2025"]
         P3C[Cari Network interop]
         P3D[Inter-bank CDA settlement<br/>via Settlement Bank]
     end

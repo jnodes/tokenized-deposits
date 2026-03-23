@@ -23,7 +23,7 @@ graph TB
             FAST[FastAPI Orchestrator<br/>offchain/main.py]
             MINT_R[CDA Mint/Burn Router]
             SETTLE_R[Settlement Router]
-            RECON_R[Reconciliation Router<br/>(Post-2025 GL)]
+            RECON_R["Reconciliation Router<br/>Post-2025 GL"]
             COMPLY_R[Compliance Router]
             RESERVE_R[Reserve Monitor Router]
         end
@@ -51,7 +51,7 @@ graph TB
     end
 
     subgraph "Middleware (Azure)"
-        KAFKA[Kafka Event Bus<br/>Confluent Platform (KRaft)]
+        KAFKA["Kafka Event Bus<br/>Confluent Platform KRaft"]
         REDIS[Redis Cache<br/>Azure Cache]
         ACR[Azure ACR<br/>mtbcari.azurecr.io]
     end
