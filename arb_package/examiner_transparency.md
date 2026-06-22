@@ -1,6 +1,6 @@
 # Examiner Transparency Artifacts
 
-**the Issuing Bank | Cari Network Cari Deposit Account (CDA) Platform**
+**The Issuing Bank | Cari Network Cari Deposit Account (CDA) Platform**
 **ARB Submission -- Regulatory Examiner Access Guide**
 
 ---
@@ -9,7 +9,7 @@
 
 This document provides OCC, Federal Reserve, and NYDFS examiners with a complete guide to accessing, querying, and verifying the the Issuing Bank CDA platform's compliance posture. The platform implements a dual-rail architecture (CDA on-chain + DDA off-chain via Hogan mainframe) with the Operator controlling CDA supply and the Settlement Bank executing daily net settlement. All artifacts are available programmatically via API, through the examiner dashboard, or as exportable reports.
 
-**the Issuing Bank Technology Stack:**
+**The Issuing Bank Technology Stack:**
 - **Hogan mainframe** (IBM Z) — Source of truth for CIF/DDA off-chain records
 - **IBM Z DIH** — Middleware for API-to-Hogan integration (MQ/REST gateway)
 - **Post-2025 GL format** (ISO 20022 aligned) — All GL entries via Hogan GL subsystem
@@ -288,4 +288,4 @@ Production observability via Azure Monitor:
 ---
 
 *ARB Submission -- Examiner Transparency Artifacts*
-*the Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*
+*The Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*

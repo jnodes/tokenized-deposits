@@ -1,6 +1,6 @@
 # Target-State Architecture
 
-**the Issuing Bank | Cari Network Cari Deposit Account (CDA) Platform**
+**The Issuing Bank | Cari Network Cari Deposit Account (CDA) Platform**
 **ARB Submission -- Architecture Diagrams**
 
 ---
@@ -353,4 +353,4 @@ graph TB
 ---
 
 *ARB Submission -- Architecture Diagrams*
-*the Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*
+*The Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*

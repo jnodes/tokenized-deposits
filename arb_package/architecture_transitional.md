@@ -1,6 +1,6 @@
 # Transitional Architecture
 
-**the Issuing Bank | Cari Network Cari Deposit Account (CDA) Platform**
+**The Issuing Bank | Cari Network Cari Deposit Account (CDA) Platform**
 **ARB Submission -- Pilot to Production Migration**
 
 ---
@@ -304,4 +304,4 @@ NON-CRITICAL ROLLBACK (API service issue):
 ---
 
 *ARB Submission -- Transitional Architecture*
-*the Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*
+*The Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*

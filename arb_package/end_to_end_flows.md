@@ -1,6 +1,6 @@
 # End-to-End Transaction Flows
 
-**the Issuing Bank | Cari Network Cari Deposit Account (CDA) Platform**
+**The Issuing Bank | Cari Network Cari Deposit Account (CDA) Platform**
 **ARB Submission -- Transaction Flow Documentation**
 
 ---
@@ -390,4 +390,4 @@ sequenceDiagram
 ---
 
 *ARB Submission -- End-to-End Transaction Flows*
-*the Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*
+*The Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*

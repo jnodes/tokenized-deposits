@@ -2,7 +2,7 @@
 
 ## Architecture Flow Diagrams
 
-### the Issuing Bank Technology Stack Integration
+### The Issuing Bank Technology Stack Integration
 
 - **Hogan mainframe** (IBM Z) — Core banking (CIF/DDA/GL)
 - **IBM Z DIH** — MQ/REST gateway for API-to-Hogan integration

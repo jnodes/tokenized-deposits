@@ -1,6 +1,6 @@
 # Security Audit Report
 
-**the Issuing Bank Tokenized Deposit Platform | Cari Network | ZKsync Prividium**
+**The Issuing Bank Tokenized Deposit Platform | Cari Network | ZKsync Prividium**
 
 **Audit Date:** March 2026  
 **Audit Type:** Comprehensive Security, Compliance, and Ethereum Protocol Audit  

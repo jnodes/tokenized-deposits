@@ -1,6 +1,6 @@
 # Quest 2 — Regulatory Compliance Matrix
 
-## the Issuing Bank Technology Stack
+## The Issuing Bank Technology Stack
 
 - **Hogan mainframe** (IBM Z) — Core banking (CIF/DDA/GL)
 - **IBM Z Data Integration Hub (DIH)** — MQ/REST gateway for API-to-Hogan integration

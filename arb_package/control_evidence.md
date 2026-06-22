@@ -1,6 +1,6 @@
 # Control Implementation Evidence
 
-**the Issuing Bank | Cari Network Cari Deposit Account (CDA) Platform**
+**The Issuing Bank | Cari Network Cari Deposit Account (CDA) Platform**
 **ARB Submission -- Control Evidence Documentation**
 
 ---
@@ -226,4 +226,4 @@ FAILURES:                         0
 ---
 
 *ARB Submission -- Control Implementation Evidence*
-*the Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*
+*The Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*

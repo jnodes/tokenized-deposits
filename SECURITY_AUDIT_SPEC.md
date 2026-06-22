@@ -1,6 +1,6 @@
 # Security Audit Specification
 
-**the Issuing Bank Tokenized Deposit Platform | Cari Network | ZKsync Prividium**
+**The Issuing Bank Tokenized Deposit Platform | Cari Network | ZKsync Prividium**
 
 **Audit Date:** March 2026  
 **Audit Scope:** Smart Contracts, Off-Chain APIs, Security Controls, Regulatory Compliance

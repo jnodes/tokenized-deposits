@@ -1,6 +1,6 @@
 # ARB Submission Package -- Executive Summary
 
-**the Issuing Bank | Cari Deposit Account (CDA) Platform on Cari Network**
+**The Issuing Bank | Cari Deposit Account (CDA) Platform on Cari Network**
 **Architecture Review Board Submission**
 **Date:** March 2026 | **Version:** 1.0
 **Sponsor:** the Head of Digital Assets, Head of Digital Assets
@@ -10,11 +10,11 @@
 
 ## 1. Initiative Overview
 
-the Issuing Bank proposes to launch FDIC-insured Cari Deposit Accounts (CDA) on the Cari Network, a permissioned blockchain built on ZKsync Prividium (zkRollup Layer 2). This initiative enables the Issuing Bank to offer programmable, instantly-settleable bank deposits to institutional and commercial clients, with full GENIUS Act compliance, FDIC insurance coverage, and OCC examiner transparency.
+The Issuing Bank proposes to launch FDIC-insured Cari Deposit Accounts (CDA) on the Cari Network, a permissioned blockchain built on ZKsync Prividium (zkRollup Layer 2). This initiative enables the Issuing Bank to offer programmable, instantly-settleable bank deposits to institutional and commercial clients, with full GENIUS Act compliance, FDIC insurance coverage, and OCC examiner transparency.
 
 The platform implements a **dual-rail architecture** where CDA tokens (on-chain) operate in parallel with traditional Demand Deposit Accounts (DDA) off-chain, with the **Operator** (the Issuing Bank) controlling CDA supply through mint/burn operations, and the **Settlement Bank** executing daily net settlement of inter-bank CDA transfers via the **Messaging Bridge**.
 
-### the Issuing Bank Technology Stack Alignment
+### The Issuing Bank Technology Stack Alignment
 
 | Component | Technology | Purpose |
 |-----------|------------|---------|
@@ -199,4 +199,4 @@ This ARB submission includes the following documents:
 ---
 
 *Submitted by: StableArch Council -- Architecture Review Board*
-*the Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*
+*The Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*

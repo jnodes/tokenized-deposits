@@ -1,6 +1,6 @@
 # Risk & Compliance Matrix
 
-**the Issuing Bank | Cari Network Cari Deposit Account (CDA) Platform**
+**The Issuing Bank | Cari Network Cari Deposit Account (CDA) Platform**
 **ARB Submission -- Complete Risk & Compliance Evidence**
 
 ---
@@ -166,7 +166,7 @@ R4: 2,3 (MEDIUM) R8: 2,2 (LOW)
 
 **R4 (Smart contract vulnerability) is the only MEDIUM residual risk.** This is expected for pre-audit code and will be reduced to LOW upon completion of the independent security audit by Trail of Bits or OpenZeppelin.
 
-### the Issuing Bank Stack-Specific Controls
+### The Issuing Bank Stack-Specific Controls
 
 | Control Area | Azure Control | Evidence |
 |--------------|--------------|----------|
@@ -186,4 +186,4 @@ R4: 2,3 (MEDIUM) R8: 2,2 (LOW)
 ---
 
 *ARB Submission -- Risk & Compliance Matrix*
-*the Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*
+*The Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*

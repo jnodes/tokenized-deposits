@@ -1,4 +1,4 @@
-# the Issuing Bank Tokenized Deposit Platform
+# The Issuing Bank Tokenized Deposit Platform
 
 **FDIC-insured, GENIUS Act-compliant tokenized deposits on the Cari Network / ZKsync Prividium.**
 
@@ -247,7 +247,7 @@ See `final/launch_readiness_report.md` for the complete assessment.
 
 ## Context
 
-- **the Issuing Bank** is a founding partner in the Cari Network
+- **The Issuing Bank** is a founding partner in the Cari Network
 - **the Head of Digital Assets** (Head of Digital Assets) has publicly committed to tokenized deposits
 - **Cari Network** runs on **ZKsync Prividium** (private permissioned zkRollup L2)
 - Tokenized deposits are **FDIC-insured bank liabilities**, not stablecoins
@@ -255,5 +255,5 @@ See `final/launch_readiness_report.md` for the complete assessment.
 
 ---
 
-*the Issuing Bank | Cari Network | ZKsync Prividium*
+*The Issuing Bank | Cari Network | ZKsync Prividium*
 *StableArch Council -- Architecture Review Board*
