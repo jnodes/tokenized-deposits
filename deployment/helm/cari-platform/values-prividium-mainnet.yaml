@@ -5,7 +5,7 @@ environment: prividium-mainnet
 
 # Azure Container Registry
 image:
-  repository: mtbcari.azurecr.io/cari-platform
+  repository: cari-platform.azurecr.io/cari-platform
 
 autoscaling:
   enabled: true

@@ -61,7 +61,7 @@ class Settings(BaseSettings):
     hsm_key_id_attestor: str = ""
 
     # --- Core Banking ---
-    core_banking_base_url: str = "https://corebanking.internal.mtb.com/api"
+    core_banking_base_url: str = "https://corebanking.internal.issuing-bank.com/api"
     core_banking_api_key: str = ""
 
     # --- Custody ---

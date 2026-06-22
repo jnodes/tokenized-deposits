@@ -166,7 +166,7 @@ class TestReserveProofEngine:
             total_reserves_usd=10_000.0,
             block_number=12345,
             attestation_fresh=True,
-            attestor="MTB_ATTESTOR",
+            attestor="ISSUING_BANK_ATTESTOR"
         )
         assert proof.status == ProofStatus.VERIFIED
         assert proof.fully_backed is True

@@ -4,7 +4,7 @@
 replicaCount: 2
 
 image:
-  repository: mtbcari.azurecr.io/cari-platform
+  repository: cari-platform.azurecr.io/cari-platform
   tag: latest
   pullPolicy: IfNotPresent
 
@@ -82,7 +82,7 @@ azure:
     tenantId: ""
     resourceGroup: ""
   acr:
-    loginServer: mtbcari.azurecr.io
+    loginServer: cari-platform.azurecr.io
 
 # Database
 postgresql:

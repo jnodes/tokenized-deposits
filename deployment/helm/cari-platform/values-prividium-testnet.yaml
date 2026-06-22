@@ -5,7 +5,7 @@ environment: prividium-testnet
 
 # Azure Container Registry (testnet uses same ACR as production)
 image:
-  repository: mtbcari.azurecr.io/cari-platform
+  repository: cari-platform.azurecr.io/cari-platform
 
 autoscaling:
   enabled: false

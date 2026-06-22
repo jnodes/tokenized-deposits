@@ -173,13 +173,13 @@ class ReserveProofEngine:
                 asset_type="FDIC_INSURED_DEPOSIT",
                 custodian="the Issuing Bank Trust",
                 amount_usd=round(total_usd * 0.30, 2),
-                account_reference="MTB-RESERVE-001",
+                account_reference="ISSUING-BANK-RESERVE-001"
             ),
             ReserveComponent(
                 asset_type="FED_REVERSE_REPO",
                 custodian="Federal Reserve Bank of New York",
                 amount_usd=round(total_usd * 0.10, 2),
-                account_reference="FRBNY-RRP-MTB",
+                account_reference="FRBNY-RRP-ISSUING"
             ),
         ]
 
