@@ -3,19 +3,19 @@ pragma solidity ^0.8.26;
 
 import "forge-std/Test.sol";
 import "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
-import "../contracts/MTokenizedDeposit.sol";
+import "../contracts/TokenizedDeposit.sol";
 import "../contracts/ReserveOracle.sol";
 import "../contracts/CariSettlement.sol";
 
 /**
  * @title TestHelper
  * @notice Shared setup for all StableArch Council contract tests.
- *         Deploys proxied instances of ReserveOracle, MTokenizedDeposit, and CariSettlement
+ *         Deploys proxied instances of ReserveOracle, TokenizedDeposit, and CariSettlement
  *         with standard roles assigned.
  */
 abstract contract TestHelper is Test {
     // --- Contracts ---
-    MTokenizedDeposit public token;
+    TokenizedDeposit public token;
     ReserveOracle public oracle;
     CariSettlement public settlement;
 
@@ -54,13 +54,13 @@ abstract contract TestHelper is Test {
         );
         oracle = ReserveOracle(address(new ERC1967Proxy(address(oracleImpl), oracleInit)));
 
-        // --- Deploy MTokenizedDeposit behind proxy ---
-        MTokenizedDeposit tokenImpl = new MTokenizedDeposit();
+        // --- Deploy TokenizedDeposit behind proxy ---
+        TokenizedDeposit tokenImpl = new TokenizedDeposit();
         bytes memory tokenInit = abi.encodeCall(
-            MTokenizedDeposit.initialize,
+            TokenizedDeposit.initialize,
             (admin, address(oracle))
         );
-        token = MTokenizedDeposit(address(new ERC1967Proxy(address(tokenImpl), tokenInit)));
+        token = TokenizedDeposit(address(new ERC1967Proxy(address(tokenImpl), tokenInit)));
 
         // --- Deploy CariSettlement behind proxy ---
         CariSettlement settlementImpl = new CariSettlement();

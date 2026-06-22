@@ -1,6 +1,6 @@
 """
 Risk Matrix Generator - automated risk register and scoring.
-Generates comprehensive risk assessments for M&T Bank Cari deposit program (CDA/DDA).
+Generates comprehensive risk assessments for the Issuing Bank Cari deposit program (CDA/DDA).
 
 Implements:
 - NIST CSF and FFIEC risk categories
@@ -9,7 +9,7 @@ Implements:
 - Control mapping and mitigation tracking
 - CSV/JSON export for examiner consumption
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations
@@ -113,7 +113,7 @@ class RiskMatrixGenerator:
         self._initialize_baseline_risks()
 
     def _initialize_baseline_risks(self) -> None:
-        """Pre-populate with M&T Bank Cari deposit (CDA/DDA) baseline risks."""
+        """Pre-populate with the Issuing Bank Cari deposit (CDA/DDA) baseline risks."""
         baseline = [
             RiskEntry(
                 title="Private Key Compromise",
@@ -173,7 +173,7 @@ class RiskMatrixGenerator:
             ),
             RiskEntry(
                 title="Smart Contract Vulnerability",
-                description="Exploitable bug in MTokenizedDeposit, ReserveOracle, or CariSettlement contracts",
+                description="Exploitable bug in TokenizedDeposit, ReserveOracle, or CariSettlement contracts",
                 category=RiskCategory.TECHNOLOGY,
                 owner="CTO",
                 regulatory_reference="OCC 2021-18, NYDFS 500.08",

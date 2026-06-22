@@ -2,7 +2,7 @@
 StableArch Council - Entry Point
 ==================================
 One-click launch for the multi-agent ARB package generation system.
-Context: M&T Bank Cari deposit platform on the Cari Network / ZKsync Prividium.
+Context: the Issuing Bank Cari deposit platform on the Cari Network / ZKsync Prividium.
 
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 DDA <-> CDA flow: fiat in DDA triggers CDA mint; CDA burn triggers fiat back to DDA.
@@ -28,7 +28,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
             "StableArch Council -- Multi-Agent ARB Package Generator\n"
-            "M&T Bank | Cari Network | ZKsync Prividium"
+            "the Issuing Bank | Cari Network | ZKsync Prividium"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
@@ -81,7 +81,7 @@ def main() -> None:
     print("=" * 70)
     print("STABLEARCH COUNCIL")
     print("Multi-Agent Architecture Review Board Package Generator")
-    print("M&T Bank | Cari Network | ZKsync Prividium")
+    print("the Issuing Bank | Cari Network | ZKsync Prividium")
     print("=" * 70)
 
     if args.topic:

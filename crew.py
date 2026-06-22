@@ -2,7 +2,7 @@
 StableArch Council - Crew Assembly
 =====================================
 Assembles the CrewAI hierarchical crew with the Orchestrator as manager_agent.
-Context: M&T Bank Cari deposit platform on the Cari Network / ZKsync Prividium.
+Context: the Issuing Bank Cari deposit platform on the Cari Network / ZKsync Prividium.
 
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 DDA <-> CDA flow: fiat in DDA triggers CDA mint; CDA burn triggers fiat back to DDA.
@@ -102,7 +102,7 @@ def run_council(
     crew = build_crew(llm=llm, verbose=verbose)
 
     inputs = {
-        "bank": "M&T Bank",
+        "bank": "the Issuing Bank",
         "network": "Cari Network",
         "l2": "ZKsync Prividium",
     }

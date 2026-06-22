@@ -109,7 +109,7 @@ Alert: `ReserveBackingBelowThreshold` (Prometheus)
 
 ```bash
 # Via API
-curl -X POST https://cari-api.mtbank.com/api/v1/admin/pause-minting \
+curl -X POST https://cari-api..com/api/v1/admin/pause-minting \
   -H "Authorization: Bearer $ADMIN_TOKEN"
 
 # Via smart contract (emergency -- requires PAUSER key)
@@ -120,7 +120,7 @@ curl -X POST https://cari-api.mtbank.com/api/v1/admin/pause-minting \
 
 ```bash
 # Check current status
-curl https://cari-api.mtbank.com/api/v1/reserves/status | jq .
+curl https://cari-api..com/api/v1/reserves/status | jq .
 
 # Expected output when breached:
 # {
@@ -135,10 +135,10 @@ curl https://cari-api.mtbank.com/api/v1/reserves/status | jq .
 
 ```bash
 # Check recent transactions for large burns without GL settlement
-curl https://cari-api.mtbank.com/api/v1/compliance/audit?event_type=BURN_COMPLETED&limit=50
+curl https://cari-api..com/api/v1/compliance/audit?event_type=BURN_COMPLETED&limit=50
 
 # Check core banking reserve balance
-curl https://cari-api.mtbank.com/api/v1/reserves/components | jq .
+curl https://cari-api..com/api/v1/reserves/components | jq .
 ```
 
 ## Resolution (5-30 minutes)
@@ -154,17 +154,17 @@ Options (in order of preference):
 
 ```bash
 # Re-run attestation
-curl -X POST https://cari-api.mtbank.com/api/v1/reserves/attest
+curl -X POST https://cari-api..com/api/v1/reserves/attest
 
 # Verify ratio restored
-curl https://cari-api.mtbank.com/api/v1/reserves/status | jq .backing_ratio
+curl https://cari-api..com/api/v1/reserves/status | jq .backing_ratio
 # Should be >= 1.0
 ```
 
 ### 6. Resume minting
 
 ```bash
-curl -X POST https://cari-api.mtbank.com/api/v1/admin/resume-minting \
+curl -X POST https://cari-api..com/api/v1/admin/resume-minting \
   -H "Authorization: Bearer $ADMIN_TOKEN"
 ```
 
@@ -223,7 +223,7 @@ Action: Request vault freeze for affected key
 ### 4. Audit all transactions signed by compromised key
 
 ```bash
-curl https://cari-api.mtbank.com/api/v1/compliance/audit?key_id=$COMPROMISED_KEY_ID | jq .
+curl https://cari-api..com/api/v1/compliance/audit?key_id=$COMPROMISED_KEY_ID | jq .
 ```
 
 ### 5. Generate new key material

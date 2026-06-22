@@ -5,7 +5,7 @@ Integrates with Chainalysis KYT and Notabene for Travel Rule.
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 All CDA/DDA operations are screened for BSA/AML/OFAC compliance.
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 
 SECURITY GUARDIAN NOTE:
 - All screening results are immutably logged for examiner access.

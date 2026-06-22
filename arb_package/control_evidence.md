@@ -1,6 +1,6 @@
 # Control Implementation Evidence
 
-**M&T Bank | Cari Network Cari Deposit Account (CDA) Platform**
+**the Issuing Bank | Cari Network Cari Deposit Account (CDA) Platform**
 **ARB Submission -- Control Evidence Documentation**
 
 ---
@@ -26,7 +26,7 @@ Each control has been verified through:
 | Evidence Type | Location | Detail |
 |--------------|----------|--------|
 | Reserve proof engine | `compliance/reserve_proof/engine.py` | `generate_proof()` computes CDA/DDA backing_ratio; rejects if < 1.0 |
-| On-chain enforcement | `contracts/MTBankTokenizedDeposit.sol` | `mint()` checks reserve attestation freshness |
+| On-chain enforcement | `contracts/TokenizedDeposit.sol` | `mint()` checks reserve attestation freshness |
 | Off-chain monitor | `offchain/services/reserves.py` | `ReserveMonitor.check_status()` returns UNDER_BACKED violation |
 | Real-time check | `offchain/services/reserves.py` | `can_mint()` blocks CDA minting if DDA reserves insufficient |
 
@@ -137,15 +137,15 @@ Each control has been verified through:
 
 ### RULEBOOK-001: Operator Role for CDA Supply Control
 
-**Requirement:** Operator (M&T Bank) controls CDA supply through mint/burn operations.
+**Requirement:** Operator (the Issuing Bank) controls CDA supply through mint/burn operations.
 
 **Implementation Evidence:**
 
 | Evidence Type | Location | Detail |
 |--------------|----------|--------|
-| OPERATOR_ROLE constant | `contracts/MTokenizedDeposit.sol` | `OPERATOR_ROLE = keccak256("OPERATOR_ROLE")` |
-| setOperator function | `contracts/MTokenizedDeposit.sol` | `setOperator(address)` assigns Operator role |
-| Operator event | `contracts/MTokenizedDeposit.sol` | `emit OperatorUpdated(oldOperator, newOperator)` |
+| OPERATOR_ROLE constant | `contracts/TokenizedDeposit.sol` | `OPERATOR_ROLE = keccak256("OPERATOR_ROLE")` |
+| setOperator function | `contracts/TokenizedDeposit.sol` | `setOperator(address)` assigns Operator role |
+| Operator event | `contracts/TokenizedDeposit.sol` | `emit OperatorUpdated(oldOperator, newOperator)` |
 
 ### RULEBOOK-002: Settlement Bank Daily Net Settlement
 
@@ -226,4 +226,4 @@ FAILURES:                         0
 ---
 
 *ARB Submission -- Control Implementation Evidence*
-*M&T Bank | Cari Network CDA Platform | ZKsync Prividium*
+*the Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*

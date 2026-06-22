@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ─────────────────────────────────────────────────────────────
 # deploy.sh -- One-Command Deployment for Cari Network Platform
-# M&T Bank | Cari Deposit Platform | Azure AKS
+# Tokenized Deposit Platform | Azure AKS
 #
 # Usage:
 #   ./deploy.sh --env=prividium-testnet     # Deploy to Azure AKS testnet
@@ -88,7 +88,7 @@ log_error() { echo -e "${RED}[ERROR]${NC} $1"; }
 banner() {
     echo ""
     echo -e "${BLUE}╔══════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${BLUE}║  M&T Bank -- Cari Deposit Platform on Azure AKS        ║${NC}"
+    echo -e "${BLUE}║  Cari Deposit Platform on Azure AKS                    ║${NC}"
     echo -e "${BLUE}║  Deployment: ${GREEN}$ENV${BLUE}                                     ║${NC}"
     echo -e "${BLUE}║  Version:    ${GREEN}$VERSION${BLUE}                                        ║${NC}"
     echo -e "${BLUE}╚══════════════════════════════════════════════════════════╝${NC}"

@@ -4,7 +4,7 @@ Settlement router — Cari Network cross-bank CDA settlement endpoints.
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 DDA <-> CDA flow: fiat in DDA triggers CDA mint; CDA burn triggers fiat back to DDA.
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 import logging

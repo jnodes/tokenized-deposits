@@ -1,6 +1,6 @@
 # Strategic Executive Memo
 
-**TO:** Matt McAfee, Head of Digital Assets, M&T Bank
+**TO:** the Head of Digital Assets, Head of Digital Assets, the Issuing Bank
 **FROM:** StableArch Council -- Architecture Review Board
 **DATE:** March 21, 2026
 **RE:** Tokenized Deposit Platform -- Launch Readiness & Strategic Recommendation
@@ -9,9 +9,9 @@
 
 ## The Opportunity
 
-M&T Bank is positioned to be among the first US regional banks to launch FDIC-insured tokenized deposits on the Cari Network. With the GENIUS Act advancing through Congress and competitors like JPMorgan (Kinexys) already operational, the window for first-mover advantage among regional banks is narrowing.
+the Issuing Bank is positioned to be among the first US regional banks to launch FDIC-insured tokenized deposits on the Cari Network. With the GENIUS Act advancing through Congress and competitors like JPMorgan (Kinexys) already operational, the window for first-mover advantage among regional banks is narrowing.
 
-Tokenized deposits are not stablecoins. They are programmable bank deposit liabilities -- FDIC-insured, interest-bearing, and fully within M&T's existing regulatory perimeter. This distinction is M&T's competitive moat.
+Tokenized deposits are not stablecoins. They are programmable bank deposit liabilities -- FDIC-insured, interest-bearing, and fully within the Issuing Bank's existing regulatory perimeter. This distinction is the Issuing Bank's competitive moat.
 
 ---
 
@@ -82,11 +82,11 @@ The platform is complete across four layers, all tested and verified:
 
 ## Recommendation
 
-**Proceed to ARB submission.** The platform is technically complete, regulatory-ready, and competitively positioned. Every month of delay is a month JPMorgan and others extend their lead in institutional blockchain. M&T's founding partnership in Cari Network provides a structural advantage that should be exercised.
+**Proceed to ARB submission.** The platform is technically complete, regulatory-ready, and competitively positioned. Every month of delay is a month JPMorgan and others extend their lead in institutional blockchain. the Issuing Bank's founding partnership in Cari Network provides a structural advantage that should be exercised.
 
 The technology is built. The compliance is mapped. The question is no longer "can we?" -- it is "how fast do we move?"
 
 ---
 
 *StableArch Council | Architecture Review Board*
-*M&T Bank | Cari Network | ZKsync Prividium*
+*the Issuing Bank | Cari Network | ZKsync Prividium*

@@ -1,6 +1,6 @@
 # End-to-End Transaction Flows
 
-**M&T Bank | Cari Network Cari Deposit Account (CDA) Platform**
+**the Issuing Bank | Cari Network Cari Deposit Account (CDA) Platform**
 **ARB Submission -- Transaction Flow Documentation**
 
 ---
@@ -17,9 +17,9 @@ sequenceDiagram
     participant HOGAN as Hogan Mainframe - CIF/DDA/GL
     participant SIGN as Signing Policy Engine
     participant HSM as Azure Managed HSM
-    participant OPERATOR as Operator - M&T Supply Controller
+    participant OPERATOR as Operator - the Issuing Bank Supply Controller
     participant BC as ZKsync Prividium
-    participant TOKEN as MTBankTokenizedDeposit - CDA
+    participant TOKEN as TokenizedDeposit - CDA
     participant AUDIT as Audit Service
 
     Client->>API: POST /api/v1/transactions/mint<br/>{depositor, amount, wallet_address}
@@ -76,9 +76,9 @@ sequenceDiagram
     participant TRAVEL as Travel Rule Engine
     participant SIGN as Signing Policy Engine
     participant HSM as Azure Managed HSM
-    participant OPERATOR as Operator - M&T Supply Controller
+    participant OPERATOR as Operator - the Issuing Bank Supply Controller
     participant BC as ZKsync Prividium
-    participant TOKEN as MTBankTokenizedDeposit - CDA
+    participant TOKEN as TokenizedDeposit - CDA
     participant ZDIH as IBM Z DIH - MQ/REST Gateway
     participant HOGAN as Hogan Mainframe - CIF/DDA/GL
     participant AUDIT as Audit Service
@@ -144,8 +144,8 @@ sequenceDiagram
 
 ```mermaid
 sequenceDiagram
-    participant MT as M&T Bank
-    participant MT_GW as M&T Cari Gateway
+    participant MT as the Issuing Bank
+    participant MT_GW as the Issuing Bank Cari Gateway
     participant BRIDGE as Messaging Bridge
     participant SBANK as Settlement Bank
     participant ORACLE as Compliance Oracle
@@ -162,8 +162,8 @@ sequenceDiagram
 
     Note over MT_GW,SETTLE: Step 2: Create CDA Settlement via Messaging Bridge
     MT_GW->>BRIDGE: Cross-bank CDA transfer message
-    BRIDGE->>SETTLE: createSettlement(M&T, BankB, $5M)
-    SETTLE->>SETTLE: Lock M&T CDA ($5M)
+    BRIDGE->>SETTLE: createSettlement(the Issuing Bank, BankB, $5M)
+    SETTLE->>SETTLE: Lock the Issuing Bank CDA ($5M)
     SETTLE-->>BRIDGE: {settlement_id, status: PENDING}
     BRIDGE->>SBANK: Queue for daily net settlement
 
@@ -176,7 +176,7 @@ sequenceDiagram
     Note over SBANK,SETTLE: Step 4: Daily Net Settlement Execution
     SBANK->>SBANK: Calculate net CDA positions at window close
     SBANK->>SETTLE: netSettle(settlement_id)
-    SETTLE->>SETTLE: Transfer M&T CDA -> Bank B
+    SETTLE->>SETTLE: Transfer the Issuing Bank CDA -> Bank B
     SETTLE->>SETTLE: Update reserve allocations
     SETTLE-->>SBANK: {status: SETTLED, block: 12345}
     SBANK-->>MT_GW: {status: SETTLED, block: 12345}
@@ -390,4 +390,4 @@ sequenceDiagram
 ---
 
 *ARB Submission -- End-to-End Transaction Flows*
-*M&T Bank | Cari Network CDA Platform | ZKsync Prividium*
+*the Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*

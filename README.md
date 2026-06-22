@@ -1,4 +1,4 @@
-# M&T Bank Tokenized Deposit Platform
+# the Issuing Bank Tokenized Deposit Platform
 
 **FDIC-insured, GENIUS Act-compliant tokenized deposits on the Cari Network / ZKsync Prividium.**
 
@@ -99,7 +99,7 @@ cari/
 
   # ── Quest 1: Smart Contracts (ZKsync Prividium) ───────
   contracts/
-    MTBankTokenizedDeposit.sol # ERC-20 + UUPS upgradeable token
+    TokenizedDeposit.sol # ERC-20 + UUPS upgradeable token
     CariComplianceOracle.sol   # On-chain KYC/AML/OFAC oracle
   test/                        # Foundry test suite (104 tests)
 
@@ -158,7 +158,7 @@ cari/
     runbooks/                  # Operational runbooks (outage, reserve, key)
   final/
     board_presentation.md      # Board-level slide deck (Markdown -> PPT)
-    one_page_strategy.md       # Executive memo for Matt McAfee
+    one_page_strategy.md       # Executive memo for the Head of Digital Assets
     cost_estimate.md           # Investment & ROI analysis
     stablearch_council_review.md # Council cross-check & governance sign-off
     launch_readiness_report.md # Final launch readiness assessment
@@ -166,7 +166,7 @@ cari/
 
 ---
 
-## How M&T Launches This in 2026
+## How the Issuing Bank Launches This in 2026
 
 ### Phase 1: Internal Pilot (Q2 2026)
 
@@ -177,7 +177,7 @@ cari/
    ./deployment/deploy.sh --env=prividium-testnet
    ```
 4. Commission independent security audit (Trail of Bits or OpenZeppelin)
-5. Run UAT with M&T Treasury Operations
+5. Run UAT with the Issuing Bank Treasury Operations
 
 ### Phase 2: Prividium Mainnet (Q3 2026)
 
@@ -187,7 +187,7 @@ cari/
    ./deployment/deploy.sh --env=prividium-mainnet
    ```
 8. File OCC Activity Letter and FDIC notification
-9. Launch intra-bank settlement (M&T internal transfers)
+9. Launch intra-bank settlement (the Issuing Bank internal transfers)
 10. Complete OCC/NYDFS examiner walkthrough
 
 ### Phase 3: Cari Network Production (Q4 2026)
@@ -247,13 +247,13 @@ See `final/launch_readiness_report.md` for the complete assessment.
 
 ## Context
 
-- **M&T Bank** is a founding partner in the Cari Network
-- **Matt McAfee** (Head of Digital Assets) has publicly committed to tokenized deposits
+- **the Issuing Bank** is a founding partner in the Cari Network
+- **the Head of Digital Assets** (Head of Digital Assets) has publicly committed to tokenized deposits
 - **Cari Network** runs on **ZKsync Prividium** (private permissioned zkRollup L2)
 - Tokenized deposits are **FDIC-insured bank liabilities**, not stablecoins
 - All designs comply with **GENIUS Act**, **BSA/AML/OFAC/Travel Rule**, and **NYDFS Part 500**
 
 ---
 
-*M&T Bank | Cari Network | ZKsync Prividium*
+*the Issuing Bank | Cari Network | ZKsync Prividium*
 *StableArch Council -- Architecture Review Board*

@@ -12,7 +12,7 @@ Implements:
 - GENIUS Act Section 4 & 6 compliance verification (CDA 1:1 backing)
 - Monthly attestation readiness check
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations
@@ -43,7 +43,7 @@ class ReserveComponent(BaseModel):
     """A single component of the reserve backing."""
     component_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     asset_type: str  # "US_TREASURY_BILL" | "FDIC_INSURED_DEPOSIT" | "FED_REVERSE_REPO"
-    custodian: str  # "M&T Bank Trust" | "BNY Mellon" | "State Street"
+    custodian: str  # "the Issuing Bank Trust" | "BNY Mellon" | "State Street"
     amount_usd: float
     maturity_date: Optional[str] = None
     isin: str = ""  # For treasury bills
@@ -171,7 +171,7 @@ class ReserveProofEngine:
             ),
             ReserveComponent(
                 asset_type="FDIC_INSURED_DEPOSIT",
-                custodian="M&T Bank Trust",
+                custodian="the Issuing Bank Trust",
                 amount_usd=round(total_usd * 0.30, 2),
                 account_reference="MTB-RESERVE-001",
             ),

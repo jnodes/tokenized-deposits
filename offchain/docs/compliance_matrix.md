@@ -1,12 +1,12 @@
 # Quest 2 — Regulatory Compliance Matrix
 
-## M&T Bank Technology Stack
+## the Issuing Bank Technology Stack
 
 - **Hogan mainframe** (IBM Z) — Core banking (CIF/DDA/GL)
 - **IBM Z Data Integration Hub (DIH)** — MQ/REST gateway for API-to-Hogan integration
 - **Kafka** (Confluent Platform, KRaft mode) — Event bus
 - **Azure AKS** — Kubernetes orchestration
-- **Azure ACR** (mtbcari.azurecr.io) — Container registry
+- **Azure ACR** (cari-platform.azurecr.io) — Container registry
 - **Azure Managed HSM / Azure Key Vault** — Key management
 - **Post-2025 GL format** (ISO 20022 aligned) — GL entries via Hogan GL subsystem
 

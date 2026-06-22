@@ -5,7 +5,7 @@ Abstract interface with stub implementations for dev/test.
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 Payment rails move fiat between DDAs for CDA mint/burn operations.
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations
@@ -131,7 +131,7 @@ class RTPAdapter(PaymentRailAdapter):
 
 
 class BookTransferAdapter(PaymentRailAdapter):
-    """Internal book transfer (M&T account to M&T account)."""
+    """Internal book transfer (the Issuing Bank account to the Issuing Bank account)."""
 
     async def send_payment(
         self, *, destination_account: str, amount_usd: float, reference_id: str

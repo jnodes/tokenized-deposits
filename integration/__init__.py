@@ -1,8 +1,8 @@
 """
-M&T Bank Cari Platform - Integration Adapters
+the Issuing Bank Cari Platform - Integration Adapters
 ==============================================
 Provides adapters for connecting the Cari deposit (CDA) platform
-to M&T Bank's enterprise systems.
+to the Issuing Bank's enterprise systems.
 
 Modules:
 - core_banking: Hogan mainframe integration for DDA/GL operations

@@ -2,7 +2,7 @@
 IBM Z Data Integration Hub (DIH) Adapter
 ==========================================
 Stub implementation of the IBM Z DIH middleware that bridges
-M&T Bank's Cari deposit (CDA) platform with the Hogan mainframe.
+the Issuing Bank's Cari deposit (CDA) platform with the Hogan mainframe.
 
 IBM Z DIH provides:
 - MQ Series message routing between APIs and COBOL/CICS transactions
@@ -64,7 +64,7 @@ class ZDIHAdapter:
     """
     IBM Z Data Integration Hub (DIH) middleware adapter.
     
-    Provides the communication bridge between M&T Bank's Cari deposit
+    Provides the communication bridge between the Issuing Bank's Cari deposit
     platform and the Hogan mainframe system running on IBM Z.
     
     Message Flow:
@@ -199,7 +199,7 @@ class ZDIHAdapter:
     ) -> dict:
         """Post GL journal entries to Hogan General Ledger.
         
-        Uses M&T's post-2025 GL format (ISO 20022 aligned).
+        Uses the Issuing Bank's post-2025 GL format (ISO 20022 aligned).
         """
         msg = DIHMessage(
             message_type=DIHMessageType.GL_POST,

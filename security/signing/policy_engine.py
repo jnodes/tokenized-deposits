@@ -9,7 +9,7 @@ Implements:
 - Transaction signing policies with thresholds and velocity limits
 - NYDFS Part 500 Section 500.07 access privilege controls
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations

@@ -1,6 +1,6 @@
 # Launch Readiness Report
 
-**M&T Bank | Cari Network Tokenized Deposit Platform**
+**the Issuing Bank | Cari Network Tokenized Deposit Platform**
 **StableArch Council -- Final Assessment**
 **Date:** March 2026
 
@@ -57,7 +57,7 @@
 Layer                          Components    Built    Tested    Status
 ─────────────────────────────────────────────────────────────────────
 Smart Contracts                     3          3        3       COMPLETE
-  MTBankTokenizedDeposit           [x]        [x]      [x]
+  TokenizedDeposit           [x]        [x]      [x]
   CariComplianceOracle             [x]        [x]      [x]
   ReserveAttestationContract       [x]        [x]      [x]
 
@@ -136,9 +136,9 @@ All conditions are expected to be resolved during Phase 1 (Pilot). None block th
 
 ## 6. Final Recommendation
 
-### FOR M&T BUFFALO LEADERSHIP:
+### FOR the Issuing Bank BUFFALO LEADERSHIP:
 
-The StableArch Council has completed its final review of the M&T Bank Tokenized Deposit Platform. The platform is **technically complete, regulatory-mapped, and deployment-ready**.
+The StableArch Council has completed its final review of the the Issuing Bank Tokenized Deposit Platform. The platform is **technically complete, regulatory-mapped, and deployment-ready**.
 
 **We recommend proceeding to ARB formal vote and Phase 1 pilot authorization.**
 
@@ -158,5 +158,5 @@ The five outstanding conditions are standard pre-production requirements (securi
 
 *StableArch Council*
 *Architecture Review Board Decision Memo*
-*M&T Bank | Cari Network | ZKsync Prividium*
+*the Issuing Bank | Cari Network | ZKsync Prividium*
 *Confidence Score: 91.35/100 | Classification: CONFIDENTIAL*

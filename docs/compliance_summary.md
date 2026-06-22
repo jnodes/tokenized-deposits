@@ -2,14 +2,14 @@
 
 ## GENIUS Act Alignment
 
-M&T Bank Cari Deposit Account (CDA) contracts on ZKsync Prividium / Cari Network.
+the Issuing Bank Cari Deposit Account (CDA) contracts on ZKsync Prividium / Cari Network.
 
-**M&T Bank Technology Stack:**
+**the Issuing Bank Technology Stack:**
 - **Hogan mainframe** on IBM Z for core banking (CIF/DDA)
 - **IBM Z Data Integration Hub (DIH)** as middleware between modern APIs and Hogan
 - **Kafka** event bus (Confluent Platform, KRaft mode)
 - **Azure AKS** for Kubernetes orchestration
-- **Azure Container Registry (ACR)** for Docker images (mtbcari.azurecr.io)
+- **Azure Container Registry (ACR)** for Docker images (cari-platform.azurecr.io)
 - **Azure Managed HSM / Azure Key Vault** for key management
 - **Post-2025 GL format** (ISO 20022 aligned) via Hogan GL subsystem
 - **GL accounts**: 1010 Reserve Cash, 1015 Reserve T-Bills, 1020 Reserve Fed Deposits, 1510 Settlement Receivable, 2010 CDA Token Liability, 2510 Settlement Payable, 3010 CDA Fee Revenue, 4010 CDA Operating Expense
@@ -19,16 +19,16 @@ M&T Bank Cari Deposit Account (CDA) contracts on ZKsync Prividium / Cari Network
 
 | Requirement | Implementation | Contract |
 |-------------|----------------|----------|
-| 1:1 reserve backing | `ReserveOracle.canMint()` enforced on every CDA mint; reverts if `supply + mint > reserves` | `MTokenizedDeposit.mint()` -> `_checkReserveBacking()` |
+| 1:1 reserve backing | `ReserveOracle.canMint()` enforced on every CDA mint; reverts if `supply + mint > reserves` | `TokenizedDeposit.mint()` -> `_checkReserveBacking()` |
 | Qualifying assets (cash, T-bills, Fed deposits) | Off-chain attestation by registered accounting firm; hash stored on-chain | `ReserveOracle.updateAttestation()` |
-| No rehypothecation | Reserves are segregated in M&T Bank custody; oracle attestation includes asset breakdown | Off-chain + `ReserveOracle.attestationHash` |
+| No rehypothecation | Reserves are segregated in the Issuing Bank custody; oracle attestation includes asset breakdown | Off-chain + `ReserveOracle.attestationHash` |
 | Staleness protection | Attestations expire after `maxStaleness` (default 24h); stale attestation blocks all CDA minting | `ReserveOracle.canMint()` staleness check |
 
 ### Section 5: Redemption at Par -- COMPLIANT
 
 | Requirement | Implementation | Contract |
 |-------------|----------------|----------|
-| Redemption at par (1:1 USD) | `burn()` destroys CDA tokens; off-chain settlement credits depositor's DDA at par | `MTokenizedDeposit.burn()` |
+| Redemption at par (1:1 USD) | `burn()` destroys CDA tokens; off-chain settlement credits depositor's DDA at par | `TokenizedDeposit.burn()` |
 | Within 1 business day | Settlement reference ID links to core banking for T+0 processing | `referenceId` parameter on burn |
 | No unreasonable fees | No on-chain fee mechanism; gas on Prividium is consortium-configured (no public gas market) | ZKsync Prividium gas model |
 
@@ -44,7 +44,7 @@ M&T Bank Cari Deposit Account (CDA) contracts on ZKsync Prividium / Cari Network
 | Requirement | Implementation |
 |-------------|----------------|
 | Reserve composition | Included in attestation report (linked by `attestationHash`) |
-| Redemption policies | Published by M&T Bank; referenced in token metadata |
+| Redemption policies | Published by the Issuing Bank; referenced in token metadata |
 | Risk factors | Part of ARB package and public disclosure |
 
 ### Section 8: Interoperability -- COMPLIANT
@@ -52,7 +52,7 @@ M&T Bank Cari Deposit Account (CDA) contracts on ZKsync Prividium / Cari Network
 | Requirement | Implementation | Contract |
 |-------------|----------------|----------|
 | Cross-platform transferability | Cari Network settlement protocol via Messaging Bridge for inter-bank CDA transfers | `CariSettlement` |
-| Standard token interface | ERC-20 compatible CDA with additional compliance hooks | `MTokenizedDeposit` (ERC20Upgradeable) |
+| Standard token interface | ERC-20 compatible CDA with additional compliance hooks | `TokenizedDeposit` (ERC20Upgradeable) |
 
 ## Cari Rulebook Compliance
 
@@ -77,27 +77,27 @@ M&T Bank Cari Deposit Account (CDA) contracts on ZKsync Prividium / Cari Network
 | Control | Implementation | Contract |
 |---------|----------------|----------|
 | Real-time wallet screening | `CariComplianceOracle` stores OFAC screening results; CDA whitelist gated by screening | `CariComplianceOracle.isCompliant()` |
-| SDN list enforcement | Addresses flagged by OFAC screening are frozen via `freezeAddress()` | `MTokenizedDeposit.freezeAddress()` |
-| Seizure capability | `forceTransfer()` moves CDA from frozen address to escrow | `MTokenizedDeposit.forceTransfer()` |
+| SDN list enforcement | Addresses flagged by OFAC screening are frozen via `freezeAddress()` | `TokenizedDeposit.freezeAddress()` |
+| Seizure capability | `forceTransfer()` moves CDA from frozen address to escrow | `TokenizedDeposit.forceTransfer()` |
 
 ## FinCEN Travel Rule
 
 | Control | Implementation | Contract |
 |---------|----------------|----------|
-| Originator/beneficiary info (>= $3,000) | `transferWithTravelRule()` emits `TravelRuleTransfer` event with PII hashes | `MTokenizedDeposit.transferWithTravelRule()` |
-| Configurable threshold | `travelRuleThreshold` adjustable by admin | `MTokenizedDeposit.setTravelRuleThreshold()` |
+| Originator/beneficiary info (>= $3,000) | `transferWithTravelRule()` emits `TravelRuleTransfer` event with PII hashes | `TokenizedDeposit.transferWithTravelRule()` |
+| Configurable threshold | `travelRuleThreshold` adjustable by admin | `TokenizedDeposit.setTravelRuleThreshold()` |
 | Off-chain PII storage | Actual PII stored by Travel Rule service (Notabene); only hashes on-chain | `TravelRuleData` struct |
 
 ## NYDFS Part 500 Cybersecurity
 
 | Control | Implementation |
 |---------|----------------|
-| Cybersecurity program | Covered by M&T Bank's existing Part 500 program |
-| CISO designation | M&T Bank CISO oversees digital asset security |
+| Cybersecurity program | Covered by the Issuing Bank's existing Part 500 program |
+| CISO designation | the Issuing Bank CISO oversees digital asset security |
 | Penetration testing | Smart contract audits (minimum 2 independent firms) + infrastructure pen testing |
 | Encryption | ZKsync Prividium provides transaction-level privacy via zk-proofs |
 | Incident response | Pause capability (`pause()`) for immediate circuit breaker; `forceTransfer()` for seizure |
-| Third-party vendor management | All vendors (Fireblocks, Chainalysis, etc.) subject to M&T vendor risk assessment |
+| Third-party vendor management | All vendors (Fireblocks, Chainalysis, etc.) subject to the Issuing Bank vendor risk assessment |
 | Key Management (GENIUS Act) | Azure Managed HSM (FIPS 140-2 Level 3) for all signing keys; keys never leave HSM boundary |
 | Infrastructure | Azure AKS with RBAC, Azure Key Vault audit logging, ACR image scanning |
 

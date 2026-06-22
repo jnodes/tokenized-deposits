@@ -6,7 +6,7 @@ and coordinates rebalancing.
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 Reserves ensure 1:1 backing of CDA tokens by qualifying assets.
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations

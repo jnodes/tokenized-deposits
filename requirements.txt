@@ -1,5 +1,5 @@
 # StableArch Council - Python Dependencies
-# M&T Bank | Cari Network | ZKsync Prividium
+# Tokenized Deposit Platform | Cari Network | ZKsync Prividium
 
 crewai>=0.86.0,<1.0.0
 crewai-tools>=0.17.0,<1.0.0

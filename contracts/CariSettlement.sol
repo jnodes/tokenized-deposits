@@ -6,14 +6,14 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "./interfaces/ICariSettlement.sol";
-import "./interfaces/IMTokenizedDeposit.sol";
+import "./interfaces/ITokenizedDeposit.sol";
 
 /**
  * @title CariSettlement
  * @notice Cross-bank settlement contract for Cari Deposit Account (CDA) transfers
  *         on the Cari Network / ZKsync Prividium.
  *         Coordinates burn-at-source / mint-at-destination for inter-bank CDA
- *         transfers between M&T Bank and other Cari member institutions.
+ *         transfers between the Issuing Bank and other Cari member institutions.
  *
  *         TERMINOLOGY:
  *         - CDA = Cari Deposit Account (on-chain token representation)
@@ -21,11 +21,11 @@ import "./interfaces/IMTokenizedDeposit.sol";
  *         - Cross-bank CDA transfers do not involve DDA - they move CDA between member banks
  *
  *         OPERATOR ROLE (per Cari Network Whitepaper):
- *         The Operator (M&T Bank) is the centralized entity controlling CDA supply.
+ *         The Operator (the Issuing Bank) is the centralized entity controlling CDA supply.
  *         - The Operator initiates settlements by burning CDA at source (via MINTER/BURNER roles)
  *         - Settlement execution mints CDA at the destination bank
  *         - The Operator's MINTER_ROLE and BURNER_ROLE are used indirectly via SETTLEMENT_ROLE
- *           callbacks defined in MTokenizedDeposit (settlementMint, settlementBurn)
+ *           callbacks defined in TokenizedDeposit (settlementMint, settlementBurn)
  *
  * @dev    Flow:
  *         1. Originator bank calls initiateSettlement() -> burns CDA at source.
@@ -67,8 +67,8 @@ contract CariSettlement is
     //                              STATE
     // =========================================================================
 
-    /// @notice M&T Bank's Cari deposit (CDA) contract on this Prividium instance.
-    IMTokenizedDeposit public token;
+    /// @notice The Issuing Bank's Cari deposit (CDA) contract on this Prividium instance.
+    ITokenizedDeposit public token;
 
     /// @notice Default settlement expiry window in seconds (e.g., 24 hours).
     uint256 public settlementExpiry;
@@ -126,8 +126,8 @@ contract CariSettlement is
 
     /**
      * @notice Initialize the CariSettlement contract for CDA transfers.
-     * @param admin           M&T Bank Timelock/multi-sig.
-     * @param _token          Address of MTokenizedDeposit (CDA contract) on this Prividium instance.
+     * @param admin           Timelock/multi-sig address.
+     * @param _token          Address of TokenizedDeposit (CDA contract) on this Prividium instance.
      * @param _settlementExpiry Default expiry window in seconds.
      */
     function initialize(
@@ -147,7 +147,7 @@ contract CariSettlement is
         _grantRole(INITIATOR_ROLE, admin);
         _grantRole(SETTLEMENT_BANK_ROLE, admin);
 
-        token = IMTokenizedDeposit(_token);
+        token = ITokenizedDeposit(_token);
         settlementExpiry = _settlementExpiry;
     }
 
@@ -194,7 +194,7 @@ contract CariSettlement is
         // Generate unique settlement ID
         settlementId = keccak256(abi.encodePacked(block.chainid, address(this), _nonce++));
 
-        // Burn CDA at source (M&T Bank)
+        // Burn CDA at source (Issuing Bank)
         token.settlementBurn(originator, amount, settlementId);
 
         // Create settlement record

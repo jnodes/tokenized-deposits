@@ -33,11 +33,11 @@ resources:
 
 ingress:
   hosts:
-    - host: cari-testnet.internal.mtbank.com
+    - host: cari-testnet.internal.cari-platform.com
       paths:
         - path: /
           pathType: Prefix
   tls:
     - secretName: cari-testnet-tls
       hosts:
-        - cari-testnet.internal.mtbank.com
+        - cari-testnet.internal.cari-platform.com

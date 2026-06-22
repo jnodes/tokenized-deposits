@@ -4,7 +4,7 @@ Reconciliation router — CDA/DDA ledger matching and examiner reporting.
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 Reconciliation ensures on-chain CDA transactions match off-chain DDA ledger entries.
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations
@@ -34,7 +34,7 @@ limiter = Limiter(key_func=get_remote_address)
 @router.post("/run", response_model=list[ReconciliationEntry])
 @limiter.limit("60/minute")
 async def run_reconciliation(request: Request) -> list[ReconciliationEntry]:
-    """Trigger reconciliation of on-chain CDA transactions against M&T Bank's
+    """Trigger reconciliation of on-chain CDA transactions against the Issuing Bank's
     Hogan GL entries (post-2025 format) via IBM Z DIH. Flags ledger
     exceptions for examiner review.
     """

@@ -8,7 +8,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
  * @title CariComplianceOracle
  * @notice On-chain compliance oracle for the Cari Network on ZKsync Prividium.
  *         Stores KYC/AML status, OFAC screening results, and Travel Rule data
- *         for M&T Bank's Cari deposit (CDA) platform.
+ *         for the Cari deposit (CDA) platform.
  *
  *         This oracle gates which addresses may hold or transfer Cari Deposit
  *         Account (CDA) tokens, ensuring regulatory compliance.

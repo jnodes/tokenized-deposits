@@ -1,6 +1,6 @@
 # Transitional Architecture
 
-**M&T Bank | Cari Network Cari Deposit Account (CDA) Platform**
+**the Issuing Bank | Cari Network Cari Deposit Account (CDA) Platform**
 **ARB Submission -- Pilot to Production Migration**
 
 ---
@@ -13,7 +13,7 @@ graph LR
         P1A["Single-node deployment<br/>Docker Compose"]
         P1B[Stub HSM + Stub Custody<br/>+ Stub Z DIH]
         P1C[Prividium Testnet]
-        P1D[M&T internal CDA only]
+        P1D[the Issuing Bank internal CDA only]
     end
 
     subgraph "Phase 2: Prividium Mainnet"
@@ -44,11 +44,11 @@ graph LR
 
 ## 2. Phase 1: Internal Pilot Architecture
 
-**Purpose:** Validate end-to-end CDA flows with M&T Treasury Operations on testnet.
+**Purpose:** Validate end-to-end CDA flows with the Issuing Bank Treasury Operations on testnet.
 
 ```mermaid
 graph TB
-    subgraph "M&T Internal Network"
+    subgraph "the Issuing Bank Internal Network"
         subgraph "Single VM (Azure D4s_v3)"
             DOCKER[Docker Compose]
             API[FastAPI :8000]
@@ -66,7 +66,7 @@ graph TB
 
     subgraph "ZKsync Prividium Testnet"
         TEST_RPC[Testnet RPC]
-        TEST_TOKEN[MTBankTokenizedDeposit<br/>CDA Test deployment]
+        TEST_TOKEN[TokenizedDeposit<br/>CDA Test deployment]
         TEST_ORACLE[CariComplianceOracle<br/>Test deployment]
     end
 
@@ -87,7 +87,7 @@ graph TB
 | Component | Pilot Config | Production Config |
 |-----------|-------------|-------------------|
 | Compute | 1x Azure D4s_v3 | 3x Azure AKS nodes (3 AZs) |
-| Container Registry | Local Docker | Azure ACR (mtbcari.azurecr.io) |
+| Container Registry | Local Docker | Azure ACR (cari-platform.azurecr.io) |
 | Database | PostgreSQL (single) | Azure PostgreSQL Flexible (HA) |
 | Cache | Redis (single) | Azure Cache Premium (cluster) |
 | HSM | Stub (in-memory) | Azure Managed HSM (FIPS 140-2 L3) |
@@ -186,7 +186,7 @@ core_banking:
   zdih_url: ${ZDIH_GATEWAY_URL}
   hogan_enabled: true
   gl_format: post_2025_iso20022
-container_registry: mtbcari.azurecr.io
+container_registry: cari-platform.azurecr.io
 event_bus:
   provider: kafka
   mode: confluent_kraft
@@ -201,13 +201,13 @@ event_bus:
 
 ```mermaid
 graph TB
-    subgraph "M&T Bank - Phase 2 Existing"
+    subgraph "the Issuing Bank - Phase 2 Existing"
         API[FastAPI Orchestrator]
         SETTLE[Settlement Service]
         COMPLY[Compliance Service]
     end
 
-    subgraph "M&T Core Banking - Hogan/Z DIH"
+    subgraph "the Issuing Bank Core Banking - Hogan/Z DIH"
         ZDIH["IBM Z DIH<br/>MQ/REST Gateway"]
         HOGAN["Hogan Mainframe<br/>CIF/DDA/GL"]
     end
@@ -257,18 +257,18 @@ graph TB
 | Cari Gateway Service | Inter-bank CDA message routing | New microservice alongside FastAPI |
 | Cari Auth (mTLS) | Bank identity verification | Certificate-based mutual TLS |
 | Cari Router | Counterparty bank discovery | Cari Network directory service |
-| Operator Contract | M&T Bank controls CDA supply (mint/burn) | OPERATOR_ROLE on-chain |
+| Operator Contract | the Issuing Bank controls CDA supply (mint/burn) | OPERATOR_ROLE on-chain |
 | Settlement Bank | Daily net settlement of CDA transfers | SETTLEMENT_BANK_ROLE on-chain |
 | Messaging Bridge | Cross-bank CDA transfer communication | New Prividium contract deployment |
 | Hogan GL Integration | Post-2025 GL format for dual-rail reconciliation | Z DIH -> Hogan GL subsystem |
-| Azure ACR | Container images for multi-region AKS | mtbcari.azurecr.io |
+| Azure ACR | Container images for multi-region AKS | cari-platform.azurecr.io |
 
 ### Migration Path: GHCR -> Azure ACR
 
 | Phase | Container Registry | Notes |
 |-------|-------------------|-------|
 | Phase 1 (Pilot) | Local Docker / GHCR | Development convenience |
-| Phase 2 (Mainnet) | Azure ACR (mtbcari.azurecr.io) | M&T standard; geo-replication |
+| Phase 2 (Mainnet) | Azure ACR (cari-platform.azurecr.io) | the Issuing Bank standard; geo-replication |
 | Phase 3 (Cari Network) | Azure ACR (multi-region) | Cross-AZ resilience |
 
 ---
@@ -304,4 +304,4 @@ NON-CRITICAL ROLLBACK (API service issue):
 ---
 
 *ARB Submission -- Transitional Architecture*
-*M&T Bank | Cari Network CDA Platform | ZKsync Prividium*
+*the Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*

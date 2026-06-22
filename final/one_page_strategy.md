@@ -1,6 +1,6 @@
 # ONE-PAGE STRATEGY MEMO
 
-**TO:** Matt McAfee, Head of Digital Assets | Senior Leadership Team
+**TO:** the Head of Digital Assets, Head of Digital Assets | Senior Leadership Team
 **FROM:** StableArch Council -- Architecture Review Board
 **DATE:** March 2026
 **RE:** Tokenized Deposit Platform -- Ready for Launch
@@ -9,7 +9,7 @@
 
 ## THE OPPORTUNITY
 
-M&T Bank can be the **first US regional bank** to launch FDIC-insured tokenized deposits on the Cari Network. The platform is technically complete, regulatory-ready, and competitively differentiated.
+the Issuing Bank can be the **first US regional bank** to launch FDIC-insured tokenized deposits on the Cari Network. The platform is technically complete, regulatory-ready, and competitively differentiated.
 
 ## WHAT WE BUILT
 
@@ -33,7 +33,7 @@ A production-ready platform spanning four layers -- all tested, all passing:
 
 ## COMPETITIVE URGENCY
 
-JPMorgan's Kinexys is already in production. Goldman and BNY are live on Canton. Circle's USDC dominates public chains. **M&T's window as first-mover among regional banks is narrowing.** Our Cari Network founding partnership provides structural advantage -- but only if exercised.
+JPMorgan's Kinexys is already in production. Goldman and BNY are live on Canton. Circle's USDC dominates public chains. **the Issuing Bank's window as first-mover among regional banks is narrowing.** Our Cari Network founding partnership provides structural advantage -- but only if exercised.
 
 ## THE ASK
 
@@ -56,4 +56,4 @@ The technology is built. The compliance is mapped. The competitive window is ope
 
 ---
 
-*StableArch Council | M&T Bank | Cari Network | ZKsync Prividium*
+*StableArch Council | the Issuing Bank | Cari Network | ZKsync Prividium*

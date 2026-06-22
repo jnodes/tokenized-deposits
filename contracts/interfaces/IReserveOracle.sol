@@ -3,7 +3,7 @@ pragma solidity ^0.8.26;
 
 /**
  * @title IReserveOracle
- * @notice Interface for the 1:1 reserve backing oracle used by M&T Bank's Cari Deposit
+ * @notice Interface for the 1:1 reserve backing oracle used by the Cari Deposit
  *         Account (CDA) platform on the Cari Network / ZKsync Prividium.
  *
  *         This oracle ensures every CDA token is backed 1:1 by qualifying reserves
@@ -15,7 +15,7 @@ pragma solidity ^0.8.26;
  *
  *         SECURITY GUARDIAN NOTE: The oracle updater key MUST be stored in an HSM
  *         (Thales Luna / Utimaco) with dual-control key ceremony. Updates should be
- *         gated by M&T Bank treasury operations with separation of duties (SoD)
+ *         gated by treasury operations with separation of duties (SoD)
  *         between the attestor and the minter.
  */
 interface IReserveOracle {

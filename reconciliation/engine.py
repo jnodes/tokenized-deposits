@@ -5,7 +5,7 @@ Ensures ledger integrity for examiner audits (OCC/Fed/NYDFS).
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 Reconciliation ensures CDA supply matches DDA reserve allocations.
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations
@@ -25,7 +25,7 @@ logger = logging.getLogger("cari.reconciliation")
 
 
 # =============================================================================
-#                M&T Bank Post-2025 GL Account Structure
+#                the Issuing Bank Post-2025 GL Account Structure
 #      Aligned with Hogan mainframe GL subsystem and ISO 20022 classification
 # =============================================================================
 
@@ -43,7 +43,7 @@ MT_GL_ACCOUNTS = {
 
 @dataclass
 class HoganGLMapping:
-    """Maps CDA operations to M&T's post-2025 Hogan GL entries.
+    """Maps CDA operations to the Issuing Bank's post-2025 Hogan GL entries.
     
     Each CDA operation generates a double-entry GL posting through
     Hogan's GL subsystem via IBM Z DIH.
@@ -56,7 +56,7 @@ class HoganGLMapping:
     description: str
 
 
-# Standard CDA operation -> GL mapping for M&T post-2025 format
+# Standard CDA operation -> GL mapping for the Issuing Bank post-2025 format
 CDA_GL_MAPPINGS = {
     "MINT": HoganGLMapping(
         operation="MINT",
@@ -97,7 +97,7 @@ class ReconciliationSummary(BaseModel):
     net_on_chain_usd: float = 0.0
     net_off_chain_usd: float = 0.0
     discrepancy_usd: float = 0.0
-    gl_format: str = "MT_POST_2025"  # M&T Bank GL format version
+    gl_format: str = "MT_POST_2025"  # the Issuing Bank GL format version
     gl_system: str = "Hogan/IBM_Z_DIH"  # GL integration system
 
 
@@ -273,7 +273,7 @@ class ReconciliationEngine:
         self._off_chain.clear()
 
     def validate_gl_mapping(self, operation: str, entries: list[OffChainRecord]) -> list[str]:
-        """Validate that GL entries follow M&T's post-2025 GL mapping rules.
+        """Validate that GL entries follow the Issuing Bank's post-2025 GL mapping rules.
         
         Checks that the correct GL codes are used for each CDA operation type
         and that double-entry bookkeeping is maintained.

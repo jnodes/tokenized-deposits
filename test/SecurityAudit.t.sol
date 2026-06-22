@@ -2,16 +2,16 @@
 pragma solidity ^0.8.26;
 
 import "./TestHelper.sol";
-import "../contracts/interfaces/IMTokenizedDeposit.sol";
+import "../contracts/interfaces/ITokenizedDeposit.sol";
 import "../contracts/interfaces/ICariSettlement.sol";
 
 /**
  * @title SecurityAuditTest
- * @notice Comprehensive security audit tests for M&T Bank tokenized deposit contracts.
+ * @notice Comprehensive security audit tests for tokenized deposit contracts.
  *         Tests for reentrancy, access control, integer overflow, and other vulnerabilities.
  * 
  * Audit Reference: SECURITY_AUDIT_SPEC.md
- * M&T Bank | Cari Network | ZKsync Prividium
+ * Cari Network | ZKsync Prividium
  */
 contract SecurityAuditTest is TestHelper {
     
@@ -96,7 +96,7 @@ contract SecurityAuditTest is TestHelper {
     /// @dev SC-005: Test initialization front-running protection
     function test_security_initializationProtection() public {
         // Deploy new implementation
-        MTokenizedDeposit impl = new MTokenizedDeposit();
+        TokenizedDeposit impl = new TokenizedDeposit();
         
         // Constructor should disable initializers on implementation
         // This prevents front-running by making implementation non-initializable
@@ -146,7 +146,7 @@ contract SecurityAuditTest is TestHelper {
         
         // Alice tries to transfer to non-whitelisted address
         vm.prank(alice);
-        vm.expectRevert(abi.encodeWithSelector(MTokenizedDeposit.NotWhitelisted.selector, outsider));
+        vm.expectRevert(abi.encodeWithSelector(TokenizedDeposit.NotWhitelisted.selector, outsider));
         token.transfer(outsider, 100e6);
     }
 
@@ -160,7 +160,7 @@ contract SecurityAuditTest is TestHelper {
         
         // Alice tries to transfer
         vm.prank(alice);
-        vm.expectRevert(abi.encodeWithSelector(MTokenizedDeposit.AccountFrozen.selector, alice));
+        vm.expectRevert(abi.encodeWithSelector(TokenizedDeposit.AccountFrozen.selector, alice));
         token.transfer(bob, 100e6);
     }
 
@@ -283,7 +283,7 @@ contract SecurityAuditTest is TestHelper {
     /// @dev SC-010: Test amount zero rejection
     function test_security_zeroAmount_rejected() public {
         vm.prank(minter);
-        vm.expectRevert(MTokenizedDeposit.ZeroAmount.selector);
+        vm.expectRevert(TokenizedDeposit.ZeroAmount.selector);
         token.mint(alice, 0, "ref");
     }
 
@@ -346,10 +346,10 @@ contract SecurityAuditTest is TestHelper {
     function test_security_travelRuleTransfer() public {
         _mint(alice, 5000e6);
         
-        IMTokenizedDeposit.TravelRuleData memory td = IMTokenizedDeposit.TravelRuleData({
+        ITokenizedDeposit.TravelRuleData memory td = ITokenizedDeposit.TravelRuleData({
             originatorHash: keccak256("Alice PII"),
             beneficiaryHash: keccak256("Bob PII"),
-            originatorInstitution: "M&T Bank",
+            originatorInstitution: "Issuing Bank",
             beneficiaryInstitution: "Cari Member Bank B"
         });
         

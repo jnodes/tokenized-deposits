@@ -1,6 +1,6 @@
 apiVersion: v2
 name: cari-platform
-description: M&T Bank Cari Deposit Platform on Azure AKS / Cari Network / ZKsync Prividium
+description: Tokenized Deposit Platform on Azure AKS / Cari Network / ZKsync Prividium
 type: application
 version: 1.0.0
 appVersion: "1.0.0"
@@ -10,4 +10,4 @@ keywords:
   - zksync-prividium
   - banking
 maintainers:
-  - name: M&T Digital Assets Engineering
+  - name: Digital Assets Engineering

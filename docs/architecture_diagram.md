@@ -16,12 +16,12 @@ graph TB
         ORC -->|delegates & synthesizes| SAA
     end
 
-    subgraph "M&T Bank Cari Deposit Platform on ZKsync Prividium"
+    subgraph "the Issuing Bank Cari Deposit Platform on ZKsync Prividium"
         subgraph "On-Chain (ZKsync Prividium L2)"
             TC["CDA Token Contract<br/>(ERC-20, UUPS Upgradeable)"]
             ACREG["Access Control<br/>Registry"]
             CO["Compliance Oracle<br/>(KYC/AML/OFAC)"]
-            OP["Operator<br/>(M&T Bank Supply Controller)"]
+            OP["Operator<br/>(the Issuing Bank Supply Controller)"]
             RPM["Reserve Proof<br/>Module (zk-attestation)"]
         end
 
@@ -38,7 +38,7 @@ graph TB
 
         subgraph "Infrastructure - Azure"
             AKS["Azure AKS<br/>Kubernetes"]
-            ACR["Azure ACR<br/>mtbcari.azurecr.io"]
+            ACR["Azure ACR<br/>cari-platform.azurecr.io"]
             AKV["Azure Key Vault<br/>Managed HSM"]
             CUST["Custody Integration<br/>Fireblocks/BitGo"]
             MON["Observability Stack<br/>Prometheus/Grafana"]
@@ -151,7 +151,7 @@ sequenceDiagram
     participant Customer
     participant ZDIH as IBM Z DIH - MQ/REST Gateway
     participant Hogan as Hogan Mainframe - IBM Z - CIF/DDA
-    participant Operator as Operator - M&T Supply Controller
+    participant Operator as Operator - the Issuing Bank Supply Controller
     participant API as API Gateway
     participant AML as AML/KYC Service
     participant OFAC as OFAC Screening

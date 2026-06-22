@@ -10,7 +10,7 @@ Enable instant, 24/7 settlement of tokenized bank deposits across member institu
 
 ### Founding Partners
 
-- M&T Bank (founding partner) — led by Matt McAfee, Head of Digital Assets
+- the Issuing Bank (founding partner) — led by the Head of Digital Assets, Head of Digital Assets
 - Additional founding members to be announced
 
 ---
@@ -40,7 +40,7 @@ The **Cari Deposit Account (CDA)** is the on-chain ERC-20 token representing a b
 
 ## Operator Role
 
-The **Operator** is the centralized entity (e.g., M&T Bank) that controls CDA supply for a member bank. Each member bank in the Cari Network has exactly one Operator.
+The **Operator** is the centralized entity (e.g., the Issuing Bank) that controls CDA supply for a member bank. Each member bank in the Cari Network has exactly one Operator.
 
 ### Operator Responsibilities
 
@@ -55,9 +55,9 @@ The Operator holds the following on-chain roles:
 
 | Role | Permission | Smart Contract |
 |------|------------|----------------|
-| `MINTER_ROLE` | Authorized to mint new CDA tokens | MTokenizedDeposit |
-| `BURNER_ROLE` | Authorized to burn CDA tokens | MTokenizedDeposit |
-| `OPERATOR_ROLE` | Administrative operations | MTokenizedDeposit |
+| `MINTER_ROLE` | Authorized to mint new CDA tokens | TokenizedDeposit |
+| `BURNER_ROLE` | Authorized to burn CDA tokens | TokenizedDeposit |
+| `OPERATOR_ROLE` | Administrative operations | TokenizedDeposit |
 
 ### One Operator Per Bank
 
@@ -308,7 +308,7 @@ The **Cari Network Rulebook** is the consortium governance framework that binds 
 
 ## Smart Contract Architecture
 
-### MTokenizedDeposit
+### TokenizedDeposit
 
 The core CDA token contract implementing ERC-20 with compliance controls.
 

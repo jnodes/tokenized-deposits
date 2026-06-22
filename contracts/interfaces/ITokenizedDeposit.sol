@@ -2,8 +2,8 @@
 pragma solidity ^0.8.26;
 
 /**
- * @title IMTokenizedDeposit
- * @notice Interface for M&T Bank's Cari Deposit Account (CDA) token on Cari Network / ZKsync Prividium.
+ * @title ITokenizedDeposit
+ * @notice Interface for the Cari Deposit Account (CDA) token on Cari Network / ZKsync Prividium.
  *
  *         TERMINOLOGY:
  *         - CDA = Cari Deposit Account (on-chain token representation)
@@ -15,14 +15,14 @@ pragma solidity ^0.8.26;
  *         integration, and Cari settlement callbacks required for a GENIUS-Act-compliant
  *         FDIC-insured Cari deposit.
  */
-interface IMTokenizedDeposit {
+interface ITokenizedDeposit {
     // --- Travel Rule ---
 
     /// @notice Travel Rule metadata attached to qualifying transfers (>= $3,000).
     struct TravelRuleData {
         bytes32 originatorHash;   // Hash of originator PII (name, account, institution)
         bytes32 beneficiaryHash;  // Hash of beneficiary PII
-        string  originatorInstitution;  // "M&T Bank" or Cari member bank name
+        string  originatorInstitution;  // Issuing Bank or Cari member bank name
         string  beneficiaryInstitution; // Destination institution name
     }
 

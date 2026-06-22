@@ -1,6 +1,6 @@
 # Roadmap to Full Cari Network Production
 
-**M&T Bank | Tokenized Deposit Platform**
+**the Issuing Bank | Tokenized Deposit Platform**
 **Target:** Q4 2026 Production Launch
 **Classification:** CONFIDENTIAL -- Internal Use Only
 
@@ -10,7 +10,7 @@
 
 ```mermaid
 gantt
-    title M&T Cari Network Tokenized Deposit Roadmap
+    title the Issuing Bank Cari Network Tokenized Deposit Roadmap
     dateFormat  YYYY-MM-DD
     axisFormat  %b %Y
 
@@ -26,7 +26,7 @@ gantt
     Vendor Onboarding (Fireblocks, Chainalysis) :p1b, 2026-04-15, 2026-06-30
     Internal Testnet Deployment           :p1c, 2026-05-01, 2026-06-30
     Security Audit (Trail of Bits / OpenZeppelin) :p1d, 2026-05-15, 2026-07-15
-    Internal UAT (M&T Treasury Ops)       :p1e, 2026-06-01, 2026-07-31
+    Internal UAT (the Issuing Bank Treasury Ops)       :p1e, 2026-06-01, 2026-07-31
 
     section Phase 2: Prividium Mainnet
     Prividium Mainnet Deployment          :p2a, 2026-07-01, 2026-08-15
@@ -49,7 +49,7 @@ gantt
 - Obtain ARB approval and begin vendor procurement
 - Deploy full stack on Prividium testnet
 - Complete independent security audit
-- Run internal UAT with M&T Treasury Operations
+- Run internal UAT with the Issuing Bank Treasury Operations
 
 ### Key Milestones
 
@@ -76,7 +76,7 @@ gantt
 ### Objectives
 - Deploy production smart contracts on ZKsync Prividium mainnet
 - File regulatory notifications with OCC and FDIC
-- Launch intra-bank settlement (M&T internal transfers)
+- Launch intra-bank settlement (the Issuing Bank internal transfers)
 - Complete examiner walkthrough for OCC/NYDFS
 
 ### Key Milestones
@@ -126,7 +126,7 @@ NYDFS
 | Cari Network inter-bank channel live | Nov 30, 2026 | Cari Network Team | Member bank readiness |
 | First inter-bank tokenized deposit transfer | Nov 30, 2026 | Operations | Inter-bank channel |
 | Liquidity sharing protocol active | Dec 15, 2026 | Engineering | Inter-bank settlement |
-| **PRODUCTION LAUNCH** | **Dec 1, 2026** | **Matt McAfee / Digital Assets** | All Phase 2 complete |
+| **PRODUCTION LAUNCH** | **Dec 1, 2026** | **the Head of Digital Assets / Digital Assets** | All Phase 2 complete |
 | 30-day post-launch review | Jan 1, 2027 | Operations / Risk | Production launch |
 | 90-day post-launch review | Mar 1, 2027 | All stakeholders | Production launch |
 
@@ -134,8 +134,8 @@ NYDFS
 
 ```mermaid
 graph LR
-    subgraph "M&T Bank"
-        A[M&T Tokenized<br/>Deposit Engine] --> B[Cari Network<br/>Gateway]
+    subgraph "the Issuing Bank"
+        A[the Issuing Bank Tokenized<br/>Deposit Engine] --> B[Cari Network<br/>Gateway]
     end
 
     subgraph "Cari Network (ZKsync Prividium)"

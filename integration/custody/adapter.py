@@ -5,7 +5,7 @@ Manages secure key custody for on-chain CDA signing operations.
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 Custody wallets hold CDA tokens and sign CDA mint/burn/transfer transactions.
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations

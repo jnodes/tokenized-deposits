@@ -5,7 +5,7 @@ Handles the full lifecycle: compliance check -> core banking -> on-chain -> audi
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 DDA <-> CDA flow: fiat in DDA triggers CDA mint; CDA burn triggers fiat back to DDA.
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 import logging
@@ -55,7 +55,7 @@ def _usd_to_tokens(usd: float) -> int:
 async def mint_tokenized_deposit(request: Request, mint_request: Annotated[MintRequest, Body(...)]) -> TransactionResponse:
     """Operator-initiated CDA mint: converts DDA (fiat) deposit to CDA (on-chain).
     
-    Per Cari Whitepaper, only the designated Operator (M&T Bank) can mint CDA.
+    Per Cari Whitepaper, only the designated Operator (the Issuing Bank) can mint CDA.
 
     Flow:
     1. Compliance screening (BSA/AML/OFAC)
@@ -93,7 +93,7 @@ async def mint_tokenized_deposit(request: Request, mint_request: Annotated[MintR
             message=f"Compliance rejected: {screening.details}",
         )
 
-    # 2. Verify fiat deposit at M&T core banking
+    # 2. Verify fiat deposit at the Issuing Bank core banking
     core_banking = get_core_banking_adapter()
     deposit_check = await core_banking.verify_deposit(
         account_id=mint_request.depositor_account_id,
@@ -192,7 +192,7 @@ async def mint_tokenized_deposit(request: Request, mint_request: Annotated[MintR
 async def burn_tokenized_deposit(request: Request, burn_request: Annotated[BurnRequest, Body(...)]) -> TransactionResponse:
     """Operator-initiated CDA burn: redeems CDA (on-chain) back to DDA (fiat).
     
-    Per Cari Whitepaper, only the designated Operator (M&T Bank) can burn CDA.
+    Per Cari Whitepaper, only the designated Operator (the Issuing Bank) can burn CDA.
 
     CDA burn triggers fiat settlement back to depositor's DDA.
 

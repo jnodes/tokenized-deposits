@@ -1,6 +1,6 @@
 """
 Pydantic v2 models for the off-chain orchestration platform.
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 DDA <-> CDA flow: fiat in DDA triggers CDA mint; CDA burn triggers fiat back to DDA.
@@ -82,12 +82,12 @@ class ReconciliationStatus(str, Enum):
 
 
 class MintRequest(BaseModel):
-    """Request to mint Cari deposits (CDA) after fiat deposit to DDA at M&T Bank."""
+    """Request to mint Cari deposits (CDA) after fiat deposit to DDA at the Issuing Bank."""
     to_address: str = Field(..., description="Whitelisted recipient wallet address (CDA holder)")
     amount_usd: float = Field(..., gt=0, description="USD amount to mint (will be converted to 6-decimal CDA token units)")
-    reference_id: str = Field(..., description="M&T core banking reference ID for DDA->CDA reconciliation")
+    reference_id: str = Field(..., description="the Issuing Bank core banking reference ID for DDA->CDA reconciliation")
     payment_rail: PaymentRail = Field(..., description="How the fiat deposit arrived at DDA")
-    depositor_account_id: str = Field(..., description="M&T Bank DDA account number")
+    depositor_account_id: str = Field(..., description="the Issuing Bank DDA account number")
 
 
 class BurnRequest(BaseModel):
@@ -97,8 +97,8 @@ class BurnRequest(BaseModel):
     """
     from_address: str = Field(..., description="Address holding CDA tokens to redeem")
     amount_usd: float = Field(..., gt=0, description="USD amount to redeem at par")
-    reference_id: str = Field(..., description="M&T core banking reference for CDA->DDA settlement")
-    destination_account_id: str = Field(..., description="M&T Bank DDA to credit USD")
+    reference_id: str = Field(..., description="the Issuing Bank core banking reference for CDA->DDA settlement")
+    destination_account_id: str = Field(..., description="the Issuing Bank DDA to credit USD")
     payment_rail: PaymentRail = Field(PaymentRail.FEDNOW, description="Settlement rail for fiat payout to DDA")
 
 
@@ -110,7 +110,7 @@ class SettlementRequest(BaseModel):
     amount_usd: float = Field(..., gt=0)
     originator_name: str = Field(..., description="Originator full name (Travel Rule)")
     beneficiary_name: str = Field(..., description="Beneficiary full name (Travel Rule)")
-    originator_institution: str = Field(default="M&T Bank")
+    originator_institution: str = Field(default="the Issuing Bank")
     beneficiary_institution: str = Field(...)
 
 

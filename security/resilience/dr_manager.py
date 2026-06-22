@@ -1,6 +1,6 @@
 """
 Resilience, Failover, Disaster Recovery & Incident Response.
-Business continuity planning for M&T Bank Cari deposit platform (CDA/DDA operations).
+Business continuity planning for the Issuing Bank Cari deposit platform (CDA/DDA operations).
 
 Implements:
 - Circuit breaker pattern for external service calls
@@ -9,7 +9,7 @@ Implements:
 - Incident classification, escalation, and response tracking
 - NYDFS Part 500 Section 500.16 incident response plan
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations

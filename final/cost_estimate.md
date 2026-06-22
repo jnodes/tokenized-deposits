@@ -1,6 +1,6 @@
 # Cost & Investment Estimate
 
-**M&T Bank | Cari Network Tokenized Deposit Platform**
+**the Issuing Bank | Cari Network Tokenized Deposit Platform**
 **Classification:** CONFIDENTIAL -- Finance & Strategy
 
 ---
@@ -38,7 +38,7 @@
 |------|------|-------|
 | Security audit (Trail of Bits / OpenZeppelin) | $150K | Smart contract + infrastructure audit |
 | Fireblocks enterprise license (pilot) | $75K | 6-month POC agreement |
-| Chainalysis KYT extension | $50K | Extend existing M&T contract to Cari |
+| Chainalysis KYT extension | $50K | Extend existing the Issuing Bank contract to Cari |
 | Notabene (Travel Rule) | $25K | Pilot license |
 | Chronicle Protocol (attestation) | $15K | Evaluation + pilot |
 | Legal review (vendor contracts + regulatory filings) | $100K | External counsel if needed |
@@ -156,4 +156,4 @@
 ---
 
 *Prepared by: StableArch Council -- Strategic Advisory*
-*M&T Bank | Cari Network | ZKsync Prividium*
+*the Issuing Bank | Cari Network | ZKsync Prividium*

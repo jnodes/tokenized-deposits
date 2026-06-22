@@ -8,14 +8,14 @@ import "./interfaces/IReserveOracle.sol";
 
 /**
  * @title ReserveOracle
- * @notice 1:1 reserve backing attestation oracle for M&T Bank's Cari deposits (CDA)
+ * @notice 1:1 reserve backing attestation oracle for Cari deposits (CDA)
  *         on the Cari Network / ZKsync Prividium.
  *
  *         This oracle ensures every Cari Deposit Account (CDA) token is backed 1:1
  *         by qualifying reserves per GENIUS Act Section 4 (cash, T-bills, Fed deposits).
  *
- * @dev    This oracle receives off-chain reserve attestations from M&T Bank's treasury
- *         operations team and makes them available on-chain for the MTokenizedDeposit
+ * @dev    This oracle receives off-chain reserve attestations from the Issuing Bank's treasury
+ *         operations team and makes them available on-chain for the TokenizedDeposit
  *         (CDA) contract to query before every mint.
  *
  *         Attestation sources (pluggable):
@@ -27,7 +27,7 @@ import "./interfaces/IReserveOracle.sol";
  *         SECURITY GUARDIAN NOTE:
  *         - ATTESTOR_ROLE key MUST reside in an HSM (Thales Luna / Utimaco).
  *         - Separation of duties: the attestor MUST NOT also hold MINTER_ROLE on the
- *           CDA contract. M&T Bank treasury operations signs attestations; a separate
+ *           CDA contract. Treasury operations signs attestations; a separate
  *           minting service executes mints.
  *         - Staleness threshold enforces that attestations cannot be older than
  *           `maxStaleness` seconds (default 24 hours; configurable by admin).
@@ -69,7 +69,7 @@ contract ReserveOracle is
 
     /**
      * @notice Initialize the ReserveOracle for CDA reserve backing.
-     * @param admin         M&T Bank consortium multi-sig address.
+     * @param admin         Consortium multi-sig address.
      * @param attestor      Address authorized to submit reserve attestations (HSM-backed).
      * @param _maxStaleness Maximum age (seconds) of a valid attestation. Default: 86400 (24h).
      */

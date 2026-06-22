@@ -1,13 +1,13 @@
 # Board-Level Presentation: Tokenized Deposit Platform
 
-**M&T Bank | Cari Network | ZKsync Prividium**
+**the Issuing Bank | Cari Network | ZKsync Prividium**
 **Prepared for:** Board of Directors / Digital Strategy Committee
 **Date:** March 2026
 
 > **Export Instructions:** This Markdown deck can be converted to PowerPoint using:
 > ```bash
 > # Using pandoc (recommended)
-> pandoc final/board_presentation.md -o "M&T_Cari_Tokenized_Deposits_Board_Deck.pptx" \
+> pandoc final/board_presentation.md -o "Cari_Tokenized_Deposits_Board_Deck.pptx" \
 >   --reference-doc=templates/mt-brand.pptx
 >
 > # Using marp (alternative -- renders as PDF slides)
@@ -21,9 +21,9 @@
 
 ### Programmable, FDIC-Insured Bank Deposits for the Digital Era
 
-**M&T Bank** | March 2026
+**the Issuing Bank** | March 2026
 
-Sponsor: Matt McAfee, Head of Digital Assets
+Sponsor: the Head of Digital Assets, Head of Digital Assets
 
 ---
 
@@ -46,10 +46,10 @@ Sponsor: Matt McAfee, Head of Digital Assets
 ## Why Now?
 
 1. **GENIUS Act** advancing through Congress -- creates federal framework for tokenized deposits
-2. **M&T is a Cari Network founding partner** -- structural advantage over competitors
+2. **the Issuing Bank is a Cari Network founding partner** -- structural advantage over competitors
 3. **JPMorgan Kinexys already operational** -- regional bank window closing
 4. **$2.1 trillion** tokenized asset market projected by 2030 (BCG)
-5. **Matt McAfee** has publicly committed M&T to tokenized deposits
+5. **the Head of Digital Assets** has publicly committed the Issuing Bank to tokenized deposits
 
 **The question is not "should we?" -- it's "how fast do we move?"**
 
@@ -124,14 +124,14 @@ Payment Rails  Chainalysis   Smart Contracts
 <!-- slide 8 -->
 ## Competitive Landscape
 
-| Institution | Product | Status | M&T Advantage |
+| Institution | Product | Status | the Issuing Bank Advantage |
 |-------------|---------|--------|---------------|
-| JPMorgan | Kinexys (fka Onyx) | Production | M&T: Cari Network = bank consortium, not proprietary |
-| Goldman/BNY | Canton Network | Production | M&T: ZK-proof privacy vs. DAML-based |
-| Circle | USDC | Production | M&T: FDIC-insured + interest-bearing |
-| PayPal | PYUSD | Production | M&T: Bank-issued, not money transmitter |
+| JPMorgan | Kinexys (fka Onyx) | Production | Cari Network = bank consortium, not proprietary |
+| Goldman/BNY | Canton Network | Production | ZK-proof privacy vs. DAML-based |
+| Circle | USDC | Production | FDIC-insured + interest-bearing |
+| PayPal | PYUSD | Production | Bank-issued, not money transmitter |
 
-**M&T is the first regional bank on Cari Network.** First-mover advantage among the 10+ founding banks.
+**the Issuing Bank is the first regional bank on Cari Network.** First-mover advantage among the 10+ founding banks.
 
 ---
 
@@ -183,7 +183,7 @@ Payment Rails  Chainalysis   Smart Contracts
 <!-- slide 12 -->
 ## Summary
 
-M&T Bank has a **complete, tested, regulatory-ready** tokenized deposit platform.
+the Issuing Bank has a **complete, tested, regulatory-ready** tokenized deposit platform.
 
 - **223 automated tests passing** across all layers
 - **16 regulatory controls** -- 100% implemented, 100% tested
@@ -196,4 +196,4 @@ M&T Bank has a **complete, tested, regulatory-ready** tokenized deposit platform
 ---
 
 *Prepared by: StableArch Council -- Architecture Review Board*
-*M&T Bank | Cari Network | ZKsync Prividium*
+*the Issuing Bank | Cari Network | ZKsync Prividium*

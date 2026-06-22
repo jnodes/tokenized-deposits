@@ -5,7 +5,7 @@ Manages incident lifecycle from detection through resolution and post-mortem.
 Re-exports and extends the incident capabilities from security/resilience/dr_manager.py
 with additional playbook execution tracking and regulatory notification management.
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations

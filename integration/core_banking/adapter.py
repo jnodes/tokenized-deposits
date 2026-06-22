@@ -1,12 +1,12 @@
 """
 Core banking adapter — abstract interface and FIS/Symcor stub.
-Connects to M&T Bank's general ledger for DDA deposit verification,
+Connects to the Issuing Bank's general ledger for DDA deposit verification,
 reserve tracking, and CDA settlement.
 
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 Core banking manages DDA balances that back CDA tokens.
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations
@@ -43,7 +43,7 @@ class GLEntry(BaseModel):
 
 
 class DepositVerification(BaseModel):
-    """Result of verifying a fiat deposit to DDA at M&T Bank (triggers CDA mint)."""
+    """Result of verifying a fiat deposit to DDA at the Issuing Bank (triggers CDA mint)."""
     verified: bool
     account_id: str
     amount_usd: float
@@ -54,7 +54,7 @@ class DepositVerification(BaseModel):
 
 
 class CoreBankingAdapter(ABC):
-    """Abstract adapter for M&T Bank's core banking system."""
+    """Abstract adapter for the Issuing Bank's core banking system."""
 
     @abstractmethod
     async def verify_deposit(
@@ -87,9 +87,9 @@ class CoreBankingAdapter(ABC):
 
 
 class StubCoreBankingAdapter(CoreBankingAdapter):
-    """Stub implementation for dev/test — simulates M&T core banking (FIS/Symcor).
+    """Stub implementation for dev/test — simulates the Issuing Bank core banking (FIS/Symcor).
 
-    In production, replace with real API calls to M&T's core banking platform.
+    In production, replace with real API calls to the Issuing Bank's core banking platform.
     """
 
     def __init__(self) -> None:
@@ -182,7 +182,7 @@ class StubCoreBankingAdapter(CoreBankingAdapter):
 
 class HoganCoreBankingAdapter(CoreBankingAdapter):
     """
-    M&T Bank Hogan mainframe adapter via IBM Z Data Integration Hub (DIH).
+    the Issuing Bank Hogan mainframe adapter via IBM Z Data Integration Hub (DIH).
     
     Architecture:
         FastAPI -> IBM Z DIH (MQ/REST gateway) -> Hogan CIF/DDA System
@@ -195,7 +195,7 @@ class HoganCoreBankingAdapter(CoreBankingAdapter):
         - Mint (DDA->CDA): Hogan DDA debit -> GL posting -> on-chain CDA mint
         - Burn (CDA->DDA): on-chain CDA burn -> GL posting -> Hogan DDA credit
     
-    GL Account Mapping (M&T post-2025 format):
+    GL Account Mapping (the Issuing Bank post-2025 format):
         - 1010: Reserve Cash (FDIC-insured deposits backing CDA)
         - 2010: CDA Token Liability (on-chain CDA outstanding)
         - 1510: Settlement Receivable (interbank net settlement)
@@ -253,15 +253,15 @@ class HoganCoreBankingAdapter(CoreBankingAdapter):
         )
     
     async def post_gl_entries(self, entries: list[GLEntry]) -> bool:
-        """Post GL entries to M&T's post-2025 General Ledger via Hogan.
+        """Post GL entries to the Issuing Bank's post-2025 General Ledger via Hogan.
         
         Production flow:
-        1. Format entries in M&T post-2025 GL format (ISO 20022 aligned)
+        1. Format entries in the Issuing Bank post-2025 GL format (ISO 20022 aligned)
         2. Submit batch to Hogan GL subsystem via IBM Z DIH
         3. Hogan validates double-entry balance and posts to GL
         4. Returns posting confirmation with Hogan journal ID
         
-        M&T Post-2025 GL Format:
+        the Issuing Bank Post-2025 GL Format:
         - GL codes use 4-digit classification (1010, 2010, 1510, 2510)
         - Journal entries include CDA reference for on-chain/off-chain reconciliation
         - ISO 20022 message format for interoperability
@@ -332,7 +332,7 @@ def get_core_banking_adapter(provider: str = "stub") -> CoreBankingAdapter:
     """Factory for core banking adapters.
     
     Args:
-        provider: "stub" for development/test, "hogan" for M&T Bank Hogan mainframe via IBM Z DIH.
+        provider: "stub" for development/test, "hogan" for the Issuing Bank Hogan mainframe via IBM Z DIH.
     
     Returns:
         Cached CoreBankingAdapter instance for the requested provider.

@@ -2,7 +2,7 @@
 StableArch Council - Task Definitions
 =======================================
 Defines CrewAI tasks for the ARB package generation workflow.
-Context: M&T Bank Cari deposit platform on the Cari Network / ZKsync Prividium.
+Context: the Issuing Bank Cari deposit platform on the Cari Network / ZKsync Prividium.
 
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 DDA <-> CDA flow: fiat in DDA triggers CDA mint; CDA burn triggers fiat back to DDA.
@@ -15,7 +15,7 @@ def create_platform_architecture_task(agent: Agent) -> Task:
     """Task: Design the Cari deposit platform architecture (CDA/DDA)."""
     return Task(
         description=(
-            "Design the complete Cari deposit platform architecture for M&T Bank on the "
+            "Design the complete Cari deposit platform architecture for the Issuing Bank on the "
             "Cari Network / ZKsync Prividium.\n\n"
             "Cari Deposit Accounts (CDAs) are on-chain representations of Demand Deposit Accounts (DDAs).\n"
             "Core flow: DDA deposit triggers CDA mint; CDA burn triggers fiat back to DDA.\n\n"
@@ -29,13 +29,13 @@ def create_platform_architecture_task(agent: Agent) -> Task:
             "network-level mint/burn coordination.\n"
             "5. Data flow diagrams for: DDA deposit -> CDA mint, CDA transfer, CDA redeem -> CDA burn -> DDA settlement.\n"
             "6. Capacity planning and performance requirements.\n\n"
-            "All designs must explicitly reference M&T Bank, Cari Network, and ZKsync Prividium. "
+            "All designs must explicitly reference the Issuing Bank, Cari Network, and ZKsync Prividium. "
             "All designs must be GENIUS Act compliant."
         ),
         expected_output=(
             "A comprehensive platform architecture document in markdown format covering all "
             "deliverables listed above, with specific component names, integration patterns, "
-            "and data flows for M&T Bank's Cari deposit (CDA/DDA) on ZKsync Prividium / Cari Network."
+            "and data flows for the Issuing Bank's Cari deposit (CDA/DDA) on ZKsync Prividium / Cari Network."
         ),
         agent=agent,
     )
@@ -45,7 +45,7 @@ def create_tech_stack_evaluation_task(agent: Agent) -> Task:
     """Task: Evaluate and recommend the technology stack for the Cari deposit platform."""
     return Task(
         description=(
-            "Evaluate and recommend the full technology stack for M&T Bank's Cari deposit "
+            "Evaluate and recommend the full technology stack for the Issuing Bank's Cari deposit "
             "platform (CDA/DDA) on ZKsync Prividium within the Cari Network.\n\n"
             "Deliverables:\n"
             "1. Technology stack recommendation matrix with rationale for each component.\n"
@@ -57,13 +57,13 @@ def create_tech_stack_evaluation_task(agent: Agent) -> Task:
             "5. Middleware: event indexing, API gateway, message queues, oracle integration.\n"
             "6. DevOps: CI/CD for smart contracts, IaC (Terraform/Pulumi), observability stack.\n"
             "7. Technology risk assessment: vendor lock-in, OSS maturity, upgrade paths.\n\n"
-            "All recommendations must reference M&T Bank, Cari Network, and ZKsync Prividium. "
+            "All recommendations must reference the Issuing Bank, Cari Network, and ZKsync Prividium. "
             "Prefer enterprise-grade, audited, production-proven technologies."
         ),
         expected_output=(
             "A technology stack evaluation document in markdown format with a recommendation "
             "matrix, infrastructure diagrams, tooling selections, and risk assessment for "
-            "M&T Bank's Cari deposit (CDA/DDA) ZKsync Prividium deployment within the Cari Network."
+            "the Issuing Bank's Cari deposit (CDA/DDA) ZKsync Prividium deployment within the Cari Network."
         ),
         agent=agent,
     )
@@ -73,7 +73,7 @@ def create_security_compliance_task(agent: Agent) -> Task:
     """Task: Produce the security and compliance review for the Cari deposit platform."""
     return Task(
         description=(
-            "Produce the complete security, risk, and compliance review for M&T Bank's Cari "
+            "Produce the complete security, risk, and compliance review for the Issuing Bank's Cari "
             "deposit platform (CDA/DDA) on ZKsync Prividium / Cari Network.\n\n"
             "Deliverables:\n"
             "1. GENIUS Act compliance mapping matrix (each section -> architectural control -> evidence).\n"
@@ -89,13 +89,13 @@ def create_security_compliance_task(agent: Agent) -> Task:
             "likelihood/impact/mitigation.\n"
             "9. Examiner transparency package: how OCC/Fed/NYDFS examiners access data and reports.\n"
             "10. Regulatory guardrail checklist (pass/fail for each requirement).\n\n"
-            "All outputs must reference M&T Bank, Cari Network, and ZKsync Prividium. "
+            "All outputs must reference the Issuing Bank, Cari Network, and ZKsync Prividium. "
             "Apply bank-grade standards, not DeFi standards."
         ),
         expected_output=(
             "A comprehensive security and compliance document in markdown format with compliance "
             "mapping matrix, risk register, guardrail checklist, and examiner transparency package "
-            "for M&T Bank's Cari deposit platform (CDA/DDA) on ZKsync Prividium / Cari Network."
+            "for the Issuing Bank's Cari deposit platform (CDA/DDA) on ZKsync Prividium / Cari Network."
         ),
         agent=agent,
     )
@@ -105,10 +105,10 @@ def create_strategic_advisory_task(agent: Agent) -> Task:
     """Task: Produce the strategic advisory report for the Cari deposit initiative."""
     return Task(
         description=(
-            "Produce the strategic advisory report for M&T Bank's Cari deposit initiative "
+            "Produce the strategic advisory report for the Issuing Bank's Cari deposit initiative "
             "on the Cari Network / ZKsync Prividium.\n\n"
             "Deliverables:\n"
-            "1. Competitive landscape analysis: M&T vs. JPMorgan Kinexys, Citi Token Services, "
+            "1. Competitive landscape analysis: the Issuing Bank vs. JPMorgan Kinexys, Citi Token Services, "
             "USDF Consortium, Fnality, Partior, and other bank tokenization initiatives.\n"
             "2. Cari Network vendor radar: evaluate ZKsync/Matter Labs, custody vendors "
             "(Fireblocks, BitGo, Anchorage), compliance vendors (Chainalysis, TRM Labs, "
@@ -119,14 +119,14 @@ def create_strategic_advisory_task(agent: Agent) -> Task:
             "(extended use cases) -> Phase 4 (retail-facing CDA).\n"
             "5. Business case summary: cost reduction, revenue opportunities, risk reduction, "
             "regulatory positioning.\n"
-            "6. Risk/opportunity assessment for M&T Bank's Cari Network founding partnership.\n\n"
-            "All outputs must reference M&T Bank, Cari Network, and ZKsync Prividium. "
+            "6. Risk/opportunity assessment for the Issuing Bank's Cari Network founding partnership.\n\n"
+            "All outputs must reference the Issuing Bank, Cari Network, and ZKsync Prividium. "
             "Frame through the lens of a conservative regional bank."
         ),
         expected_output=(
             "A strategic advisory document in markdown format with competitive analysis, vendor "
             "radar, evaluation matrix, phased roadmap, business case, and risk/opportunity "
-            "assessment for M&T Bank's Cari Network participation."
+            "assessment for the Issuing Bank's Cari Network participation."
         ),
         agent=agent,
     )
@@ -137,9 +137,9 @@ def create_arb_synthesis_task(agent: Agent, context_tasks: list[Task]) -> Task:
     return Task(
         description=(
             "Synthesize all specialist agent outputs into a unified Architecture Review Board (ARB) "
-            "package for M&T Bank's Cari deposit platform (CDA/DDA) on ZKsync Prividium / Cari Network.\n\n"
+            "package for the Issuing Bank's Cari deposit platform (CDA/DDA) on ZKsync Prividium / Cari Network.\n\n"
             "Your ARB package must include:\n"
-            "1. EXECUTIVE SUMMARY: One-page overview for M&T Bank leadership and board.\n"
+            "1. EXECUTIVE SUMMARY: One-page overview for the Issuing Bank leadership and board.\n"
             "2. SOLUTION ARCHITECTURE: Consolidated platform architecture with all components.\n"
             "3. TECHNOLOGY STACK: Finalized technology selections with rationale.\n"
             "4. SECURITY & COMPLIANCE: Consolidated compliance mapping, risk register, guardrails.\n"
@@ -149,15 +149,15 @@ def create_arb_synthesis_task(agent: Agent, context_tasks: list[Task]) -> Task:
             "8. GO/NO-GO RECOMMENDATION: Clear recommendation with conditions.\n"
             "9. APPENDICES: Detailed technical specifications, compliance checklists, vendor scorecards.\n\n"
             "CRITICAL REQUIREMENTS:\n"
-            "- Every section must explicitly reference M&T Bank, Cari Network, and ZKsync Prividium.\n"
+            "- Every section must explicitly reference the Issuing Bank, Cari Network, and ZKsync Prividium.\n"
             "- Flag any non-GENIUS-Act-compliant or non-Cari-compliant elements.\n"
             "- No 'TBD' or placeholder sections -- everything must be specific and actionable.\n"
             "- Format for dual audiences: bank executive leadership AND regulatory examiners.\n"
-            "- Include Matt McAfee's (M&T Head of Digital Assets) commitment context."
+            "- Include the Head of Digital Assets' commitment context."
         ),
         expected_output=(
             "A complete, production-ready ARB package document in markdown format suitable for "
-            "M&T Bank leadership, board, and regulatory examiner review. Must cover all 9 sections "
+            "the Issuing Bank leadership, board, and regulatory examiner review. Must cover all 9 sections "
             "listed above with no placeholders or incomplete sections."
         ),
         agent=agent,

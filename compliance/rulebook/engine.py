@@ -43,7 +43,7 @@ class RulebookComplianceEngine:
     """
     Cari Network Rulebook compliance verification engine.
 
-    Validates that M&T Bank's Cari deposit (CDA) platform adheres to all
+    Validates that the Issuing Bank's Cari deposit (CDA) platform adheres to all
     Cari Network consortium governance requirements.
 
     NOTE: All methods are stubs returning PASS. Replace with full implementation
@@ -51,7 +51,7 @@ class RulebookComplianceEngine:
     """
 
     def __init__(self) -> None:
-        self._institution_name = "M&T Bank"
+        self._institution_name = "the Issuing Bank"
 
     def _stub_result(self, check_name: str, description: str) -> RulebookCheckResult:
         """Generate a stub PASS result."""

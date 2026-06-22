@@ -8,7 +8,7 @@ Implements:
 - Cooldown periods between movements
 - Integration with custody adapters (Quest 2) and signing policy
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations

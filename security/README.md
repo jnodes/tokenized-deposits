@@ -1,8 +1,8 @@
 # Security, Risk & Compliance Guardian Layer
 
-## M&T Bank | Cari Network | ZKsync Prividium
+## the Issuing Bank | Cari Network | ZKsync Prividium
 
-Bank-grade security controls, regulatory compliance engines, and risk management for the M&T Bank tokenized deposit platform.
+Bank-grade security controls, regulatory compliance engines, and risk management for the the Issuing Bank tokenized deposit platform.
 
 ---
 
@@ -159,5 +159,5 @@ PYTHONPATH=. pytest tests/compliance/ -v --tb=short
 
 ---
 
-*M&T Bank | Cari Network | ZKsync Prividium*
+*the Issuing Bank | Cari Network | ZKsync Prividium*
 *Security Guardian Layer — Quest 3*

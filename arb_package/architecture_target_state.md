@@ -1,6 +1,6 @@
 # Target-State Architecture
 
-**M&T Bank | Cari Network Cari Deposit Account (CDA) Platform**
+**the Issuing Bank | Cari Network Cari Deposit Account (CDA) Platform**
 **ARB Submission -- Architecture Diagrams**
 
 ---
@@ -15,7 +15,7 @@ graph TB
         API_EXT[Partner API Gateway]
     end
 
-    subgraph "M&T Bank - Application Layer - Azure AKS"
+    subgraph "the Issuing Bank - Application Layer - Azure AKS"
         direction TB
         LB[Azure Application Gateway<br/>WAF + TLS Termination]
         
@@ -53,7 +53,7 @@ graph TB
     subgraph "Middleware (Azure)"
         KAFKA["Kafka Event Bus<br/>Confluent Platform KRaft"]
         REDIS[Redis Cache<br/>Azure Cache]
-        ACR[Azure ACR<br/>mtbcari.azurecr.io]
+        ACR[Azure ACR<br/>cari-platform.azurecr.io]
     end
 
     subgraph "ZKsync Prividium (Cari Network)"
@@ -61,13 +61,13 @@ graph TB
         RPC[JSON-RPC Endpoint<br/>Prividium Node]
         
         subgraph "Smart Contracts"
-            TOKEN[MTBankTokenizedDeposit<br/>CDA ERC-20 + UUPS Proxy]
+            TOKEN[TokenizedDeposit<br/>CDA ERC-20 + UUPS Proxy]
             ORACLE[CariComplianceOracle<br/>KYC/AML/OFAC]
             ATTEST[ReserveAttestationContract]
         end
         
         subgraph "Cari Network Layer"
-            OPERATOR[Operator<br/>M&T CDA Supply Controller]
+            OPERATOR[Operator<br/>the Issuing Bank CDA Supply Controller]
             SBANK[Settlement Bank<br/>Daily Net Settlement]
             BRIDGE[Messaging Bridge<br/>Cross-Bank Comms]
         end
@@ -258,13 +258,13 @@ graph TB
         AKV[Azure Key Vault<br/>Secrets Management]
     end
 
-    subgraph "Core Banking - M&T Internal Network"
+    subgraph "Core Banking - the Issuing Bank Internal Network"
         ZDIH["IBM Z DIH<br/>MQ/REST Gateway"]
         HOGAN["Hogan Mainframe<br/>IBM Z - CIF/DDA/GL"]
     end
 
     subgraph "Container Registry (Azure)"
-        ACR[Azure ACR<br/>mtbcari.azurecr.io]
+        ACR[Azure ACR<br/>cari-platform.azurecr.io]
     end
 
     subgraph "External Services - VPN / Private Link"
@@ -353,4 +353,4 @@ graph TB
 ---
 
 *ARB Submission -- Architecture Diagrams*
-*M&T Bank | Cari Network CDA Platform | ZKsync Prividium*
+*the Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*

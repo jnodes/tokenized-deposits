@@ -10,7 +10,7 @@ Implements:
 - Control testing status tracking
 - CSV/JSON export
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations
@@ -68,7 +68,7 @@ class ControlMatrix:
         self._initialize_controls()
 
     def _initialize_controls(self) -> None:
-        """Populate with M&T Bank Cari Network control mappings."""
+        """Populate with the Issuing Bank Cari Network control mappings."""
         controls = [
             # --- GENIUS Act ---
             ControlEntry(
@@ -87,11 +87,11 @@ class ControlMatrix:
                 regulation="GENIUS Act Section 5",
                 requirement="Par redemption — tokens redeemable at face value",
                 control_description="Burn endpoint redeems at 1:1 par with automatic fiat payout",
-                implementation="MTokenizedDeposit.burn() + FastAPI burn router + payment rail adapter",
-                module="contracts/MTokenizedDeposit.sol, offchain/routers/transactions.py",
+                implementation="TokenizedDeposit.burn() + FastAPI burn router + payment rail adapter",
+                module="contracts/TokenizedDeposit.sol, offchain/routers/transactions.py",
                 status=ControlStatus.IMPLEMENTED,
                 test_result=TestResult.PASSED,
-                evidence="test/MTokenizedDeposit.t.sol (test_burn_*), offchain/tests/test_transactions.py",
+                evidence="test/TokenizedDeposit.t.sol (test_burn_*), offchain/tests/test_transactions.py",
                 owner="PRODUCT_OWNER",
                 effectiveness_pct=99.0,
             ),
@@ -159,7 +159,7 @@ class ControlMatrix:
                 requirement="Access privileges and management",
                 control_description="RBAC with 8 segregated roles, HSM-backed keys, signing policy engine",
                 implementation="On-chain AccessControl + SigningPolicyEngine with dual approval",
-                module="contracts/MTokenizedDeposit.sol, security/signing/policy_engine.py",
+                module="contracts/TokenizedDeposit.sol, security/signing/policy_engine.py",
                 status=ControlStatus.IMPLEMENTED,
                 test_result=TestResult.PASSED,
                 evidence="Role-based keys: MINTER, BURNER, ATTESTOR, COMPLIANCE, SETTLEMENT, PAUSER, UPGRADER, ADMIN",

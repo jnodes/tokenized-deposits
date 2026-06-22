@@ -1,6 +1,6 @@
 # StableArch Council -- Final Cross-Check & Governance Sign-Off
 
-**M&T Bank | Cari Network Tokenized Deposit Platform**
+**the Issuing Bank | Cari Network Tokenized Deposit Platform**
 **Council Session:** Final Launch Readiness Review
 **Date:** March 2026
 
@@ -138,7 +138,7 @@ The following items require human decision-making and cannot be resolved by auto
 | 3 | Fireblocks enterprise contract negotiation | Procurement + Legal | May 2026 |
 | 4 | OCC Activity Letter review and sign-off | General Counsel | July 2026 |
 | 5 | FDIC notification review and sign-off | General Counsel | July 2026 |
-| 6 | Phase 2 -> Phase 3 go/no-go decision | Matt McAfee + CTO | September 2026 |
+| 6 | Phase 2 -> Phase 3 go/no-go decision | the Head of Digital Assets + CTO | September 2026 |
 | 7 | Production launch final authorization | CEO / Board Committee | November 2026 |
 
 ---
@@ -147,7 +147,7 @@ The following items require human decision-making and cannot be resolved by auto
 
 ### ARB DECISION: APPROVE WITH CONDITIONS
 
-**The StableArch Council unanimously recommends CONDITIONAL APPROVAL for the M&T Bank Tokenized Deposit Platform on the Cari Network.**
+**The StableArch Council unanimously recommends CONDITIONAL APPROVAL for the the Issuing Bank Tokenized Deposit Platform on the Cari Network.**
 
 **Conditions for Full Approval:**
 
@@ -157,7 +157,7 @@ The following items require human decision-making and cannot be resolved by auto
 | 2 | NYDFS 500.05 penetration test scheduled and scoped | CISO | During Phase 1 (pilot) |
 | 3 | Fireblocks enterprise POC validates Prividium custom network support | Engineering | During Phase 1 |
 | 4 | Chainalysis KYT confirms Cari Network / Prividium address coverage | Compliance | During Phase 1 |
-| 5 | UAT sign-off from M&T Treasury Operations | Head of Treasury Ops | Before Phase 2 |
+| 5 | UAT sign-off from the Issuing Bank Treasury Operations | Head of Treasury Ops | Before Phase 2 |
 
 **Upon satisfaction of all conditions, the platform is CLEARED FOR PRODUCTION DEPLOYMENT.**
 
@@ -176,5 +176,5 @@ The following items require human decision-making and cannot be resolved by auto
 ---
 
 *StableArch Council -- Architecture Review Board*
-*M&T Bank | Cari Network | ZKsync Prividium*
+*the Issuing Bank | Cari Network | ZKsync Prividium*
 *Session: Final Launch Readiness Review | Confidence: 91.35/100*

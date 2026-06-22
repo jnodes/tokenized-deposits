@@ -5,7 +5,7 @@ Provides async event streaming for CDA/DDA transaction lifecycle events.
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 Events track CDA mint/burn/transfer operations for reconciliation and compliance.
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations

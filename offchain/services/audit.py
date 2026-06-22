@@ -5,7 +5,7 @@ OCC / Fed / NYDFS examiners can query the full audit trail.
 
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations

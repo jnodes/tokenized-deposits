@@ -1,6 +1,6 @@
 """
 StableArch Council - Off-Chain Orchestration Platform
-M&T Bank | Cari Network | ZKsync Prividium
+the Issuing Bank | Cari Network | ZKsync Prividium
 
 Configuration module: loads settings from environment / .env file.
 
@@ -27,7 +27,7 @@ class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
     # --- App ---
-    app_name: str = "M&T Bank Cari Deposit Orchestrator"
+    app_name: str = "the Issuing Bank Cari Deposit Orchestrator"
     environment: Environment = Environment.DEV
     debug: bool = True
     api_prefix: str = "/api/v1"

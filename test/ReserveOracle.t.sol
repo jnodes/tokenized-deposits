@@ -6,7 +6,7 @@ import "./TestHelper.sol";
 /**
  * @title ReserveOracleTest
  * @notice Unit tests for the 1:1 reserve backing oracle.
- *         M&T Bank | Cari Network | ZKsync Prividium.
+ *         Cari Network | ZKsync Prividium.
  */
 contract ReserveOracleTest is TestHelper {
     // =========================================================================

@@ -12,7 +12,7 @@ Implements:
 - Travel Rule threshold detection ($3,000 FinCEN / $1,000 FATF)
 - Integration with Quest 1 CariSettlement contract (travel_rule_hash for CDA transfers)
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations
@@ -44,7 +44,7 @@ class OriginatorInfo(BaseModel):
     """Originator data for Travel Rule compliance."""
     full_name: str
     account_number: str = ""
-    institution_name: str = "M&T Bank"
+    institution_name: str = "the Issuing Bank"
     institution_lei: str = ""  # Legal Entity Identifier
     address: str = ""
     date_of_birth: str = ""

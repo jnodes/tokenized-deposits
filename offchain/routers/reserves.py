@@ -4,7 +4,7 @@ Reserve & Custody router — reserve status, custody balances, treasury ops.
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 Reserves ensure 1:1 backing of CDA tokens by qualifying assets (GENIUS Act S4).
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations

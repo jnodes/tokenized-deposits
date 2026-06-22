@@ -4,7 +4,7 @@ Regulatory Guardrail Checks
 Automated compliance checks that flag non-GENIUS-Act or non-Cari-compliant designs
 before they reach the final ARB package.
 
-Context: M&T Bank Cari deposit platform on the Cari Network / ZKsync Prividium.
+Context: the Issuing Bank Cari deposit platform on the Cari Network / ZKsync Prividium.
 
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 DDA <-> CDA flow: fiat in DDA triggers CDA mint; CDA burn triggers fiat back to DDA.
@@ -51,7 +51,7 @@ class GuardrailReport:
         lines = [
             "=" * 70,
             "STABLEARCH COUNCIL - REGULATORY GUARDRAIL REPORT",
-            "M&T Bank | Cari Network | ZKsync Prividium",
+            "the Issuing Bank | Cari Network | ZKsync Prividium",
             "=" * 70,
             f"Total checks: {total}  |  Passed: {passed}  |  Failed: {failed}",
             f"Overall status: {'PASS' if self.passed else 'FAIL'}",
@@ -102,7 +102,7 @@ def check_genius_act_reserve_backing(document: str) -> GuardrailResult:
         ),
         remediation=(
             "Add explicit 1:1 reserve backing architecture with qualifying asset types "
-            "and reserve attestation mechanism for M&T Bank's Cari deposits (CDAs)."
+            "and reserve attestation mechanism for the Issuing Bank's Cari deposits (CDAs)."
         ),
     )
 
@@ -121,7 +121,7 @@ def check_genius_act_redemption(document: str) -> GuardrailResult:
         details="CDA holders must be able to redeem at par value within 1 business day (CDA burn -> DDA settlement).",
         remediation=(
             "Add explicit redemption-at-par mechanism with T+0/T+1 CDA burn -> DDA settlement to "
-            "depositor's M&T Bank account."
+            "depositor's the Issuing Bank account."
         ),
     )
 
@@ -287,25 +287,25 @@ def check_examiner_transparency(document: str) -> GuardrailResult:
 
 
 def check_mt_bank_references(document: str) -> GuardrailResult:
-    """All outputs must reference M&T Bank, Cari Network, ZKsync Prividium."""
-    has_mt = _text_contains_any(document, ["m&t bank", "m&t", "mt bank"])
+    """All outputs must reference the Issuing Bank, Cari Network, ZKsync Prividium."""
+    has_mt = _text_contains_any(document, ["the Issuing Bank", "Issuing Bank", "issuing bank"])
     has_cari = _text_contains(document, ["cari"])
     has_prividium = _text_contains_any(document, ["prividium", "zksync"])
     passed = has_mt and has_cari and has_prividium
     missing = []
     if not has_mt:
-        missing.append("M&T Bank")
+        missing.append("the Issuing Bank")
     if not has_cari:
         missing.append("Cari Network")
     if not has_prividium:
         missing.append("ZKsync Prividium")
     return GuardrailResult(
         rule_id="CTX-REF",
-        rule_name="M&T / Cari / Prividium References",
+        rule_name="the Issuing Bank / Cari / Prividium References",
         passed=passed,
         severity="HIGH",
         details=f"Missing references: {', '.join(missing)}" if missing else "All references present.",
-        remediation="Ensure every output section references M&T Bank, Cari Network, and ZKsync Prividium.",
+        remediation="Ensure every output section references the Issuing Bank, Cari Network, and ZKsync Prividium.",
     )
 
 
@@ -365,7 +365,7 @@ def run_guardrail_checks(document: str) -> GuardrailReport:
 if __name__ == "__main__":
     # Quick self-test with a sample document
     sample = """\
-    M&T Bank Cari deposit platform on the Cari Network using ZKsync Prividium.
+    the Issuing Bank Cari deposit platform on the Cari Network using ZKsync Prividium.
     Cari Deposit Accounts (CDAs) are on-chain representations of DDAs.
     1:1 reserve backing with qualifying reserves (cash, T-bills, Fed deposits).
     Redemption at par within 1 business day via CDA burn -> DDA settlement.

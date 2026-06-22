@@ -1,6 +1,6 @@
 # Emerging Technology Assessment
 
-**M&T Bank | Cari Network Tokenized Deposit Platform**
+**the Issuing Bank | Cari Network Tokenized Deposit Platform**
 **Prepared for:** Digital Assets Strategy Committee
 **Classification:** CONFIDENTIAL -- Internal Use Only
 
@@ -8,7 +8,7 @@
 
 ## 1. Executive Context
 
-M&T Bank's tokenized deposit initiative operates at the intersection of three converging technology waves: programmable money, permissioned blockchain infrastructure, and evolving federal stablecoin/deposit token regulation. This assessment evaluates the strategic positioning of M&T's approach against alternatives and emerging trends through 2028.
+the Issuing Bank's tokenized deposit initiative operates at the intersection of three converging technology waves: programmable money, permissioned blockchain infrastructure, and evolving federal stablecoin/deposit token regulation. This assessment evaluates the strategic positioning of the Issuing Bank's approach against alternatives and emerging trends through 2028.
 
 ---
 
@@ -16,11 +16,11 @@ M&T Bank's tokenized deposit initiative operates at the intersection of three co
 
 ### Fundamental Distinction
 
-| Attribute | Tokenized Deposits (M&T/Cari) | Stablecoins (USDC/USDT) |
+| Attribute | Tokenized Deposits (Cari) | Stablecoins (USDC/USDT) |
 |-----------|-------------------------------|--------------------------|
 | Legal Classification | Bank deposit liability | Payment instrument / stored value |
 | FDIC Insurance | Yes (up to $250K per depositor) | No |
-| Issuer | Chartered bank (M&T) | Non-bank issuer (Circle, Tether) |
+| Issuer | Chartered bank | Non-bank issuer (Circle, Tether) |
 | Regulatory Framework | OCC/Fed/FDIC + GENIUS Act | GENIUS Act + state money transmitter |
 | Reserve Requirements | 1:1 backing per GENIUS Act | 1:1 backing per GENIUS Act |
 | Redemption | At par, on demand | At par, subject to issuer terms |
@@ -29,9 +29,9 @@ M&T Bank's tokenized deposit initiative operates at the intersection of three co
 | Programmability | Smart contract-enabled | Smart contract-enabled |
 | Interoperability | Cari Network (permissioned) | Public chains (permissionless) |
 
-### M&T Strategic Advantage
+### the Issuing Bank Strategic Advantage
 
-Tokenized deposits provide M&T with three advantages stablecoins cannot match:
+Tokenized deposits provide the Issuing Bank with three advantages stablecoins cannot match:
 
 1. **FDIC Insurance Moat** -- Depositors receive federal insurance coverage; stablecoins carry issuer credit risk
 2. **Interest-Bearing Capability** -- Deposits can pay interest without securities classification concerns
@@ -39,7 +39,7 @@ Tokenized deposits provide M&T with three advantages stablecoins cannot match:
 
 ### Risk: Stablecoin Competition
 
-Circle (USDC) and PayPal (PYUSD) are expanding institutional stablecoin offerings. If GENIUS Act passes with broad stablecoin permissions, non-bank issuers could offer competitive products with faster time-to-market. M&T's differentiation must emphasize FDIC insurance, bank relationship, and Cari Network settlement efficiency.
+Circle (USDC) and PayPal (PYUSD) are expanding institutional stablecoin offerings. If GENIUS Act passes with broad stablecoin permissions, non-bank issuers could offer competitive products with faster time-to-market. the Issuing Bank's differentiation must emphasize FDIC insurance, bank relationship, and Cari Network settlement efficiency.
 
 ---
 
@@ -49,17 +49,17 @@ Circle (USDC) and PayPal (PYUSD) are expanding institutional stablecoin offering
 
 | Initiative | Participants | Technology | Status |
 |------------|-------------|------------|--------|
-| **Cari Network** | M&T, founding banks | ZKsync Prividium | Pilot (M&T active) |
+| **Cari Network** | the Issuing Bank, founding banks | ZKsync Prividium | Pilot (the Issuing Bank active) |
 | **JPM Onyx/Kinexys** | JPMorgan, institutional | Quorum/private | Production |
 | **Fnality** | 15 global banks | Ethereum/private | Pilot |
 | **Canton Network** | Goldman, BNY, others | DAML/Canton | Production |
 | **Regulated Settlement Network** | DTCC, major banks | Ethereum/private | Pilot |
 
-### Permissioned DeFi Use Cases for M&T
+### Permissioned DeFi Use Cases
 
 | Use Case | Feasibility | Timeline | Revenue Potential |
 |----------|-------------|----------|-------------------|
-| **Intra-bank settlement** (M&T branches) | High | Q4 2026 | Cost savings: $2-5M/yr |
+| **Intra-bank settlement** (the Issuing Bank branches) | High | Q4 2026 | Cost savings: $2-5M/yr |
 | **Inter-bank settlement** (Cari Network) | High | Q1 2027 | New revenue: $5-15M/yr |
 | **Tokenized repo/lending** | Medium | Q3 2027 | New revenue: $10-30M/yr |
 | **Programmable escrow** | Medium | Q2 2027 | New revenue: $3-8M/yr |
@@ -76,9 +76,9 @@ Prioritize intra-bank settlement (immediate ROI) and inter-bank Cari Network set
 
 ### Federal Reserve Digital Dollar Status
 
-The Federal Reserve has not committed to a retail CBDC timeline. However, M&T should maintain CBDC readiness for three scenarios:
+The Federal Reserve has not committed to a retail CBDC timeline. However, the Issuing Bank should maintain CBDC readiness for three scenarios:
 
-| Scenario | Probability | M&T Impact | Readiness Action |
+| Scenario | Probability | the Issuing Bank Impact | Readiness Action |
 |----------|-------------|------------|------------------|
 | **No US CBDC** (status quo) | 50% | Positive -- tokenized deposits fill the gap | Continue current strategy |
 | **Wholesale CBDC** (bank-to-bank) | 35% | Neutral-Positive -- Cari Network could integrate | Ensure Prividium can bridge to Fed systems |
@@ -86,11 +86,11 @@ The Federal Reserve has not committed to a retail CBDC timeline. However, M&T sh
 
 ### CBDC Readiness Architecture
 
-M&T's current Cari Network architecture provides natural CBDC readiness:
+the Issuing Bank's current Cari Network architecture provides natural CBDC readiness:
 
 ```
 Current State:                    CBDC-Ready State:
-M&T Deposit Token                 M&T Deposit Token
+the Issuing Bank Deposit Token                 the Issuing Bank Deposit Token
     |                                 |
 ZKsync Prividium                  ZKsync Prividium
     |                                 |      \
@@ -140,7 +140,7 @@ Bank Settlement                   Bank Settlement  FedNow/CBDC Rail
 ```
                     High Regulatory Clarity
                            |
-                    M&T/Cari ****
+                    Cari ****
                            |
          JPM Onyx **       |       Canton **
                            |
@@ -153,7 +153,7 @@ Low Innovation -----+------+------+----- High Innovation
                     Low Regulatory Clarity
 ```
 
-M&T/Cari occupies the optimal quadrant: high regulatory clarity (bank-issued, FDIC-insured) with meaningful innovation (ZK-proofs, programmable compliance, Cari Network interoperability).
+Cari occupies the optimal quadrant: high regulatory clarity (bank-issued, FDIC-insured) with meaningful innovation (ZK-proofs, programmable compliance, Cari Network interoperability).
 
 ---
 

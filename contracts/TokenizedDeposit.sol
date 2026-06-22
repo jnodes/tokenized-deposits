@@ -7,20 +7,20 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "./interfaces/IReserveOracle.sol";
-import "./interfaces/IMTokenizedDeposit.sol";
+import "./interfaces/ITokenizedDeposit.sol";
 
 /**
- * @title MTokenizedDeposit
- * @notice Permissioned ERC-20 Cari deposit for M&T Bank on the Cari Network /
+ * @title TokenizedDeposit
+ * @notice Permissioned ERC-20 Cari deposit on the Cari Network /
  *         ZKsync Prividium (private permissioned zkRollup L2).
  *
  *         This contract implements the Cari Deposit Account (CDA) per the Cari Network
- *         Whitepaper. Each mtUSD token represents a 1:1 FDIC-insured bank liability backed
+ *         Whitepaper. Each cUSD token represents a 1:1 FDIC-insured bank liability backed
  *         by qualifying reserves per GENIUS Act Section 4 (cash, T-bills, Fed deposits).
  *
  *         TERMINOLOGY:
  *         - CDA = Cari Deposit Account (on-chain token representation)
- *         - DDA = Demand Deposit Account (off-chain fiat account at M&T Bank)
+ *         - DDA = Demand Deposit Account (off-chain fiat account at the Issuing Bank)
  *         - Minting creates CDA from DDA (fiat deposited -> CDA issued)
  *         - Burning redeems CDA back to DDA (CDA destroyed -> fiat returned)
  *
@@ -36,24 +36,24 @@ import "./interfaces/IMTokenizedDeposit.sol";
  *
  *         SECURITY GUARDIAN NOTES:
  *         - MINTER_ROLE and BURNER_ROLE keys MUST be stored in HSM (Thales/Utimaco).
- *         - DEFAULT_ADMIN_ROLE should be a Timelock contract controlled by M&T multi-sig.
+ *         - DEFAULT_ADMIN_ROLE should be a Timelock contract controlled by consortium multi-sig.
  *         - Separation of duties: minter != attestor != compliance officer.
  *         - No reentrancy vectors: ReentrancyGuard on all state-mutating externals.
  *         - Upgrade authorization requires UPGRADER_ROLE (Timelock-gated).
  */
-contract MTokenizedDeposit is
+contract TokenizedDeposit is
     ERC20Upgradeable,
     AccessControlUpgradeable,
     PausableUpgradeable,
     ReentrancyGuard,
     UUPSUpgradeable,
-    IMTokenizedDeposit
+    ITokenizedDeposit
 {
     // =========================================================================
     //                              ROLES
     // =========================================================================
 
-    /// @notice Role for minting CDA (Cari Deposit Account) tokens (M&T treasury operations, HSM-backed).
+    /// @notice Role for minting CDA (Cari Deposit Account) tokens (treasury operations, HSM-backed).
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
     /// @notice Role for burning CDA tokens on redemption (CDA -> DDA).
@@ -71,7 +71,7 @@ contract MTokenizedDeposit is
     /// @notice Role for the CariSettlement contract to call settlement mint/burn.
     bytes32 public constant SETTLEMENT_ROLE = keccak256("SETTLEMENT_ROLE");
 
-    /// @notice Operator role — M&T Bank's centralized supply controller per Cari Network Whitepaper.
+    /// @notice Operator role — the Issuing Bank's centralized supply controller per Cari Network Whitepaper.
     /// @dev Convenience superset that grants MINTER_ROLE + BURNER_ROLE. The Operator
     ///      is the entity authorized to manage CDA supply (mint from DDA, burn to DDA).
     bytes32 public constant OPERATOR_ROLE = keccak256("OPERATOR_ROLE");
@@ -105,7 +105,7 @@ contract MTokenizedDeposit is
     //                              EVENTS
     // =========================================================================
 
-    // IMTokenizedDeposit events are inherited. Additional internal events:
+    // ITokenizedDeposit events are inherited. Additional internal events:
     event SettlementMint(address indexed to, uint256 amount, bytes32 indexed settlementId);
     event SettlementBurn(address indexed from, uint256 amount, bytes32 indexed settlementId);
     event TravelRuleThresholdUpdated(uint256 oldThreshold, uint256 newThreshold);
@@ -133,14 +133,14 @@ contract MTokenizedDeposit is
     }
 
     /**
-     * @notice Initialize the MTokenizedDeposit (Cari Deposit Account) contract.
-     * @param admin          M&T Bank Timelock/multi-sig address (DEFAULT_ADMIN_ROLE).
+     * @notice Initialize the TokenizedDeposit (Cari Deposit Account) contract.
+     * @param admin          Timelock/multi-sig address (DEFAULT_ADMIN_ROLE).
      * @param _reserveOracle Address of the deployed ReserveOracle contract for CDA backing.
      */
     function initialize(address admin, address _reserveOracle) public initializer {
         if (admin == address(0)) revert ZeroAddress();
 
-        __ERC20_init("M&T Bank Tokenized Deposit (Cari)", "mtUSD");
+        __ERC20_init("Tokenized Deposit (Cari)", "cUSD");
         __AccessControl_init();
         __Pausable_init();
 
@@ -171,13 +171,13 @@ contract MTokenizedDeposit is
     // =========================================================================
 
     /**
-     * @notice Mint CDA tokens upon verified fiat deposit at M&T Bank (DDA -> CDA).
+     * @notice Mint CDA tokens upon verified fiat deposit at the Issuing Bank (DDA -> CDA).
      * @dev    Converts a Demand Deposit Account (DDA) balance into Cari Deposit Account
      *         (CDA) tokens. Enforces 1:1 reserve backing via ReserveOracle before minting.
      *         Minter key MUST be HSM-backed with SoD from attestor.
      * @param to          Whitelisted recipient address to receive CDA.
      * @param amount      Amount of CDA to mint (6 decimals).
-     * @param referenceId M&T core banking reference ID for reconciliation.
+     * @param referenceId Core banking reference ID for reconciliation.
      */
     function mint(
         address to,
@@ -200,10 +200,10 @@ contract MTokenizedDeposit is
      * @notice Burn CDA tokens on redemption at par (CDA -> DDA, GENIUS Act Section 5).
      * @dev    Converts Cari Deposit Account (CDA) tokens back to Demand Deposit Account
      *         (DDA) fiat. Burns tokens, triggering off-chain settlement to depositor's
-     *         M&T Bank DDA.
+     *         DDA at the Issuing Bank.
      * @param from        Address to burn CDA from.
      * @param amount      Amount of CDA to burn (6 decimals).
-     * @param referenceId M&T core banking reference for settlement tracking.
+     * @param referenceId Core banking reference for settlement tracking.
      */
     function burn(
         address from,
@@ -290,7 +290,7 @@ contract MTokenizedDeposit is
      * @dev    Bypasses whitelist/freeze checks. Only callable by COMPLIANCE_ROLE.
      *         Event includes reason string for examiner audit trail.
      * @param from   Source address (may be frozen).
-     * @param to     Destination address (e.g., M&T compliance escrow).
+     * @param to     Destination address (e.g., compliance escrow).
      * @param amount Amount to force-transfer.
      * @param reason Documented reason (e.g., "OFAC seizure order #12345").
      */
@@ -318,7 +318,7 @@ contract MTokenizedDeposit is
      * @notice Mint CDA tokens as part of a Cari cross-bank settlement (destination side).
      * @dev    Called by the CariSettlement contract after validating the settlement request.
      *         Issues new CDA at the destination bank for the beneficiary.
-     * @param to           Beneficiary wallet at M&T Bank to receive CDA.
+     * @param to           Beneficiary wallet to receive CDA.
      * @param amount       Amount of CDA to mint.
      * @param settlementId Cari settlement identifier for reconciliation.
      */
@@ -340,7 +340,7 @@ contract MTokenizedDeposit is
      * @notice Burn CDA tokens as part of a Cari cross-bank settlement (source side).
      * @dev    Called by the CariSettlement contract when initiating a cross-bank CDA transfer.
      *         Burns CDA at the source bank so equivalent CDA can be minted at the destination.
-     * @param from         Originator wallet at M&T Bank whose CDA is burned.
+     * @param from         Originator wallet whose CDA is burned.
      * @param amount       Amount of CDA to burn.
      * @param settlementId Cari settlement identifier for reconciliation.
      */
@@ -402,7 +402,7 @@ contract MTokenizedDeposit is
     }
 
     /// @notice Designate an Operator address, granting it MINTER_ROLE and BURNER_ROLE.
-    /// @dev Per Cari Whitepaper: the Operator is the single entity (M&T Bank) controlling CDA supply.
+    /// @dev Per Cari Whitepaper: the Operator is the single entity (the Issuing Bank) controlling CDA supply.
     ///      Replaces previous Operator if one was set (revokes old roles, grants new).
     ///      Only callable by DEFAULT_ADMIN_ROLE.
     /// @param newOperator The new Operator address

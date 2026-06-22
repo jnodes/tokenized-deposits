@@ -2,13 +2,13 @@
 
 ## Architecture Flow Diagrams
 
-### M&T Bank Technology Stack Integration
+### the Issuing Bank Technology Stack Integration
 
 - **Hogan mainframe** (IBM Z) — Core banking (CIF/DDA/GL)
 - **IBM Z DIH** — MQ/REST gateway for API-to-Hogan integration
 - **Kafka** (Confluent Platform, KRaft mode) — Event bus
 - **Azure AKS** — Kubernetes orchestration
-- **Azure ACR** (mtbcari.azurecr.io) — Container registry
+- **Azure ACR** (cari-platform.azurecr.io) — Container registry
 - **Azure Managed HSM** — Key management
 
 ### Mint Flow - Fiat Deposit to Tokenized Deposit via Hogan/Z DIH

@@ -1,12 +1,12 @@
 # Architecture Flow Diagrams — Security, Risk & Compliance Layer
 
-## M&T Bank Technology Stack
+## the Issuing Bank Technology Stack
 
 - **Hogan mainframe** (IBM Z) — Core banking (CIF/DDA/GL)
 - **IBM Z DIH** — MQ/REST gateway for API-to-Hogan integration
 - **Kafka** (Confluent Platform, KRaft mode) — Event bus
 - **Azure AKS** — Kubernetes orchestration
-- **Azure ACR** (mtbcari.azurecr.io) — Container registry
+- **Azure ACR** (cari-platform.azurecr.io) — Container registry
 - **Azure Managed HSM** — Key management
 
 ## Security Guardian Architecture
@@ -42,7 +42,7 @@ graph TB
     end
 
     subgraph "Quest 1 - Smart Contracts - CDA Layer"
-        MTD["MTokenizedDeposit<br/>CDA"]
+        MTD["TokenizedDeposit<br/>CDA"]
         RO[ReserveOracle]
         CS[CariSettlement]
         OP[Operator<br/>CDA Supply Control]
@@ -184,7 +184,7 @@ sequenceDiagram
 ```mermaid
 graph LR
     subgraph "On-Chain CDA State"
-        Supply[Total CDA Supply<br/>MTokenizedDeposit]
+        Supply[Total CDA Supply<br/>TokenizedDeposit]
         Oracle[ReserveOracle<br/>Attestation Hash]
     end
 

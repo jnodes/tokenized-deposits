@@ -1,11 +1,11 @@
 """
-M&T Bank Cari Deposit Orchestrator — FastAPI Application.
-Connects Quest 1 smart contracts to M&T's core banking, custody, and compliance stack.
+the Issuing Bank Cari Deposit Orchestrator — FastAPI Application.
+Connects Quest 1 smart contracts to the Issuing Bank's core banking, custody, and compliance stack.
 
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 DDA <-> CDA flow: fiat in DDA triggers CDA mint; CDA burn triggers fiat back to DDA.
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations
@@ -154,7 +154,7 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title=settings.app_name,
         description=(
-            "Off-chain orchestration platform for M&T Bank's Cari deposit product (CDA/DDA). "
+            "Off-chain orchestration platform for the Issuing Bank's Cari deposit product (CDA/DDA). "
             "Connects ZKsync Prividium smart contracts to core banking, custody, payments, "
             "and regulatory compliance infrastructure. GENIUS Act compliant."
         ),

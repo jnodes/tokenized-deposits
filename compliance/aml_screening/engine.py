@@ -13,7 +13,7 @@ Implements:
 - Integration with Chainalysis KYT and TRM Labs (stubs for dev)
 - NYDFS Part 504 transaction monitoring requirements
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations

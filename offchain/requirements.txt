@@ -1,4 +1,4 @@
-# M&T Bank Tokenized Deposit Orchestrator
+# Tokenized Deposit Orchestrator
 # Dependencies for Quest 2 — Off-Chain Platform
 
 # --- Web Framework ---

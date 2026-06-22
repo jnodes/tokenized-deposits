@@ -4,7 +4,7 @@ Health & system router — operational readiness checks.
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 Health checks verify connectivity to all CDA/DDA platform components.
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations

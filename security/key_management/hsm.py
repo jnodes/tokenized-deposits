@@ -1,5 +1,5 @@
 """
-Private Key Lifecycle Manager — HSM integration for M&T Bank Cari deposits.
+Private Key Lifecycle Manager — HSM integration for the Issuing Bank Cari deposits.
 Supports AWS CloudHSM, Azure Key Vault, and Fireblocks MPC.
 
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
@@ -11,7 +11,7 @@ Implements:
 - NYDFS Part 500 Section 500.15 encryption of nonpublic information
 - FIPS 140-2 Level 3 compliance (via HSM backends)
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations

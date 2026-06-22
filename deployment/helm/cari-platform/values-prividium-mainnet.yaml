@@ -38,14 +38,14 @@ ingress:
     nginx.ingress.kubernetes.io/rate-limit: "500"
     nginx.ingress.kubernetes.io/limit-connections: "50"
   hosts:
-    - host: cari-api.mtbank.com
+    - host: cari-api.cari-platform.com
       paths:
         - path: /
           pathType: Prefix
   tls:
     - secretName: cari-prod-tls
       hosts:
-        - cari-api.mtbank.com
+        - cari-api.cari-platform.com
 
 # Azure Cloud Configuration (production)
 azure:

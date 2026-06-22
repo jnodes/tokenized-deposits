@@ -2,23 +2,23 @@
 pragma solidity ^0.8.26;
 
 import "./TestHelper.sol";
-import "../contracts/interfaces/IMTokenizedDeposit.sol";
+import "../contracts/interfaces/ITokenizedDeposit.sol";
 
 /**
- * @title MTokenizedDepositTest
- * @notice Unit tests for M&T Bank's tokenized deposit contract on Cari Network / ZKsync Prividium.
+ * @title TokenizedDepositTest
+ * @notice Unit tests for the tokenized deposit contract on Cari Network / ZKsync Prividium.
  */
-contract MTokenizedDepositTest is TestHelper {
+contract TokenizedDepositTest is TestHelper {
     // =========================================================================
     //                          INITIALIZATION
     // =========================================================================
 
     function test_initialize_name() public view {
-        assertEq(token.name(), "M&T Bank Tokenized Deposit (Cari)");
+        assertEq(token.name(), "Tokenized Deposit (Cari)");
     }
 
     function test_initialize_symbol() public view {
-        assertEq(token.symbol(), "mtUSD");
+        assertEq(token.symbol(), "cUSD");
     }
 
     function test_initialize_decimals() public view {
@@ -40,11 +40,11 @@ contract MTokenizedDepositTest is TestHelper {
     }
 
     function test_initialize_revertZeroAdmin() public {
-        MTokenizedDeposit impl = new MTokenizedDeposit();
-        vm.expectRevert(MTokenizedDeposit.ZeroAddress.selector);
+        TokenizedDeposit impl = new TokenizedDeposit();
+        vm.expectRevert(TokenizedDeposit.ZeroAddress.selector);
         new ERC1967Proxy(
             address(impl),
-            abi.encodeCall(MTokenizedDeposit.initialize, (address(0), address(oracle)))
+            abi.encodeCall(TokenizedDeposit.initialize, (address(0), address(oracle)))
         );
     }
 
@@ -60,7 +60,7 @@ contract MTokenizedDepositTest is TestHelper {
 
     function test_mint_emitsEvent() public {
         vm.expectEmit(true, false, false, true, address(token));
-        emit IMTokenizedDeposit.Mint(alice, 500e6, "ref-001");
+        emit ITokenizedDeposit.Mint(alice, 500e6, "ref-001");
         vm.prank(minter);
         token.mint(alice, 500e6, "ref-001");
     }
@@ -74,7 +74,7 @@ contract MTokenizedDepositTest is TestHelper {
     function test_mint_revert_notWhitelisted() public {
         address outsider = makeAddr("outsider");
         vm.prank(minter);
-        vm.expectRevert(abi.encodeWithSelector(MTokenizedDeposit.NotWhitelisted.selector, outsider));
+        vm.expectRevert(abi.encodeWithSelector(TokenizedDeposit.NotWhitelisted.selector, outsider));
         token.mint(outsider, 100e6, "ref");
     }
 
@@ -83,19 +83,19 @@ contract MTokenizedDepositTest is TestHelper {
         token.freezeAddress(alice);
 
         vm.prank(minter);
-        vm.expectRevert(abi.encodeWithSelector(MTokenizedDeposit.AccountFrozen.selector, alice));
+        vm.expectRevert(abi.encodeWithSelector(TokenizedDeposit.AccountFrozen.selector, alice));
         token.mint(alice, 100e6, "ref");
     }
 
     function test_mint_revert_zeroAmount() public {
         vm.prank(minter);
-        vm.expectRevert(MTokenizedDeposit.ZeroAmount.selector);
+        vm.expectRevert(TokenizedDeposit.ZeroAmount.selector);
         token.mint(alice, 0, "ref");
     }
 
     function test_mint_revert_zeroAddress() public {
         vm.prank(minter);
-        vm.expectRevert(MTokenizedDeposit.ZeroAddress.selector);
+        vm.expectRevert(TokenizedDeposit.ZeroAddress.selector);
         token.mint(address(0), 100e6, "ref");
     }
 
@@ -104,7 +104,7 @@ contract MTokenizedDepositTest is TestHelper {
         vm.prank(minter);
         vm.expectRevert(
             abi.encodeWithSelector(
-                MTokenizedDeposit.ReserveBackingInsufficient.selector,
+                TokenizedDeposit.ReserveBackingInsufficient.selector,
                 INITIAL_RESERVES + 1,
                 INITIAL_RESERVES
             )
@@ -146,7 +146,7 @@ contract MTokenizedDepositTest is TestHelper {
         _mint(alice, 1000e6);
 
         vm.expectEmit(true, false, false, true, address(token));
-        emit IMTokenizedDeposit.Burn(alice, 500e6, "redeem-001");
+        emit ITokenizedDeposit.Burn(alice, 500e6, "redeem-001");
         vm.prank(burner);
         token.burn(alice, 500e6, "redeem-001");
     }
@@ -160,7 +160,7 @@ contract MTokenizedDepositTest is TestHelper {
 
     function test_burn_revert_zeroAmount() public {
         vm.prank(burner);
-        vm.expectRevert(MTokenizedDeposit.ZeroAmount.selector);
+        vm.expectRevert(TokenizedDeposit.ZeroAmount.selector);
         token.burn(alice, 0, "ref");
     }
 
@@ -193,7 +193,7 @@ contract MTokenizedDepositTest is TestHelper {
         token.removeFromWhitelist(alice);
 
         vm.prank(alice);
-        vm.expectRevert(abi.encodeWithSelector(MTokenizedDeposit.NotWhitelisted.selector, alice));
+        vm.expectRevert(abi.encodeWithSelector(TokenizedDeposit.NotWhitelisted.selector, alice));
         token.transfer(bob, 100e6);
     }
 
@@ -202,7 +202,7 @@ contract MTokenizedDepositTest is TestHelper {
         address outsider = makeAddr("outsider");
 
         vm.prank(alice);
-        vm.expectRevert(abi.encodeWithSelector(MTokenizedDeposit.NotWhitelisted.selector, outsider));
+        vm.expectRevert(abi.encodeWithSelector(TokenizedDeposit.NotWhitelisted.selector, outsider));
         token.transfer(outsider, 100e6);
     }
 
@@ -213,7 +213,7 @@ contract MTokenizedDepositTest is TestHelper {
         token.freezeAddress(alice);
 
         vm.prank(alice);
-        vm.expectRevert(abi.encodeWithSelector(MTokenizedDeposit.AccountFrozen.selector, alice));
+        vm.expectRevert(abi.encodeWithSelector(TokenizedDeposit.AccountFrozen.selector, alice));
         token.transfer(bob, 100e6);
     }
 
@@ -224,7 +224,7 @@ contract MTokenizedDepositTest is TestHelper {
         token.freezeAddress(bob);
 
         vm.prank(alice);
-        vm.expectRevert(abi.encodeWithSelector(MTokenizedDeposit.AccountFrozen.selector, bob));
+        vm.expectRevert(abi.encodeWithSelector(TokenizedDeposit.AccountFrozen.selector, bob));
         token.transfer(bob, 100e6);
     }
 
@@ -235,15 +235,15 @@ contract MTokenizedDepositTest is TestHelper {
     function test_transferWithTravelRule_success() public {
         _mint(alice, 5000e6);
 
-        IMTokenizedDeposit.TravelRuleData memory td = IMTokenizedDeposit.TravelRuleData({
+        ITokenizedDeposit.TravelRuleData memory td = ITokenizedDeposit.TravelRuleData({
             originatorHash: keccak256("Alice PII"),
             beneficiaryHash: keccak256("Bob PII"),
-            originatorInstitution: "M&T Bank",
+            originatorInstitution: "Issuing Bank",
             beneficiaryInstitution: "Cari Member Bank B"
         });
 
         vm.expectEmit(true, true, false, true, address(token));
-        emit IMTokenizedDeposit.TravelRuleTransfer(
+        emit ITokenizedDeposit.TravelRuleTransfer(
             alice, bob, 5000e6, td.originatorHash, td.beneficiaryHash
         );
 
@@ -345,7 +345,7 @@ contract MTokenizedDepositTest is TestHelper {
 
     function test_forceTransfer_revert_zeroAmount() public {
         vm.prank(compliance);
-        vm.expectRevert(MTokenizedDeposit.ZeroAmount.selector);
+        vm.expectRevert(TokenizedDeposit.ZeroAmount.selector);
         token.forceTransfer(alice, bob, 0, "reason");
     }
 
@@ -403,7 +403,7 @@ contract MTokenizedDepositTest is TestHelper {
 
     function test_setReserveOracle_revert_zeroAddress() public {
         vm.prank(admin);
-        vm.expectRevert(MTokenizedDeposit.ZeroAddress.selector);
+        vm.expectRevert(TokenizedDeposit.ZeroAddress.selector);
         token.setReserveOracle(address(0));
     }
 
@@ -464,7 +464,7 @@ contract MTokenizedDepositTest is TestHelper {
         bytes32 settlementId = keccak256("settle-return-1");
         
         vm.expectEmit(true, true, false, true, address(token));
-        emit IMTokenizedDeposit.SettlementReturn(alice, 500e6, settlementId);
+        emit ITokenizedDeposit.SettlementReturn(alice, 500e6, settlementId);
         
         vm.prank(address(settlement));
         token.settlementReturn(alice, 500e6, settlementId);
@@ -510,13 +510,13 @@ contract MTokenizedDepositTest is TestHelper {
 
     function test_settlementReturn_rejectsZeroAddress() public {
         vm.prank(address(settlement));
-        vm.expectRevert(MTokenizedDeposit.ZeroAddress.selector);
+        vm.expectRevert(TokenizedDeposit.ZeroAddress.selector);
         token.settlementReturn(address(0), 100e6, keccak256("bad"));
     }
 
     function test_settlementReturn_rejectsZeroAmount() public {
         vm.prank(address(settlement));
-        vm.expectRevert(MTokenizedDeposit.ZeroAmount.selector);
+        vm.expectRevert(TokenizedDeposit.ZeroAmount.selector);
         token.settlementReturn(alice, 0, keccak256("bad"));
     }
 
@@ -537,7 +537,7 @@ contract MTokenizedDepositTest is TestHelper {
         address newOperator = makeAddr("newOperator");
         
         vm.expectEmit(true, true, false, false, address(token));
-        emit IMTokenizedDeposit.OperatorUpdated(address(0), newOperator);
+        emit ITokenizedDeposit.OperatorUpdated(address(0), newOperator);
         
         vm.prank(admin);
         token.setOperator(newOperator);
@@ -598,7 +598,7 @@ contract MTokenizedDepositTest is TestHelper {
 
     function test_setOperator_rejectsZeroAddress() public {
         vm.prank(admin);
-        vm.expectRevert(MTokenizedDeposit.ZeroAddress.selector);
+        vm.expectRevert(TokenizedDeposit.ZeroAddress.selector);
         token.setOperator(address(0));
     }
 

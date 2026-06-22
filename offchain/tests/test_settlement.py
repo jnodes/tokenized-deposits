@@ -38,7 +38,7 @@ class TestSettlementEndpoint:
                 "amount_usd": 50000.0,
                 "originator_name": "John Doe",
                 "beneficiary_name": "Jane Smith",
-                "originator_institution": "M&T Bank",
+                "originator_institution": "the Issuing Bank",
                 "beneficiary_institution": "JPMorgan Chase",
             },
         )
@@ -63,7 +63,7 @@ class TestSettlementEndpoint:
                 "amount_usd": 1500.0,
                 "originator_name": "Alice",
                 "beneficiary_name": "Bob",
-                "originator_institution": "M&T Bank",
+                "originator_institution": "the Issuing Bank",
                 "beneficiary_institution": "Wells Fargo",
             },
         )

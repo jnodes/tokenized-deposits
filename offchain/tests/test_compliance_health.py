@@ -63,7 +63,7 @@ class TestComplianceService:
         svc = ComplianceService()
         orig_hash, benef_hash, combined = await svc.compute_travel_rule_hash(
             originator_name="John Doe",
-            originator_institution="M&T Bank",
+            originator_institution="the Issuing Bank",
             beneficiary_name="Jane Smith",
             beneficiary_institution="JPMorgan Chase",
         )
@@ -73,7 +73,7 @@ class TestComplianceService:
         # Deterministic
         _, _, combined2 = await svc.compute_travel_rule_hash(
             originator_name="John Doe",
-            originator_institution="M&T Bank",
+            originator_institution="the Issuing Bank",
             beneficiary_name="Jane Smith",
             beneficiary_institution="JPMorgan Chase",
         )

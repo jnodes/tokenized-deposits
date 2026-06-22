@@ -1,6 +1,6 @@
 """
 Security Audit Tests - API Security and Compliance
-M&T Bank | Cari Network | ZKsync Prividium
+the Issuing Bank | Cari Network | ZKsync Prividium
 
 Tests for:
 - API parameter tampering
@@ -177,7 +177,7 @@ class TestPIIHandling:
         
         orig_hash, benef_hash, combined = await svc.compute_travel_rule_hash(
             originator_name="John Doe",
-            originator_institution="M&T Bank",
+            originator_institution="the Issuing Bank",
             beneficiary_name="Jane Smith",
             beneficiary_institution="JPMorgan Chase",
         )
@@ -188,7 +188,7 @@ class TestPIIHandling:
         assert len(combined) == 32
         
         # Verify hashes are not plaintext
-        assert orig_hash != b"John Doe|M&T Bank"
+        assert orig_hash != b"John Doe|the Issuing Bank"
         assert benef_hash != b"Jane Smith|JPMorgan Chase"
 
     @pytest.mark.asyncio
@@ -200,14 +200,14 @@ class TestPIIHandling:
         # Same input should produce same hash
         hash1 = await svc.compute_travel_rule_hash(
             originator_name="John Doe",
-            originator_institution="M&T Bank",
+            originator_institution="the Issuing Bank",
             beneficiary_name="Jane Smith",
             beneficiary_institution="JPMorgan Chase",
         )
         
         hash2 = await svc.compute_travel_rule_hash(
             originator_name="John Doe",
-            originator_institution="M&T Bank",
+            originator_institution="the Issuing Bank",
             beneficiary_name="Jane Smith",
             beneficiary_institution="JPMorgan Chase",
         )
@@ -222,14 +222,14 @@ class TestPIIHandling:
         
         hash1 = await svc.compute_travel_rule_hash(
             originator_name="John Doe",
-            originator_institution="M&T Bank",
+            originator_institution="the Issuing Bank",
             beneficiary_name="Jane Smith",
             beneficiary_institution="JPMorgan Chase",
         )
         
         hash2 = await svc.compute_travel_rule_hash(
             originator_name="John Smith",  # Different name
-            originator_institution="M&T Bank",
+            originator_institution="the Issuing Bank",
             beneficiary_name="Jane Smith",
             beneficiary_institution="JPMorgan Chase",
         )

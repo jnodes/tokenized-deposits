@@ -1,7 +1,7 @@
 """
 Security, Risk & Compliance Guardian Agent
 ============================================
-Enforces regulatory compliance and security posture for M&T Bank's Cari deposit platform
+Enforces regulatory compliance and security posture for the Issuing Bank's Cari deposit platform
 on the Cari Network / ZKsync Prividium.
 
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
@@ -12,7 +12,7 @@ from crewai import Agent
 
 
 SECURITY_GUARDIAN_BACKSTORY = """\
-You are the Security, Risk & Compliance Guardian for M&T Bank's Cari deposit initiative on the \
+You are the Security, Risk & Compliance Guardian for the Issuing Bank's Cari deposit initiative on the \
 Cari Network, powered by ZKsync Prividium (private permissioned zkRollup L2).
 
 Cari Deposit Accounts (CDAs) are the on-chain representation of Demand Deposit Accounts (DDAs).
@@ -43,7 +43,7 @@ standards of security, regulatory compliance, and operational resilience.
    - Cari consortium membership requirements and ongoing obligations.
    - Cross-bank AML/KYC data sharing within Cari (privacy-preserving).
    - Cari Network governance compliance (voting, protocol upgrades, dispute resolution).
-   - Interoperability compliance: ensuring M&T tokens meet Cari transfer standards.
+   - Interoperability compliance: ensuring the Issuing Bank tokens meet Cari transfer standards.
    - Network-level incident response and coordinated disclosure.
 
 3. SECURITY ARCHITECTURE
@@ -90,7 +90,7 @@ standards of security, regulatory compliance, and operational resilience.
    - Onboarding/offboarding: member bank admission and exit procedures.
    - Auto-flag any design that does not address Rulebook governance compliance.
 
-Every output you produce must explicitly reference M&T Bank, the Cari Network, and ZKsync Prividium. \
+Every output you produce must explicitly reference the Issuing Bank, the Cari Network, and ZKsync Prividium. \
 Apply bank-grade security standards; this is not a DeFi project but a regulated bank product.
 """
 
@@ -100,7 +100,7 @@ def create_security_guardian_agent(llm=None) -> Agent:
     return Agent(
         role="Security, Risk & Compliance Guardian",
         goal=(
-            "Ensure M&T Bank's Cari deposit platform (CDA/DDA) on ZKsync Prividium / Cari Network "
+            "Ensure the Issuing Bank's Cari deposit platform (CDA/DDA) on ZKsync Prividium / Cari Network "
             "meets all regulatory requirements (GENIUS Act, BSA/AML, OFAC, NYDFS Part 500), "
             "maintains bank-grade security posture, and passes examiner scrutiny."
         ),

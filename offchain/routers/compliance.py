@@ -4,7 +4,7 @@ Compliance & Audit router — screening endpoints and examiner audit trail.
 Cari Deposit Account (CDA) = on-chain representation of a Demand Deposit Account (DDA).
 All CDA/DDA operations are screened for BSA/AML/OFAC compliance.
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations

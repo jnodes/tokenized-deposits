@@ -1,9 +1,9 @@
-# M&T Bank — Cari Deposit Account (CDA) Platform
+# the Issuing Bank — Cari Deposit Account (CDA) Platform
 # Architecture Review Board (ARB) Submission Package
 
 ## Executive Summary
 
-**Program**: M&T Bank CDA Platform on Cari Network (ZKsync Prividium)
+**Program**: the Issuing Bank CDA Platform on Cari Network (ZKsync Prividium)
 **Prepared by**: StableArch Council — Security Guardian Layer
 **Classification**: CONFIDENTIAL — Board & Examiner Use Only
 
@@ -11,18 +11,18 @@
 
 ### Platform Overview
 
-M&T Bank proposes to issue permissioned Cari Deposit Accounts (CDA) on ZKsync Prividium (a privacy-preserving ZK-rollup on Ethereum) as part of the Cari Network consortium. The platform implements a dual-rail architecture with the Operator controlling CDA supply and the Settlement Bank executing daily net settlement. The platform enables:
+the Issuing Bank proposes to issue permissioned Cari Deposit Accounts (CDA) on ZKsync Prividium (a privacy-preserving ZK-rollup on Ethereum) as part of the Cari Network consortium. The platform implements a dual-rail architecture with the Operator controlling CDA supply and the Settlement Bank executing daily net settlement. The platform enables:
 
-1. **Cari Deposit Accounts (CDA)**: ERC-20 tokens representing USD deposits held 1:1 at M&T Bank
+1. **Cari Deposit Accounts (CDA)**: ERC-20 tokens representing USD deposits held 1:1 at the Issuing Bank
 2. **Demand Deposit Accounts (DDA)**: Off-chain fiat accounts that operate in parallel with CDA (dual-rail) via Hogan mainframe
-3. **Operator Role**: M&T Bank as centralized CDA supply controller (mint/burn operations)
+3. **Operator Role**: the Issuing Bank as centralized CDA supply controller (mint/burn operations)
 4. **Settlement Bank**: Aggregates and nets daily inter-bank CDA transfers
 5. **Messaging Bridge**: Cross-bank CDA transfer communication layer
 6. **Par Redemption**: Instant redemption at face value via multiple DDA payment rails (ACH, Fedwire, RTP/FedNow via Hogan)
 7. **Cross-Bank Settlement**: Daily net settlement between Cari Network member banks
 8. **Regulatory Compliance**: Full GENIUS Act, BSA/AML, OFAC, NYDFS Part 500, and Cari Rulebook compliance
 
-### M&T Bank Technology Stack
+### the Issuing Bank Technology Stack
 
 | Component | Technology | Purpose |
 |-----------|------------|---------|
@@ -30,7 +30,7 @@ M&T Bank proposes to issue permissioned Cari Deposit Accounts (CDA) on ZKsync Pr
 | **Middleware** | IBM Z Data Integration Hub (DIH) | JSON/REST to COBOL copybook translation |
 | **Event Bus** | Kafka (Confluent Platform, KRaft mode) | Real-time event streaming |
 | **Compute** | Azure AKS | Kubernetes orchestration |
-| **Container Registry** | Azure ACR (mtbcari.azurecr.io) | Docker image storage |
+| **Container Registry** | Azure ACR (cari-platform.azurecr.io) | Docker image storage |
 | **Key Management** | Azure Managed HSM | FIPS 140-2 L3 key storage |
 | **GL Format** | Post-2025 GL (ISO 20022 aligned) | Hogan GL subsystem |
 | **Payment Rails** | ACH, Fedwire, RTP/FedNow | Via Hogan payment processing |
@@ -39,7 +39,7 @@ M&T Bank proposes to issue permissioned Cari Deposit Accounts (CDA) on ZKsync Pr
 
 | Layer | Component | Technology | Status |
 |---|---|---|---|
-| On-Chain | MTokenizedDeposit (CDA) | Solidity 0.8.26, UUPS Upgradeable | 104/104 tests passing |
+| On-Chain | TokenizedDeposit (CDA) | Solidity 0.8.26, UUPS Upgradeable | 104/104 tests passing |
 | On-Chain | ReserveOracle | Solidity 0.8.26, 1:1 CDA/DDA backing enforcement | Fuzz + invariant tested |
 | On-Chain | CariSettlement | Solidity 0.8.26, cross-bank CDA settlement | Travel Rule integrated |
 | On-Chain | Operator Role | CDA supply control (mint/burn) | OPERATOR_ROLE implemented |
@@ -62,7 +62,7 @@ M&T Bank proposes to issue permissioned Cari Deposit Accounts (CDA) on ZKsync Pr
 | Section | Requirement | Implementation | Control ID |
 |---|---|---|---|
 | S4 | 1:1 Reserve Backing | ReserveOracle.canMint() pre-check + ReserveMonitorService | CTRL-GENIUS-S4 |
-| S5 | Par Redemption | MTokenizedDeposit.burn() CDA at 1:1 with DDA fiat payout | CTRL-GENIUS-S5 |
+| S5 | Par Redemption | TokenizedDeposit.burn() CDA at 1:1 with DDA fiat payout | CTRL-GENIUS-S5 |
 | S6 | Monthly Attestation | Oracle staleness check (24h), ReserveProofEngine | CTRL-GENIUS-S6 |
 | S7 | Public Disclosure | Examiner dashboard + CDA/DDA reserve composition breakdown | CTRL-GENIUS-S7 |
 | S8 | Interoperability | CariSettlement cross-bank CDA burn/mint protocol via Settlement Bank | CTRL-GENIUS-S8 |
@@ -88,7 +88,7 @@ M&T Bank proposes to issue permissioned Cari Deposit Accounts (CDA) on ZKsync Pr
 | CTR Detection | $10,000 threshold auto-detection | AMLScreeningEngine |
 | SAR Patterns | Structuring, velocity anomaly detection | AMLScreeningEngine |
 | FinCEN Travel Rule | $3,000 threshold, Notabene VASP notification | TravelRuleEngine |
-| KYC/CDD | On-chain CDA whitelist + compliance role | MTokenizedDeposit |
+| KYC/CDD | On-chain CDA whitelist + compliance role | TokenizedDeposit |
 
 ---
 
@@ -166,7 +166,7 @@ M&T Bank proposes to issue permissioned Cari Deposit Accounts (CDA) on ZKsync Pr
 
 ## Recommendation
 
-The StableArch Council recommends **CONDITIONAL APPROVAL** of the M&T Bank CDA Platform for production deployment, subject to:
+The StableArch Council recommends **CONDITIONAL APPROVAL** of the the Issuing Bank CDA Platform for production deployment, subject to:
 
 1. **Pre-Production**: Complete external smart contract audit (Trail of Bits / OpenZeppelin)
 2. **Pre-Production**: HSM hardware provisioning and key ceremony
@@ -178,4 +178,4 @@ The StableArch Council recommends **CONDITIONAL APPROVAL** of the M&T Bank CDA P
 ---
 
 *Generated by StableArch Council — Security Guardian Layer*
-*M&T Bank | Cari Network CDA Platform | ZKsync Prividium*
+*the Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*

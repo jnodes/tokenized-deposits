@@ -1,6 +1,6 @@
 # Security Audit Report
 
-**M&T Bank Tokenized Deposit Platform | Cari Network | ZKsync Prividium**
+**the Issuing Bank Tokenized Deposit Platform | Cari Network | ZKsync Prividium**
 
 **Audit Date:** March 2026  
 **Audit Type:** Comprehensive Security, Compliance, and Ethereum Protocol Audit  
@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-This audit covered the M&T Bank tokenized deposit platform on the Cari Network (ZKsync Prividium). The platform enables 1:1 USD-backed tokenized deposits with full regulatory compliance (GENIUS Act, NYDFS Part 500, BSA/AML/OFAC).
+This audit covered the the Issuing Bank tokenized deposit platform on the Cari Network (ZKsync Prividium). The platform enables 1:1 USD-backed tokenized deposits with full regulatory compliance (GENIUS Act, NYDFS Part 500, BSA/AML/OFAC).
 
 ### Overall Assessment: **PASS WITH FINDINGS**
 
@@ -29,7 +29,7 @@ This audit covered the M&T Bank tokenized deposit platform on the Cari Network (
 
 | Test Suite | Tests | Passed | Failed |
 |------------|-------|--------|--------|
-| MTokenizedDepositTest | 50 | 50 | 0 |
+| TokenizedDepositTest | 50 | 50 | 0 |
 | CariSettlementTest | 25 | 25 | 0 |
 | ReserveOracleTest | 20 | 20 | 0 |
 | SecurityAuditTest | 25 | 25 | 0 |
@@ -56,7 +56,7 @@ This audit covered the M&T Bank tokenized deposit platform on the Cari Network (
 
 #### FINDING-001: Settlement Expiry Can Fail Due to Reserve Check
 **Category:** Smart Contract  
-**File:** `contracts/MTokenizedDeposit.sol:304-316`  
+**File:** `contracts/TokenizedDeposit.sol:304-316`  
 **Status:** ACKNOWLEDGED (Design Decision)
 
 **Description:**
@@ -257,7 +257,7 @@ No critical or high-severity patches were required. The codebase was found to be
 | Regulation | Status | Evidence |
 |------------|--------|----------|
 | GENIUS Act S4 (1:1 Reserve) | COMPLIANT | ReserveOracle.canMint() |
-| GENIUS Act S5 (Par Redemption) | COMPLIANT | MTokenizedDeposit.burn() |
+| GENIUS Act S5 (Par Redemption) | COMPLIANT | TokenizedDeposit.burn() |
 | GENIUS Act S6 (Monthly Attestation) | COMPLIANT | Oracle staleness check |
 | GENIUS Act S7 (Public Disclosure) | COMPLIANT | Examiner dashboard |
 | GENIUS Act S8 (Interoperability) | COMPLIANT | CariSettlement cross-bank |
@@ -270,7 +270,7 @@ No critical or high-severity patches were required. The codebase was found to be
 
 ## Conclusion
 
-The M&T Bank tokenized deposit platform demonstrates strong security architecture with:
+The the Issuing Bank tokenized deposit platform demonstrates strong security architecture with:
 
 - **Comprehensive access control** with role separation
 - **Regulatory compliance** with GENIUS Act, NYDFS, and FinCEN requirements
@@ -284,5 +284,5 @@ The identified findings are medium/low severity and represent design trade-offs 
 
 ---
 
-*This report is confidential and intended for M&T Bank security review.*
+*This report is confidential and intended for the Issuing Bank security review.*
 *Audit conducted: March 2026*

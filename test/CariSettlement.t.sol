@@ -7,7 +7,7 @@ import "../contracts/interfaces/ICariSettlement.sol";
 /**
  * @title CariSettlementTest
  * @notice Unit tests for the Cari Network cross-bank settlement contract.
- *         M&T Bank | Cari Network | ZKsync Prividium.
+ *         Cari Network | ZKsync Prividium.
  */
 contract CariSettlementTest is TestHelper {
     bytes32 constant TRAVEL_HASH = keccak256("travel-rule-data");

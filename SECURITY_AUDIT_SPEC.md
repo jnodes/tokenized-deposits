@@ -1,6 +1,6 @@
 # Security Audit Specification
 
-**M&T Bank Tokenized Deposit Platform | Cari Network | ZKsync Prividium**
+**the Issuing Bank Tokenized Deposit Platform | Cari Network | ZKsync Prividium**
 
 **Audit Date:** March 2026  
 **Audit Scope:** Smart Contracts, Off-Chain APIs, Security Controls, Regulatory Compliance
@@ -9,7 +9,7 @@
 
 ## 1. Executive Summary
 
-This specification documents the security audit scope for M&T Bank's tokenized deposit platform. The platform enables 1:1 USD-backed tokenized deposits on the Cari Network (ZKsync Prividium private permissioned zkRollup L2).
+This specification documents the security audit scope for the Issuing Bank's tokenized deposit platform. The platform enables 1:1 USD-backed tokenized deposits on the Cari Network (ZKsync Prividium private permissioned zkRollup L2).
 
 ### 1.1 Platform Architecture
 
@@ -61,8 +61,8 @@ This specification documents the security audit scope for M&T Bank's tokenized d
 
 | Contract | Path | Lines | Purpose | Security Features |
 |----------|------|-------|---------|-------------------|
-| MTokenizedDeposit | `contracts/MTokenizedDeposit.sol` | 434 | Main ERC-20 tokenized deposit | UUPS, AccessControl, Pausable, ReentrancyGuard |
-| MTBankTokenizedDeposit | `contracts/MTBankTokenizedDeposit.sol` | 182 | Simplified token (legacy) | UUPS, AccessControl, Pausable |
+| TokenizedDeposit | `contracts/TokenizedDeposit.sol` | 434 | Main ERC-20 tokenized deposit | UUPS, AccessControl, Pausable, ReentrancyGuard |
+| TokenizedDeposit | `contracts/TokenizedDeposit.sol` | 182 | Simplified token (legacy) | UUPS, AccessControl, Pausable |
 | CariSettlement | `contracts/CariSettlement.sol` | 293 | Cross-bank settlement | UUPS, AccessControl, Pausable, ReentrancyGuard |
 | ReserveOracle | `contracts/ReserveOracle.sol` | 165 | 1:1 reserve attestation | UUPS, AccessControl, Pausable |
 | CariComplianceOracle | `contracts/CariComplianceOracle.sol` | 123 | KYC/AML status oracle | UUPS, AccessControl |
@@ -115,7 +115,7 @@ Client Request → Compliance Screen → Core Banking Verify → Reserve Check �
 6. HSM-backed signing for on-chain transaction
 
 **Files:**
-- `contracts/MTokenizedDeposit.sol:165-180` (mint function)
+- `contracts/TokenizedDeposit.sol:165-180` (mint function)
 - `offchain/routers/transactions.py:42-173` (API endpoint)
 
 ### 3.2 Burn Flow (Redemption)
@@ -132,7 +132,7 @@ Client Request → Compliance Screen → On-Chain Burn → GL Entry → Fiat Pay
 5. Fiat payout via ACH/Fedwire/RTP
 
 **Files:**
-- `contracts/MTokenizedDeposit.sol:189-197` (burn function)
+- `contracts/TokenizedDeposit.sol:189-197` (burn function)
 - `offchain/routers/transactions.py:176-285` (API endpoint)
 
 ### 3.3 Transfer Flow
@@ -148,8 +148,8 @@ Transfer Request → Whitelist Check → Freeze Check → On-Chain Transfer → 
 4. PII hashed before on-chain storage
 
 **Files:**
-- `contracts/MTokenizedDeposit.sol:394-412` (_update override)
-- `contracts/MTokenizedDeposit.sol:214-228` (transferWithTravelRule)
+- `contracts/TokenizedDeposit.sol:394-412` (_update override)
+- `contracts/TokenizedDeposit.sol:214-228` (transferWithTravelRule)
 
 ### 3.4 Settlement Flow (Cross-Bank)
 
@@ -176,7 +176,7 @@ Initiate → Burn at Source → Validator Verification → Mint at Destination
 | Section | Requirement | Implementation | Control ID |
 |---------|-------------|----------------|------------|
 | S4 | 1:1 Reserve Backing | ReserveOracle.canMint() | CTRL-GENIUS-S4 |
-| S5 | Par Redemption | MTokenizedDeposit.burn() at 1:1 | CTRL-GENIUS-S5 |
+| S5 | Par Redemption | TokenizedDeposit.burn() at 1:1 | CTRL-GENIUS-S5 |
 | S6 | Monthly Attestation | Oracle staleness (24h), ReserveProofEngine | CTRL-GENIUS-S6 |
 | S7 | Public Disclosure | Examiner dashboard | CTRL-GENIUS-S7 |
 | S8 | Interoperability | CariSettlement cross-bank protocol | CTRL-GENIUS-S8 |
@@ -228,12 +228,12 @@ Initiate → Burn at Source → Validator Verification → Mint at Destination
 **Pattern:** `nonReentrant` modifier from OpenZeppelin ReentrancyGuard
 
 **Protected Functions:**
-- `MTokenizedDeposit.mint()` (L169)
-- `MTokenizedDeposit.burn()` (L193)
-- `MTokenizedDeposit.transferWithTravelRule()` (L218)
-- `MTokenizedDeposit.forceTransfer()` (L283)
-- `MTokenizedDeposit.settlementMint()` (L308)
-- `MTokenizedDeposit.settlementBurn()` (L329)
+- `TokenizedDeposit.mint()` (L169)
+- `TokenizedDeposit.burn()` (L193)
+- `TokenizedDeposit.transferWithTravelRule()` (L218)
+- `TokenizedDeposit.forceTransfer()` (L283)
+- `TokenizedDeposit.settlementMint()` (L308)
+- `TokenizedDeposit.settlementBurn()` (L329)
 - `CariSettlement.initiateSettlement()` (L158)
 - `CariSettlement.executeSettlement()` (L199)
 - `CariSettlement.revertSettlement()` (L222)
@@ -247,12 +247,12 @@ Initiate → Burn at Source → Validator Verification → Mint at Destination
 | Role | Contract | Purpose |
 |------|----------|---------|
 | DEFAULT_ADMIN_ROLE | All | Role management |
-| MINTER_ROLE | MTokenizedDeposit | Mint tokens |
-| BURNER_ROLE | MTokenizedDeposit | Burn tokens |
-| COMPLIANCE_ROLE | MTokenizedDeposit | Whitelist/freeze/force-transfer |
+| MINTER_ROLE | TokenizedDeposit | Mint tokens |
+| BURNER_ROLE | TokenizedDeposit | Burn tokens |
+| COMPLIANCE_ROLE | TokenizedDeposit | Whitelist/freeze/force-transfer |
 | UPGRADER_ROLE | All UUPS | Authorize upgrades |
 | PAUSER_ROLE | All Pausable | Emergency pause |
-| SETTLEMENT_ROLE | MTokenizedDeposit | Settlement callbacks |
+| SETTLEMENT_ROLE | TokenizedDeposit | Settlement callbacks |
 | ATTESTOR_ROLE | ReserveOracle | Update attestations |
 | SETTLEMENT_OPERATOR_ROLE | CariSettlement | Execute/revert settlements |
 | INITIATOR_ROLE | CariSettlement | Initiate settlements |

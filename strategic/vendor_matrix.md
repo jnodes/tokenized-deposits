@@ -1,6 +1,6 @@
 # Vendor Evaluation Matrix
 
-**M&T Bank | Cari Network Tokenized Deposit Platform**
+**the Issuing Bank | Cari Network Tokenized Deposit Platform**
 **Prepared for:** Architecture Review Board & Procurement
 **Classification:** CONFIDENTIAL -- Internal Use Only
 
@@ -17,7 +17,7 @@ All vendors scored on a weighted 1-5 scale across six dimensions:
 | Technical Capability | 20% | Feature completeness, API quality, integration effort |
 | Cari Network Compatibility | 15% | ZKsync Prividium support, permissioned chain readiness |
 | Cost Efficiency | 10% | TCO over 3-year horizon (pilot + production) |
-| Strategic Alignment | 10% | M&T roadmap fit, vendor stability, ecosystem presence |
+| Strategic Alignment | 10% | the Issuing Bank roadmap fit, vendor stability, ecosystem presence |
 
 **Scoring:** 5 = Best-in-class | 4 = Strong | 3 = Adequate | 2 = Gaps | 1 = Not recommended
 
@@ -34,7 +34,7 @@ All vendors scored on a weighted 1-5 scale across six dimensions:
 | Technical Capability | 5 | zkRollup with EVM equivalence; Solidity/Foundry compatible |
 | Cari Network Compatibility | 5 | **Native Cari Network infrastructure** -- no integration needed |
 | Cost Efficiency | 4 | Gas costs amortized via L2 batching; ~$0.02/tx at scale |
-| Strategic Alignment | 5 | M&T founding partner commitment; Matt McAfee public endorsement |
+| Strategic Alignment | 5 | the Issuing Bank founding partner commitment; the Head of Digital Assets public endorsement |
 | **Weighted Score** | **4.75** | **SELECTED** |
 
 ### Alternatives Evaluated
@@ -94,7 +94,7 @@ All vendors scored on a weighted 1-5 scale across six dimensions:
 | Technical Capability | 5 | Real-time API screening; batch mode; risk scoring; attribution DB |
 | Cari Network Compatibility | 4 | EVM chain support; Prividium requires custom chain config |
 | Cost Efficiency | 3 | Premium pricing; per-address/per-tx model at volume |
-| Strategic Alignment | 5 | M&T existing relationship; regulatory examiner familiarity |
+| Strategic Alignment | 5 | the Issuing Bank existing relationship; regulatory examiner familiarity |
 | **Weighted Score** | **4.55** | **RECOMMENDED** |
 
 ### Notabene (Recommended -- Travel Rule)
@@ -178,10 +178,10 @@ All vendors scored on a weighted 1-5 scale across six dimensions:
 ## 7. Procurement Next Steps
 
 1. **Fireblocks** -- Initiate enterprise POC agreement; request Prividium custom network configuration
-2. **Chainalysis** -- Extend existing M&T relationship to cover Cari Network address monitoring
+2. **Chainalysis** -- Extend existing the Issuing Bank relationship to cover Cari Network address monitoring
 3. **Notabene** -- Execute pilot agreement for Travel Rule compliance on permissioned transfers
 4. **Chronicle Protocol** -- Technical evaluation for on-chain reserve attestation integration
-5. **Legal Review** -- All vendor contracts through M&T Legal for data residency, liability, and regulatory examination access clauses
+5. **Legal Review** -- All vendor contracts through the Issuing Bank Legal for data residency, liability, and regulatory examination access clauses
 
 ---
 

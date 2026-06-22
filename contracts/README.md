@@ -1,12 +1,12 @@
-# M&T Bank Tokenized Deposit Smart Contracts
+# Tokenized Deposit Smart Contracts
 
-Production-ready smart contracts for **M&T Bank's tokenized deposit platform** on **ZKsync Prividium** (Cari Network).
+Production-ready smart contracts for a **tokenized deposit platform** on **ZKsync Prividium** (Cari Network).
 
 ## Contracts
 
 | Contract | Description | Proxy |
 |----------|-------------|-------|
-| **MTokenizedDeposit** | Permissioned ERC-20 tokenized deposit (mtUSD). FDIC-insured bank liability, 1:1 reserve backed. | UUPS |
+| **TokenizedDeposit** | Permissioned ERC-20 tokenized deposit (cUSD). FDIC-insured bank liability, 1:1 reserve backed. | UUPS |
 | **ReserveOracle** | 1:1 reserve backing attestation oracle (GENIUS Act Section 4). Chainlink/Prividium-native hook. | UUPS |
 | **CariSettlement** | Cross-bank settlement for Cari Network inter-bank transfers. Burn-at-source / mint-at-destination. | UUPS |
 | **CariComplianceOracle** | On-chain KYC/AML/OFAC compliance registry (legacy, retained for compatibility). | UUPS |
@@ -17,16 +17,16 @@ Production-ready smart contracts for **M&T Bank's tokenized deposit platform** o
 |-----------|---------|
 | `IReserveOracle` | Standard interface for reserve attestation oracles |
 | `ICariSettlement` | Standard settlement interface for Cari cross-bank flows |
-| `IMTokenizedDeposit` | Token interface with Travel Rule, compliance, and settlement callbacks |
+| `ITokenizedDeposit` | Token interface with Travel Rule, compliance, and settlement callbacks |
 
 ## Architecture
 
 ### Role-Based Access Control (RBAC)
 
 ```
-DEFAULT_ADMIN_ROLE  (M&T Timelock/multi-sig)
-  ├── MINTER_ROLE         (HSM-backed, M&T treasury ops)
-  ├── BURNER_ROLE         (HSM-backed, M&T redemption service)
+DEFAULT_ADMIN_ROLE  (Consortium Timelock/multi-sig)
+  ├── MINTER_ROLE         (HSM-backed, treasury ops)
+  ├── BURNER_ROLE         (HSM-backed, redemption service)
   ├── COMPLIANCE_ROLE     (Compliance officer - whitelist/freeze/forceTransfer)
   ├── UPGRADER_ROLE       (Timelock-gated contract upgrades)
   ├── PAUSER_ROLE         (Emergency circuit breaker)
@@ -55,8 +55,8 @@ forge build
 # Run all tests (unit + fuzz + invariant)
 forge test
 
-# Run only MTokenizedDeposit tests
-forge test --match-contract MTokenizedDepositTest
+# Run only TokenizedDeposit tests
+forge test --match-contract TokenizedDepositTest
 
 # Run with verbose output
 forge test -vvvv
@@ -86,7 +86,7 @@ forge script deploy/DeployAll.s.sol:DeployAll \
     --broadcast --verify -vvvv
 ```
 
-### Post-Deployment (via M&T multi-sig)
+### Post-Deployment (via consortium multi-sig)
 
 1. `token.setCariSettlement(settlementAddress)`
 2. `token.grantRole(MINTER_ROLE, minterHSMAddress)`
@@ -103,7 +103,7 @@ forge script deploy/DeployAll.s.sol:DeployAll \
 
 | Suite | Tests | Type |
 |-------|-------|------|
-| MTokenizedDepositTest | 50 | Unit |
+| TokenizedDepositTest | 50 | Unit |
 | ReserveOracleTest | 20 | Unit |
 | CariSettlementTest | 25 | Unit |
 | FuzzTest | 7 | Fuzz (1024 runs each) |
@@ -122,7 +122,7 @@ forge script deploy/DeployAll.s.sol:DeployAll \
 
 ### Cross-Bank Settlement Flow
 
-1. **Source bank** (M&T) calls `settlement.initiateSettlement()` -- burns tokens from originator
+1. **Source bank** calls `settlement.initiateSettlement()` -- burns tokens from originator
 2. **Cari validators** verify the burn event and Travel Rule data
 3. **Settlement operator** calls `settlement.executeSettlement()` -- mints tokens to beneficiary
 4. On failure: `settlement.revertSettlement()` re-mints to originator

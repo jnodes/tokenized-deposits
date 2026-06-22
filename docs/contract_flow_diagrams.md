@@ -7,9 +7,9 @@ sequenceDiagram
     participant Depositor
     participant ZDIH as IBM Z DIH - MQ/REST Gateway
     participant Hogan as Hogan Mainframe - IBM Z - CIF/DDA
-    participant Operator as Operator - M&T Supply Controller
+    participant Operator as Operator - the Issuing Bank Supply Controller
     participant Oracle as ReserveOracle
-    participant Token as MTokenizedDeposit - CDA on Prividium
+    participant Token as TokenizedDeposit - CDA on Prividium
 
     Depositor->>Hogan: Deposit USD to DDA (ACH/Fedwire/RTP/FedNow)
     Hogan->>Hogan: Credit DDA (CIF account), allocate to reserves
@@ -41,9 +41,9 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant Holder
-    participant API as M&T API Gateway
-    participant Operator as Operator - M&T Supply Controller
-    participant Token as MTokenizedDeposit - CDA
+    participant API as the Issuing Bank API Gateway
+    participant Operator as Operator - the Issuing Bank Supply Controller
+    participant Token as TokenizedDeposit - CDA
     participant ZDIH as IBM Z DIH - MQ/REST Gateway
     participant Hogan as Hogan Mainframe - IBM Z - CIF/DDA
 
@@ -68,9 +68,9 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant Sender
-    participant App as M&T Digital App
+    participant App as the Issuing Bank Digital App
     participant Notabene as Travel Rule Service - Notabene
-    participant Token as MTokenizedDeposit - CDA
+    participant Token as TokenizedDeposit - CDA
 
     Sender->>App: CDA Transfer request (to, $5,000)
     App->>App: Amount >= $3,000 threshold
@@ -90,9 +90,9 @@ sequenceDiagram
 
 ```mermaid
 sequenceDiagram
-    participant Originator as Originator - M&T Bank
+    participant Originator as Originator - the Issuing Bank
     participant Settlement as CariSettlement
-    participant Token as MTokenizedDeposit - M&T CDA instance
+    participant Token as TokenizedDeposit - the Issuing Bank CDA instance
     participant Bridge as Messaging Bridge - Cross-Bank Comms
     participant SBank as Settlement Bank
     participant DestBank as Destination Bank - Cari Member
@@ -188,8 +188,8 @@ sequenceDiagram
 sequenceDiagram
     participant OFAC as OFAC/Court Order
     participant Compliance as Compliance Officer
-    participant Token as MTokenizedDeposit - CDA
-    participant Escrow as M&T Escrow Account
+    participant Token as TokenizedDeposit - CDA
+    participant Escrow as the Issuing Bank Escrow Account
 
     OFAC->>Compliance: Seizure order for address X
     Compliance->>Token: freezeAddress(X)

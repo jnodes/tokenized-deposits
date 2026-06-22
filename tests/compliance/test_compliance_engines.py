@@ -108,7 +108,7 @@ class TestTravelRuleEngine:
             amount_usd=5_000.0,
             originator=OriginatorInfo(
                 full_name="John Doe",
-                institution_name="M&T Bank",
+                institution_name="the Issuing Bank",
                 wallet_address="0xORIG",
             ),
             beneficiary=BeneficiaryInfo(

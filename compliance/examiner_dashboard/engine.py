@@ -12,7 +12,7 @@ Implements:
 - Risk register export
 - NYDFS Part 500 Section 500.04 CISO reporting
 
-M&T Bank | Cari Network | ZKsync Prividium.
+the Issuing Bank | Cari Network | ZKsync Prividium.
 """
 
 from __future__ import annotations

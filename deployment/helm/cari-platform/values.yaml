@@ -27,14 +27,14 @@ ingress:
     # nginx.ingress.kubernetes.io/rate-limit: "100"
     # nginx.ingress.kubernetes.io/ssl-redirect: "true"
   hosts:
-    - host: cari-api.internal.mtbank.com
+    - host: cari-api.internal.cari-platform.com
       paths:
         - path: /
           pathType: Prefix
   tls:
     - secretName: cari-api-tls
       hosts:
-        - cari-api.internal.mtbank.com
+        - cari-api.internal.cari-platform.com
 
 resources:
   limits:

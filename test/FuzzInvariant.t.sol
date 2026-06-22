@@ -5,9 +5,9 @@ import "./TestHelper.sol";
 
 /**
  * @title FuzzTest
- * @notice Fuzz tests for MTokenizedDeposit and ReserveOracle.
+ * @notice Fuzz tests for TokenizedDeposit and ReserveOracle.
  *         Validates 1:1 backing invariant, role enforcement, and compliance under random inputs.
- *         M&T Bank | Cari Network | ZKsync Prividium.
+ *         Cari Network | ZKsync Prividium.
  */
 contract FuzzTest is TestHelper {
     // =========================================================================
@@ -117,7 +117,7 @@ contract FuzzTest is TestHelper {
  * @title InvariantTest
  * @notice Invariant tests ensuring the 1:1 backing constraint is never violated
  *         across arbitrary sequences of mint/burn/transfer operations.
- *         M&T Bank | Cari Network | ZKsync Prividium.
+ *         Cari Network | ZKsync Prividium.
  */
 contract InvariantHandler is TestHelper {
     uint256 public ghost_totalMinted;

@@ -1,19 +1,19 @@
-# M&T Bank — Examiner Compliance Report
+# the Issuing Bank — Examiner Compliance Report
 # Cari Deposit Account (CDA) Platform — Regulatory Readiness Assessment
 
 **Prepared for**: OCC / Federal Reserve / NYDFS Examiners
-**Prepared by**: M&T Bank — Digital Assets Compliance Team
+**Prepared by**: the Issuing Bank — Digital Assets Compliance Team
 **Classification**: CONFIDENTIAL — Examiner Use Only
 
 ---
 
 ## 1. Program Overview
 
-M&T Bank has developed a Cari Deposit Account (CDA) platform on the Cari Network, a consortium of U.S. regulated banks operating on ZKsync Prividium (a privacy-preserving ZK-rollup). The platform implements a dual-rail architecture with the Operator controlling CDA supply and the Settlement Bank executing daily net settlement. The platform:
+the Issuing Bank has developed a Cari Deposit Account (CDA) platform on the Cari Network, a consortium of U.S. regulated banks operating on ZKsync Prividium (a privacy-preserving ZK-rollup). The platform implements a dual-rail architecture with the Operator controlling CDA supply and the Settlement Bank executing daily net settlement. The platform:
 
 - Issues **CDA (Cari Deposit Account)** ERC-20 tokens representing USD deposits
 - Operates alongside **DDA (Demand Deposit Accounts)** off-chain fiat accounts in dual-rail configuration via **Hogan mainframe** (IBM Z)
-- **Operator** (M&T Bank) controls CDA supply through mint/burn operations
+- **Operator** (the Issuing Bank) controls CDA supply through mint/burn operations
 - **Settlement Bank** aggregates and nets daily inter-bank CDA transfers
 - **Messaging Bridge** handles cross-bank CDA transfer communication
 - Maintains **1:1 reserve backing** (GENIUS Act Section 4) with US Treasury Bills, FDIC-insured deposits, and Fed reverse repo
@@ -21,7 +21,7 @@ M&T Bank has developed a Cari Deposit Account (CDA) platform on the Cari Network
 - Enables **cross-bank CDA settlement** via Cari Network protocol with Travel Rule compliance
 - Implements **bank-grade security controls** per NYDFS 23 NYCRR 500 and Cari Rulebook
 
-### M&T Bank Technology Stack
+### the Issuing Bank Technology Stack
 
 | Component | Technology | Purpose |
 |-----------|------------|---------|
@@ -30,7 +30,7 @@ M&T Bank has developed a Cari Deposit Account (CDA) platform on the Cari Network
 | **GL Format** | Post-2025 GL (ISO 20022 aligned) | Hogan GL subsystem |
 | **Event Bus** | Kafka (Confluent Platform, KRaft) | Real-time event streaming |
 | **Compute** | Azure AKS | Kubernetes orchestration |
-| **Container Registry** | Azure ACR (mtbcari.azurecr.io) | Docker image storage |
+| **Container Registry** | Azure ACR (cari-platform.azurecr.io) | Docker image storage |
 | **Key Management** | Azure Managed HSM | FIPS 140-2 L3 key storage |
 | **Payment Rails** | ACH, Fedwire, RTP/FedNow | Via Hogan payment processing |
 
@@ -46,7 +46,7 @@ The `ReserveOracle` smart contract enforces that `totalCDASupply <= totalDDARese
 | Asset Class | Custodian | Allocation |
 |---|---|---|
 | US Treasury Bills (< 90 days) | BNY Mellon | 60% |
-| FDIC-Insured DDA Deposits | M&T Bank Trust | 30% |
+| FDIC-Insured DDA Deposits | the Issuing Bank Trust | 30% |
 | Fed Reverse Repo (overnight) | FRBNY | 10% |
 
 ### 2.3 Cryptographic Proof
@@ -144,6 +144,6 @@ Every CDA state-changing operation generates an immutable `AuditLogEntry` with:
 
 ---
 
-*This report is generated programmatically from the M&T Bank CDA Platform's compliance engine. All data is derived from live control monitoring and automated test results.*
+*This report is generated programmatically from the the Issuing Bank CDA Platform's compliance engine. All data is derived from live control monitoring and automated test results.*
 
-*M&T Bank | Cari Network CDA Platform | ZKsync Prividium*
+*the Issuing Bank | Cari Network CDA Platform | ZKsync Prividium*
